@@ -1,0 +1,5 @@
+@extends('errors.layout-errors')
+@section('title', '429')
+@section('code', '429')
+@section('title_page', 'Demasiados intentos')
+@section('message', 'Espere 1 minuto para volver a intentarlo.')

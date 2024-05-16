@@ -1,0 +1,198 @@
+{
+  "Spinner.css": {
+    "file": "assets/Spinner-f424a175.css",
+    "src": "Spinner.css"
+  },
+  "_Filters-bb7c5f68.js": {
+    "file": "assets/Filters-bb7c5f68.js",
+    "imports": [
+      "_Footer-b67b93bd.js"
+    ]
+  },
+  "_Footer-b67b93bd.js": {
+    "file": "assets/Footer-b67b93bd.js"
+  },
+  "_ImageModal-94313bc1.js": {
+    "file": "assets/ImageModal-94313bc1.js",
+    "imports": [
+      "_Footer-b67b93bd.js"
+    ]
+  },
+  "_ReactSelect-abc02bcb.js": {
+    "file": "assets/ReactSelect-abc02bcb.js",
+    "imports": [
+      "_Footer-b67b93bd.js"
+    ]
+  },
+  "_Selector-f4b2a10a.js": {
+    "file": "assets/Selector-f4b2a10a.js",
+    "imports": [
+      "_Footer-b67b93bd.js"
+    ]
+  },
+  "_Spinner-360b4a09.js": {
+    "css": [
+      "assets/Spinner-f424a175.css"
+    ],
+    "file": "assets/Spinner-360b4a09.js",
+    "imports": [
+      "_Footer-b67b93bd.js"
+    ]
+  },
+  "_index-7c0738bf.js": {
+    "file": "assets/index-7c0738bf.js"
+  },
+  "_initialStateCustomer-80295b45.js": {
+    "file": "assets/initialStateCustomer-80295b45.js",
+    "imports": [
+      "_Footer-b67b93bd.js",
+      "_Spinner-360b4a09.js"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-9cb9b171.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/js/Components/Breed/BreedContainer.jsx": {
+    "file": "assets/BreedContainer-127e8a28.js",
+    "imports": [
+      "_Footer-b67b93bd.js",
+      "_Filters-bb7c5f68.js",
+      "_Spinner-360b4a09.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Components/Breed/BreedContainer.jsx"
+  },
+  "resources/js/Components/CashRegister/CashRegisterContainer.jsx": {
+    "file": "assets/CashRegisterContainer-87b322ea.js",
+    "imports": [
+      "_Footer-b67b93bd.js",
+      "_Spinner-360b4a09.js",
+      "_ReactSelect-abc02bcb.js",
+      "_initialStateCustomer-80295b45.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Components/CashRegister/CashRegisterContainer.jsx"
+  },
+  "resources/js/Components/Customer/CustomerContainer.jsx": {
+    "file": "assets/CustomerContainer-3a8e014f.js",
+    "imports": [
+      "_Footer-b67b93bd.js",
+      "_Filters-bb7c5f68.js",
+      "_Spinner-360b4a09.js",
+      "_index-7c0738bf.js",
+      "_initialStateCustomer-80295b45.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Components/Customer/CustomerContainer.jsx"
+  },
+  "resources/js/Components/Expense/ExpenseContainer.jsx": {
+    "file": "assets/ExpenseContainer-8118a395.js",
+    "imports": [
+      "_Footer-b67b93bd.js",
+      "_Filters-bb7c5f68.js",
+      "_Spinner-360b4a09.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Components/Expense/ExpenseContainer.jsx"
+  },
+  "resources/js/Components/Graphics/Graphics.jsx": {
+    "file": "assets/Graphics-aaf6ea8e.js",
+    "imports": [
+      "_Footer-b67b93bd.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Components/Graphics/Graphics.jsx"
+  },
+  "resources/js/Components/Pet/PetContainer.jsx": {
+    "file": "assets/PetContainer-e17451b1.js",
+    "imports": [
+      "_Footer-b67b93bd.js",
+      "_Filters-bb7c5f68.js",
+      "_Spinner-360b4a09.js",
+      "_ReactSelect-abc02bcb.js",
+      "_Selector-f4b2a10a.js",
+      "_initialStateCustomer-80295b45.js",
+      "_ImageModal-94313bc1.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Components/Pet/PetContainer.jsx"
+  },
+  "resources/js/Components/PetHistory/PetHistoryContainer.css": {
+    "file": "assets/PetHistoryContainer-33d8cc87.css",
+    "src": "resources/js/Components/PetHistory/PetHistoryContainer.css"
+  },
+  "resources/js/Components/PetHistory/PetHistoryContainer.jsx": {
+    "css": [
+      "assets/PetHistoryContainer-33d8cc87.css"
+    ],
+    "file": "assets/PetHistoryContainer-ca30af4a.js",
+    "imports": [
+      "_Footer-b67b93bd.js",
+      "_Filters-bb7c5f68.js",
+      "_Spinner-360b4a09.js",
+      "_index-7c0738bf.js",
+      "_ReactSelect-abc02bcb.js",
+      "_Selector-f4b2a10a.js",
+      "_ImageModal-94313bc1.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Components/PetHistory/PetHistoryContainer.jsx"
+  },
+  "resources/js/Components/Product/ProductContainer.jsx": {
+    "file": "assets/ProductContainer-8064cbbd.js",
+    "imports": [
+      "_Footer-b67b93bd.js",
+      "_Filters-bb7c5f68.js",
+      "_Spinner-360b4a09.js",
+      "_ImageModal-94313bc1.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Components/Product/ProductContainer.jsx"
+  },
+  "resources/js/Components/Services/ServiceContainer.jsx": {
+    "file": "assets/ServiceContainer-5220203f.js",
+    "imports": [
+      "_Footer-b67b93bd.js",
+      "_Filters-bb7c5f68.js",
+      "_Spinner-360b4a09.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Components/Services/ServiceContainer.jsx"
+  },
+  "resources/js/Components/User/UserContainer.jsx": {
+    "file": "assets/UserContainer-11a57478.js",
+    "imports": [
+      "_Footer-b67b93bd.js",
+      "_Filters-bb7c5f68.js",
+      "_Spinner-360b4a09.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Components/User/UserContainer.jsx"
+  },
+  "resources/js/app.css": {
+    "file": "assets/app-93d8b085.css",
+    "src": "resources/js/app.css"
+  },
+  "resources/js/app.js": {
+    "css": [
+      "assets/app-93d8b085.css"
+    ],
+    "dynamicImports": [
+      "resources/js/Components/User/UserContainer.jsx",
+      "resources/js/Components/Customer/CustomerContainer.jsx",
+      "resources/js/Components/Pet/PetContainer.jsx",
+      "resources/js/Components/Services/ServiceContainer.jsx",
+      "resources/js/Components/Breed/BreedContainer.jsx",
+      "resources/js/Components/PetHistory/PetHistoryContainer.jsx",
+      "resources/js/Components/Product/ProductContainer.jsx",
+      "resources/js/Components/Expense/ExpenseContainer.jsx",
+      "resources/js/Components/CashRegister/CashRegisterContainer.jsx",
+      "resources/js/Components/Graphics/Graphics.jsx"
+    ],
+    "file": "assets/app-e6562ecf.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}

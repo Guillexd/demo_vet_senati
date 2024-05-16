@@ -1,0 +1,5 @@
+@extends('errors.layout-errors')
+@section('title', '419')
+@section('code', '419')
+@section('title_page', 'Página expirada')
+@section('message', 'Lo sentimos, esta página expiró.')

@@ -1,0 +1,5 @@
+@extends('errors.layout-errors')
+@section('title', '403')
+@section('code', '403')
+@section('title_page', 'Debes de ser un administrador')
+@section('message', 'Lo sentimos, debes de ser un administrador para poder ingresar aquí.')
