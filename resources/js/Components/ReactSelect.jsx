@@ -9,12 +9,12 @@ export default function ReactSelect({ children, setMustSearch, filters, filter, 
       {
         filters
           ?
-          <div className={`bg-gray-700 border-white border-2 w-full col-span-full mx-auto rounded-md flex justify-between font-semibold shadow-lg overflow-y-auto order-1`}>
+          <div className={`bg-gray-400 border-white border-2 w-full col-span-full mx-auto rounded-md flex justify-between font-semibold shadow-lg overflow-y-auto order-1`}>
             {
               filters.map((el, index) => (
                 <button type='button'
                   key={index}
-                  className={`${el.value === filter ? 'bg-gray-800' : 'hover:bg-gray-800'} text-white cursor-pointer p-2 rounded-md flex-grow`}
+                  className={`${el.value === filter ? 'bg-gray-600' : 'hover:bg-gray-600'} text-white cursor-pointer p-2 rounded-md flex-grow`}
                   onClick={() => setFilter(el.value)}
                 >{el.tag}</button>
               ))
@@ -23,10 +23,10 @@ export default function ReactSelect({ children, setMustSearch, filters, filter, 
           :
           null
       }
-      <div className={`relative border rounded ${css || 'w-full col-span-full order-1'}`}>
+      <div className={`relative border border-gray-600 rounded ${css || 'w-full col-span-full order-1'}`}>
         <input
           type='text'
-          className='peer block min-h-[auto] w-full rounded border-0 bg-transparent pr-14 pl-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-neutral-200 placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
+          className='peer block min-h-[auto] w-full rounded border-0 bg-transparent pr-14 pl-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-600  placeholder:text-gray-600  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
           value={input}
           onFocus={() => {
             setHelperSearch(true)
@@ -42,7 +42,7 @@ export default function ReactSelect({ children, setMustSearch, filters, filter, 
           }}
           required />
         <label
-          className='pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] transition-all duration-200 ease-out peer-focus:-translate-y-[1.8rem] peer-focus:scale-[0.9] peer-data-[te-input-state-active]:-translate-y-[2rem] peer-data-[te-input-state-active]:scale-[0.9] motion-reduce:transition-none text-neutral-200 peer-focus:text-primary peer-valid:-translate-y-[1.8rem] peer-valid:scale-[0.9] peer-valid:text-primary'
+          className='pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] transition-all duration-200 ease-out peer-focus:-translate-y-[1.8rem] peer-focus:scale-[0.9] peer-data-[te-input-state-active]:-translate-y-[2rem] peer-data-[te-input-state-active]:scale-[0.9] motion-reduce:transition-none text-gray-600  peer-focus:text-primary peer-valid:-translate-y-[1.8rem] peer-valid:scale-[0.9] peer-valid:text-primary'
         >
           {label}
         </label>
@@ -57,7 +57,7 @@ export default function ReactSelect({ children, setMustSearch, filters, filter, 
             actions()
           }
         }}>
-          <Icon icon={faDeleteLeft} css={'h-full text-white'} />
+          <Icon icon={faDeleteLeft} css={'h-full text-gray-600'} />
         </div>
       </div>
     </>

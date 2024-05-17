@@ -2,7 +2,7 @@
 @section('content')
     <div class="flex-col justify-center items-end h-full min-w-screen px-6 py-24">
         <div class="flex justify-center items-center mb-10">
-            <img src={{ url('/image/logovetnobg.png') }} alt="logo" class="rounded-full lg:w-1/6 md:w-1/5 sm:w-1/3 w-1/2">
+            <img src={{ url('/image/Logo.png') }} alt="logo" class="rounded-full lg:w-1/6 md:w-1/5 sm:w-1/3 w-1/2">
         </div>
         <!-- Right column container with form -->
         <div class="min-w-full flex justify-center items-center">

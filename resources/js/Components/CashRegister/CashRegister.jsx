@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import Spinner from '../presentational/Spinner';
 import ToastifyErrorList from '../ToastifyErrorList';
 import Icon from '../../utils/Icon';
-import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
+import { faHandPointUp, faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
 
 export default function CashRegister({ cash_registerI, setCashRegister, setOption, setOpenModal, setHelper, setMustLoad, setMustAnimate, setIsDeleted, handleClick }) {
 
@@ -36,6 +36,9 @@ export default function CashRegister({ cash_registerI, setCashRegister, setOptio
     <div className='px-8 pt-5 flex flex-col justify-between flex-1' onClick={handleClick} >
       <div className='absolute top-1 left-2 rounded-full bg-indigo-500 w-8 h-8 flex justify-center items-center font-bold font-mono text-xl text-white'>
         {cash_registerI.id}
+      </div>
+      <div className='absolute top-8 right-2 animate-bounce rounded-full bg-indigo-500 w-10 h-10 flex justify-center items-center font-bold font-mono text-xl text-white'>
+        <Icon icon={faHandPointUp} size='30px' />
       </div>
       <img src='/image/caja.png' alt='caja' />
       <div className='uppercase tracking-wide text-sm text-indigo-500 font-semibold'>Caja {getLocaleString(cash_registerI.created_at)}</div>

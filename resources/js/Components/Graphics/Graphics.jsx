@@ -6,6 +6,7 @@ import LinesChart from './LineChart';
 import Footer from '../Footer';
 import BarChart from './BarChart';
 import Icon from '../../utils/Icon';
+import Piechart from './PieChart';
 
 export default function Graphics() {
 
@@ -25,7 +26,7 @@ export default function Graphics() {
     fetchData();
   }, []);
 
-  const ContainerStyle = "md:w-[calc(45%)] w-full border rounded-lg border-vetgreen-200 shadow-lg p-4 my-4"
+  const ContainerStyle = "w-full md:w-5/6 xl:w-[calc(40%)] border rounded-lg border-vetgreen-200 shadow-lg p-4 my-4"
   return (
     <div className='relative' >
       <DefaultHeader icon={faPeopleArrows} message={"Estadísticas"} />
@@ -36,10 +37,14 @@ export default function Graphics() {
           <p className='text-center'>Capital Total: <strong>S/. {datos.capital}</strong> </p>
         </div>
       </div>
-      <div className='flex md:flex-row flex-col justify-around min-w-full'>
+      <div className='flex flex-col xl:flex-row flex-wrap justify-center items-center xl:items-stretch gap-5'>
         <div className={ContainerStyle}>
           <DefaultTitle message={"Productos más vendidos del mes"} />
           <BarChart sale={datos.sale} />
+        </div>
+        <div className={ContainerStyle}>
+          <DefaultTitle message={"Servicios más solicitados del mes"} />
+          <Piechart services={datos.services} />
         </div>
         <div className={ContainerStyle}>
           <DefaultTitle message={"Ingreso Neto"} />

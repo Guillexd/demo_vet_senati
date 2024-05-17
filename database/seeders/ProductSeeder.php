@@ -95,7 +95,7 @@ class ProductSeeder extends Seeder
             'purchase_price' => 8.90,
             'stock' => 14,
             'utility' => 4.50,
-            'product_image_url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1711552401/ReyCan/kthfwf06fmbjxgm6ulwd.jpg',
+            'product_image_url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1709590341/ReyCan/d5a4fsf8r3gscz7ler1b.webp',
             'product_public_id' => null,
             'due_date' => '2025-06-07 16:39:00',
             'description' => 'Para gato',
@@ -106,7 +106,7 @@ class ProductSeeder extends Seeder
             'purchase_price' => 9.80,
             'stock' => 17,
             'utility' => 5.20,
-            'product_image_url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1711823127/ReyCan/ddiksctxdpkvkgjytjqr.jpg',
+            'product_image_url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1712107931/ReyCan/dblbn5h4o3ptvmx80ge1.jpg',
             'product_public_id' => null,
             'due_date' => '2025-06-25 20:55:00',
             'description' => 'Para perros',
@@ -117,7 +117,7 @@ class ProductSeeder extends Seeder
             'purchase_price' => 7.80,
             'stock' => 11,
             'utility' => 8.20,
-            'product_image_url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1712020706/ReyCan/nk6snypgapnuci0klqu4.jpg',
+            'product_image_url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1713989352/ReyCan/mjwmopx29crpfxbnn4sf.jpg',
             'product_public_id' => null,
         ]);
         Product::create([
@@ -126,19 +126,10 @@ class ProductSeeder extends Seeder
             'purchase_price' => 10.80,
             'stock' => 3,
             'utility' => 5.20,
-            'product_image_url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1712107500/ReyCan/j1lqlktvczrknfzaltk3.jpg',
+            'product_image_url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1714059629/ReyCan/nwf5zygdwzklfdldf913.png',
             'product_public_id' => null,
             'due_date' => '2024-05-28 18:01:00',
             'description' => 'CANTIDAD DE GRASA O ALGUNOS COMPONETES',
-        ]);
-        Product::create([
-            'name' => 'Pesa de plástico',
-            'price' => 5.00,
-            'purchase_price' => 3.00,
-            'stock' => 18,
-            'utility' => 2.00,
-            'product_image_url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1709147581/ReyCan/gfwsetlbjvggxiz0euce.jpg',
-            'product_public_id' => null,
         ]);
     }
 }

@@ -2,7 +2,7 @@
 @section('content')
 <div class="flex-col justify-center items-end h-full min-w-screen px-6 py-24">
 <div class="flex justify-center items-center mb-10 md:translate-y-32">
-    <img src={{ url('/image/logovetnobg.png') }} alt="logo" class="rounded-full lg:w-1/6 md:w-1/5 sm:w-1/3 w-1/2">
+    <img src={{ url('/image/Logo.png') }} alt="logo" class="rounded-full lg:w-1/6 md:w-1/5 sm:w-1/3 w-1/2">
 </div>
 
       <!-- Right column container with form -->
@@ -79,7 +79,7 @@
           <!-- Submit button -->
           <button
             type="submit"
-            class="text-center inline-block w-full rounded-full bg-vetgreen-200 px-7 pb-2.5 pt-3 text-sm font-bold uppercase leading-normal text-vetbrown shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+            class="text-center inline-block w-full rounded-full bg-vetgreen-respaldo px-7 pb-2.5 pt-3 text-sm font-bold uppercase leading-normal text-vetbrown shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
             data-te-ripple-init
             data-te-ripple-color="light"
             >

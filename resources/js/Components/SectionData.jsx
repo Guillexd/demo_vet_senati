@@ -292,7 +292,7 @@ function Table({ children }) {
     <main className='mx-auto mt-2'>
       <div className='flex flex-col overflow-hidden'>
         <div className='py-2 -my-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8'>
-          <div className='overflow-x-auto h-auto rounded-lg'>
+          <div className='overflow-x-auto h-auto rounded-lg border border-gray-300'>
             <table className='min-w-full rounded-lg'>
               {children}
             </table>

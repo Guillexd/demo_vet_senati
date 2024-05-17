@@ -44,7 +44,6 @@ export const showSWToDelete = (
         title: title,
         text: message || "¡No serás capaz de revertir este proceso!",
         icon: "warning",
-        background: "#FAEDCD",
         showCancelButton: true,
         cancelButtonText: "Cancelar",
         confirmButtonColor: "#3085d6",

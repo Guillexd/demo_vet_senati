@@ -14,7 +14,7 @@ export default function CheckBox({ id, message, checked, onChange}) {
         </div>
       </div>
       <label
-        className='pointer-events-none max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-200 -translate-y-[.5rem]'
+        className='pointer-events-none max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-gray-600 -translate-y-[.5rem]'
       >
         {message}
       </label>

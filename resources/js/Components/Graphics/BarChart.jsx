@@ -20,13 +20,13 @@ ChartJS.register(
     ArcElement
 );
 export default function BarChart({ sale }) {
-    const names = sale.map(item => item.name);
-    const repeticiones = sale.map(item => parseInt(item.repeticiones, 10));
+    const names = sale?.map(item => item.name);
+    const repeticiones = sale?.map(item => parseInt(item.repeticiones, 10));
     const datos = {
         labels: names,
         datasets: [
             {
-                label: 'Ventas',
+                label: '# de ventas',
                 data: repeticiones,
                 borderColor: '#70d6ea',
                 backgroundColor: '#70d6ea',

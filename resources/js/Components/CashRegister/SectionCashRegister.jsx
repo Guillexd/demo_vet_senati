@@ -106,13 +106,13 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
   };
 
   return (
-    <section className={`${cashRegister.id !== null ? 'translate-y-0' : 'translate-y-[200%]'} transition-all duration-500 ease-in fixed bg-gray-800 z-30 bottom-0 left-0 px-3 md:px-5 ${open ? 'overflow-hidden' : 'overflow-y-auto'} rounded-t-2xl w-screen h-[99vh] mt-2 pb-10`}>
+    <section className={`${cashRegister.id !== null ? 'translate-y-0' : 'translate-y-[200%]'} transition-all duration-500 ease-in fixed bg-slate-50 z-30 bottom-0 left-0 px-3 md:px-5 ${open ? 'overflow-hidden' : 'overflow-y-auto'} rounded-t-2xl w-screen h-[99vh] mt-2 pb-10`}>
       {
         cashRegister.id !== null
           ?
           <>
-            <button className='bg-gray-200 right-0 absolute p-3 rounded-xl m-2 opacity-80 hover:opacity-45 z-40' onClick={handleClose}>
-              <Icon css={'text-green-800'} icon={faX} size='22px' />
+            <button className='bg-gray-300 right-0 absolute p-3 rounded-xl m-2 opacity-80 hover:opacity-45 z-40 animate-bounce' onClick={handleClose}>
+              <Icon css={'text-green-900'} icon={faX} size='22px' />
             </button>
             <br /> <br />
             <SectionCashRegister.Header message={`Caja ${cashRegister.name}`} messageButton={'Agregar movimiento'} disabled={cashRegister.state === 0} handleClick={() => setOpen(true)} />
@@ -206,8 +206,8 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
 
 function Header({ message, messageButton, disabled, handleClick }) {
   return (
-    <header className='w-full flex flex-wrap justify-center md:justify-between md:px-7 text-white'>
-      <p className='font-semibold text-4xl text-center'>
+    <header className='w-full flex flex-wrap justify-center md:justify-between md:px-7 text-gray-700'>
+      <p className='font-bold text-4xl text-center'>
         <Icon icon={faCashRegister} css={'mr-3'} size='37px' />
         {message}
       </p>
@@ -319,7 +319,7 @@ function Table({ children, css }) {
     <main className='mx-auto mt-2'>
       <div className='flex flex-col overflow-hidden'>
         <div className='py-2 -my-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8'>
-          <div className={`overflow-x-auto h-auto ${css || 'rounded-lg'}`}>
+          <div className={`overflow-x-auto h-auto ${css || 'rounded-lg'} border border-gray-400`}>
             <table className={`min-w-full rounded-lg ${css || 'rounded-lg'}`}>
               {children}
             </table>
@@ -381,7 +381,7 @@ function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSe
       {
         loading & mustLoad
           ?
-          <tr className='text-white bg-gray-800'>
+          <tr className='text-white bg-gray-500'>
             <td colSpan={100}>
               <Loading message={message} />
             </td>
@@ -390,9 +390,9 @@ function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSe
           (
             data.data?.length === 0
               ?
-              <tr className='text-white bg-gray-800'>
+              <tr className='text-white'>
                 <td colSpan={100}>
-                  <div className='bg-white p-4 border rounded shadow-lg text-center'>
+                  <div className='bg-white p-4 rounded shadow-lg text-center'>
                     <p className='text-gray-600 text-lg'>
                       <Icon icon={faExclamation} css={'mr-3'} />
                       No hay datos disponibles.
@@ -489,7 +489,7 @@ function BodyExpenseTable({ id, setData, page, limit, helper, searchByFilter, mu
       {
         loading & mustLoad
           ?
-          <tr className='text-white bg-gray-800'>
+          <tr className='text-white bg-gray-500'>
             <td colSpan={100}>
               <Loading message={'Cargando egresos'} />
             </td>
@@ -498,7 +498,7 @@ function BodyExpenseTable({ id, setData, page, limit, helper, searchByFilter, mu
           (
             data.data?.length === 0
               ?
-              <tr className='text-white bg-gray-800'>
+              <tr className='text-white'>
                 <td colSpan={100}>
                   <div className='bg-white p-4 border rounded shadow-lg text-center'>
                     <p className='text-gray-600 text-lg'>
@@ -586,7 +586,7 @@ function BodyAllVouchersTable({ page, limit, searchByFilter, helper, setData, mu
       {
         loading & mustLoad
           ?
-          <tr className='text-white bg-gray-800'>
+          <tr className='text-white bg-gray-500'>
             <td colSpan={100}>
               <Loading message={'Cargando vouchers'} />
             </td>
@@ -595,7 +595,7 @@ function BodyAllVouchersTable({ page, limit, searchByFilter, helper, setData, mu
           (
             data.data?.length === 0
               ?
-              <tr className='text-white bg-gray-800'>
+              <tr className='text-white'>
                 <td colSpan={100}>
                   <div className='bg-white p-4 border rounded shadow-lg text-center'>
                     <p className='text-gray-600 text-lg'>
@@ -686,7 +686,7 @@ function BodyVoucherTable({ id, searchByFilter, mustLoad, helper, handleDelete }
       {
         loading & mustLoad
           ?
-          <tr className='text-white bg-gray-800'>
+          <tr className='text-white bg-gray-500'>
             <td colSpan={100}>
               <div>
                 <Loading message={'Cargando voucher'} />
@@ -743,7 +743,7 @@ function BodyVoucherTable({ id, searchByFilter, mustLoad, helper, handleDelete }
             </tr>
             <tr className='hover:bg-sky-200'>
               <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200' colSpan={100}>
-                <div className='text-lg font-bold leading-5 text-gray-900 text-center'>
+                <div className='text-lg font-bold leading-5 text-gray-600 text-center'>
                   Total: S/ {total}
                 </div>
               </td>
@@ -769,10 +769,10 @@ function Pagination({ pageQuantity, quantity, setLimit, setPage, nextPage, prevP
   return (
     <>
       <section className='flex justify-between items-center mt-4 px-1 sm:px-5'>
-        <div className='hidden xl:block text-white rounded-lg'>
+        <div className='hidden xl:block text-black rounded-lg'>
           Mostrando {pageQuantity > quantity ? quantity : pageQuantity} de {quantity} resultados
         </div>
-        <button className='xl:hidden bg-white border px-4 py-2 text-gray-500 hover:text-indigo-500 hover:bg-gray-200 cursor-pointer rounded-lg'
+        <button className='xl:hidden bg-white border px-4 py-2 text-gray-600 hover:text-indigo-500 hover:bg-gray-200 cursor-pointer rounded-lg'
           disabled={!prevPage}
           onClick={() => {
             if (prevPage) {
@@ -834,7 +834,7 @@ function Pagination({ pageQuantity, quantity, setLimit, setPage, nextPage, prevP
           {(1 - page < -2 && page != 1) && <span className='px-4 py-2 bg-white text-gray-500'>...</span>}
 
           {
-            (1 - page < -1 && page != 1) && <button className='px-4 py-2 text-gray-500 bg-white hover:text-indigo-500 hover:scale-[105%]'
+            (1 - page < -1 && page != 1) && <button className='px-4 py-2 text-gray-600 bg-white hover:text-indigo-500 hover:scale-[105%]'
               onClick={() => {
                 setPage(prev => prev - 1)
               }}
@@ -846,7 +846,7 @@ function Pagination({ pageQuantity, quantity, setLimit, setPage, nextPage, prevP
           <button className='px-4 py-2 text-indigo-500 bg-vetwhite border border-vetbrown font-medium'>{page}</button>
 
           {
-            lastPage - page > 0 && <button className='px-4 py-2 text-gray-500 bg-white hover:text-indigo-500 hover:scale-[105%]'
+            lastPage - page > 0 && <button className='px-4 py-2 text-gray-600 bg-white hover:text-indigo-500 hover:scale-[105%]'
               onClick={() => {
                 setPage(prev => prev + 1)
               }}
@@ -855,10 +855,10 @@ function Pagination({ pageQuantity, quantity, setLimit, setPage, nextPage, prevP
             </button>
           }
 
-          {lastPage - page > 2 && <span className='px-4 py-2 bg-white  text-gray-500'>...</span>}
+          {lastPage - page > 2 && <span className='px-4 py-2 bg-white  text-gray-600'>...</span>}
 
           {
-            (lastPage - page > 2) && <button className='px-4 py-2 bg-white text-gray-500 hover:text-indigo-500 hover:scale-[105%]'
+            (lastPage - page > 2) && <button className='px-4 py-2 bg-white text-gray-600 hover:text-indigo-500 hover:scale-[105%]'
               onClick={() => {
                 setPage(parseInt(lastPage))
               }}
@@ -876,7 +876,7 @@ function Pagination({ pageQuantity, quantity, setLimit, setPage, nextPage, prevP
             }}
           >Siguiente</button>
         </nav>
-        <button className='xl:hidden bg-white border px-4 py-2 text-gray-500 hover:text-indigo-500 hover:bg-gray-200 cursor-pointer rounded-lg'
+        <button className='xl:hidden bg-white border px-4 py-2 text-gray-600 hover:text-indigo-500 hover:bg-gray-200 cursor-pointer rounded-lg'
           disabled={!nextPage}
           onClick={() => {
             if (nextPage) {
@@ -887,7 +887,7 @@ function Pagination({ pageQuantity, quantity, setLimit, setPage, nextPage, prevP
           Siguiente
         </button>
       </section>
-      <div className='block xl:hidden text-white rounded-lg text-center mt-5'>
+      <div className='block xl:hidden text-black rounded-lg text-center mt-5'>
         Mostrando {pageQuantity > quantity ? quantity : pageQuantity} de {quantity} resultados
       </div>
     </>
@@ -1061,7 +1061,7 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper }) 
           ?
           <>
             <SectionCashRegisterModal.ButtonContainer css='bg-blue-500 hover:bg-blue-700 order-5 mt-10'>
-              <button className='w-full' onClick={() => {
+              <button className='w-full text-white' onClick={() => {
                 setCustomerId('')
                 setInputCustomer('')
                 setProducts([])
@@ -1073,7 +1073,7 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper }) 
               </button>
             </SectionCashRegisterModal.ButtonContainer>
 
-            <SectionCashRegisterModal.ButtonContainer css='border-2 order-4 bg-sky-800'>
+            <SectionCashRegisterModal.ButtonContainer css='border-2 order-4 bg-sky-800 text-white'>
               Total: S/. {total}
             </SectionCashRegisterModal.ButtonContainer>
 
@@ -1119,7 +1119,7 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper }) 
           :
           <>
             <SectionCashRegisterModal.ButtonContainer css='bg-blue-500 hover:bg-blue-700 order-2 mt-10'>
-              <button className='w-full' onClick={() => {
+              <button className='w-full text-white' onClick={() => {
                 setExpenses([])
                 setInputExpense('')
               }}>
@@ -1136,7 +1136,7 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper }) 
 
 function ButtonContainer({ children, css = '' }) {
   return (
-    <div className={`relative w-full col-span-full rounded px-3 py-[0.32rem] leading-[1.6] text-neutral-200 text-center font-semibold text-lg ${css}`}>
+    <div className={`relative w-full col-span-full rounded px-3 py-[0.32rem] leading-[1.6] text-gray-600  text-center font-semibold text-lg ${css}`}>
       {children}
     </div>
   )
@@ -1402,17 +1402,17 @@ function ServiceModal({ setMustSearchService, inputService, setInputService, loa
 
 function ModalQuantity({ select, handleClick }) {
   return (
-    <div className='relative border rounded w-full'>
+    <div className='relative border border-gray-600 rounded w-full'>
       <input
         type='number'
         step='any'
-        className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-neutral-200 placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
+        className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-600  placeholder:text-gray-600  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
         value={select.quantity}
         onChange={handleClick}
         min={0}
         required />
       <label
-        className='pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] transition-all duration-200 ease-out peer-focus:-translate-y-[1.8rem] peer-focus:scale-[0.9] peer-data-[te-input-state-active]:-translate-y-[2rem] peer-data-[te-input-state-active]:scale-[0.9] motion-reduce:transition-none text-neutral-200 peer-focus:text-primary peer-valid:-translate-y-[1.8rem] peer-valid:scale-[0.9] peer-valid:text-primary'
+        className='pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] transition-all duration-200 ease-out peer-focus:-translate-y-[1.8rem] peer-focus:scale-[0.9] peer-data-[te-input-state-active]:-translate-y-[2rem] peer-data-[te-input-state-active]:scale-[0.9] motion-reduce:transition-none text-gray-600  peer-focus:text-primary peer-valid:-translate-y-[1.8rem] peer-valid:scale-[0.9] peer-valid:text-primary'
       >
         Cantidad
       </label>
@@ -1423,14 +1423,14 @@ function ModalQuantity({ select, handleClick }) {
 function ModalBody({ select, handleChange, handleClick, message }) {
   return (
     <>
-      <div className='relative border rounded w-full col-span-full'>
+      <div className='relative border border-gray-600 rounded w-full col-span-full'>
         <textarea
-          className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-neutral-200 placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
+          className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-600  placeholder:text-gray-600  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
           value={select.description}
           onChange={handleChange}
         ></textarea>
         <label
-          className='pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] transition-all duration-200 ease-out peer-focus:-translate-y-[1.8rem] peer-focus:scale-[0.9] peer-data-[te-input-state-active]:-translate-y-[2rem] peer-data-[te-input-state-active]:scale-[0.9] motion-reduce:transition-none text-neutral-200 peer-focus:text-primary peer-valid:-translate-y-[1.8rem] peer-valid:scale-[0.9] peer-valid:text-primary'
+          className='pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] transition-all duration-200 ease-out peer-focus:-translate-y-[1.8rem] peer-focus:scale-[0.9] peer-data-[te-input-state-active]:-translate-y-[2rem] peer-data-[te-input-state-active]:scale-[0.9] motion-reduce:transition-none text-gray-600  peer-focus:text-primary peer-valid:-translate-y-[1.8rem] peer-valid:scale-[0.9] peer-valid:text-primary'
         >
           Descripción (opcional)
         </label>
@@ -1530,10 +1530,10 @@ function ExpenseModal({ setMustSearchExpense, inputExpense, setInputExpense, loa
       {
         inputExpense.length > 0 && (
           <>
-            <div className='relative border rounded w-full col-span-full'>
+            <div className='relative border border-gray-600 rounded w-full col-span-full'>
               <input
                 type='number'
-                className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-neutral-200 placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
+                className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-600  placeholder:text-gray-600  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
                 value={selectExpense.subtotal}
                 onChange={(e) => {
                   setSelectExpense(prev => {
@@ -1545,7 +1545,7 @@ function ExpenseModal({ setMustSearchExpense, inputExpense, setInputExpense, loa
                 }}
                 required />
               <label
-                className='pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] transition-all duration-200 ease-out peer-focus:-translate-y-[1.8rem] peer-focus:scale-[0.9] peer-data-[te-input-state-active]:-translate-y-[2rem] peer-data-[te-input-state-active]:scale-[0.9] motion-reduce:transition-none text-neutral-200 peer-focus:text-primary peer-valid:-translate-y-[1.8rem] peer-valid:scale-[0.9] peer-valid:text-primary'
+                className='pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] transition-all duration-200 ease-out peer-focus:-translate-y-[1.8rem] peer-focus:scale-[0.9] peer-data-[te-input-state-active]:-translate-y-[2rem] peer-data-[te-input-state-active]:scale-[0.9] motion-reduce:transition-none text-gray-600  peer-focus:text-primary peer-valid:-translate-y-[1.8rem] peer-valid:scale-[0.9] peer-valid:text-primary'
               >
                 Dinero
               </label>

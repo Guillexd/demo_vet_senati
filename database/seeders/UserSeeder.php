@@ -25,6 +25,12 @@ class UserSeeder extends Seeder
             'rol_id' => 1,
             'password' => Hash::make('12345678')
         ]);
+        User::factory()->create([
+            'name' => 'Obrero',
+            'email' => 'lowerclass@gmail.com',
+            'rol_id' => 2,
+            'password' => Hash::make('12345678')
+        ]);
         // User::factory(12)->create();
         User::create([
             'name' => 'BLADIMIR BONILLA QUINTO',

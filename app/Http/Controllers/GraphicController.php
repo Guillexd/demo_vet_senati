@@ -28,6 +28,17 @@ class GraphicController extends Controller
             ->limit(10)
             ->get();
 
+        $services = DB::table('cash_registerables')
+            ->select('services.name', DB::raw('SUM(quantity) as repeticiones'))
+            ->join('services', 'cash_registerables.cash_registerable_id', '=', 'services.id')
+            ->where('cash_registerable_type', '=', 'App\Models\Service')
+            ->whereMonth('cash_registerables.created_at', $currentMonth)
+            ->whereYear('cash_registerables.created_at', $currentYear)
+            ->groupBy('services.name')
+            ->orderByDesc('repeticiones')
+            ->limit(10)
+            ->get();
+
         $neto = DB::table('cash_registers')
             ->select(
                 DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'),
@@ -48,6 +59,7 @@ class GraphicController extends Controller
         return response()->json([
             'capital' => $capital,
             'sale' => $sales,
+            'services' => $services,
             'neto' => $neto,
         ]);
     }

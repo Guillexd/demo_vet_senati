@@ -19,11 +19,11 @@
             class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 xl:hidden"></div>
 
         <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
-            class="fixed inset-y-0 left-0 z-30 w-[17rem] overflow-y-auto transition duration-300 transform bg-vetgreen-100 xl:translate-x-0 xl:static xl:inset-0">
+            class="fixed inset-y-0 left-0 z-30 w-[17rem] overflow-y-auto transition duration-300 transform bg-indigo-500 xl:translate-x-0 xl:static xl:inset-0">
 
             <div class="rounded-full w-32 mx-auto hover:scale-[106%] transition">
                 <div
-                    class="flex items-center justify-center mt-4 overflow-hidden mx-auto rounded-full h-32 w-32">
+                    class="flex items-center justify-center mt-4 overflow-hidden mx-auto rounded-full h-32 w-32 border border-black">
                     <a href="https://wa.me/+51925941194" target="_blank" rel="noopener noreferrer"
                         class="m-3 ms-4 cursor-zoom-in"
                         title="Presione para contactarse con el soporte técnico del sistema">

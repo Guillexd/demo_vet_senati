@@ -2,7 +2,7 @@
 @section('content')
 <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
     <div class="flex justify-center items-center w-full">
-        <img src={{ url('/image/logovetnobg.png') }} alt="Logo" class="rounded-full w-3/4 md:w-1/5 lg:w-1/6">
+        <img src={{ url('/image/Logo.png') }} alt="Logo" class="rounded-full w-3/4 md:w-1/5 lg:w-1/6">
     </div>
 
     <div class="max-w-md mt-6 px-6 py-4 bg-vetwhite shadow-lg overflow-hidden rounded-lg mx-2">
@@ -46,7 +46,7 @@
                 @endif
                 <div class="flex items-center justify-between">
                     <button type="submit"
-                    class="bg-vetgreen-200 text-vetbrown font-medium py-2 px-4 rounded shadow-lg transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">
+                    class="bg-vetgreen-respaldo text-vetbrown font-medium py-2 px-4 rounded shadow-lg transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">
                     {{ __('dictionary.recover_password') }}
                     </button>
                     <a href="{{ route('login') }}" class="underline text-sm text-vetbrown hover:font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2">

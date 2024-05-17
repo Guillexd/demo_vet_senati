@@ -30,7 +30,6 @@ class UserController extends Controller
             if (isset($request->inputFilter)) {
                 $query->where($request->filter, 'LIKE', "%$request->inputFilter%");
             }
-            $query->where('id', '<>', auth()->user()->id);
         })->paginate($request->limit ?? 20);
         return response()->json($user);
     }
@@ -60,6 +59,12 @@ class UserController extends Controller
 
     public function destroy(Request $request)
     {
+        if($request->id === auth()->user()->id) {
+            $errors = [
+                'user_error' => ['No es posible eliminar tu cuenta directamente a través del sistema, tienes que realizarlo desde otra cuenta administrativa.'],
+            ];
+            return response()->json(['errors' => $errors], 400);
+        }
         $user = User::destroy($request->id);
         return response()->json($user);
     }
