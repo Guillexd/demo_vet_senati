@@ -42,11 +42,11 @@ export default function CashRegister({ cash_registerI, setCashRegister, setOptio
       </div>
       <img src='/image/caja.png' alt='caja' />
       <div className='uppercase tracking-wide text-sm text-indigo-500 font-semibold'>Caja {getLocaleString(cash_registerI.created_at)}</div>
-      <div className='uppercase tracking-wide text-sm text-indigo-700 font-bold'>Monto inicial: S/{cash_registerI.initial_amount}</div>
+      <div className='uppercase tracking-wide text-sm text-indigo-700 font-bold'>Monto inicial: S/ {cash_registerI.initial_amount}</div>
       {
         cash_registerI.total &&
         <div className='uppercase tracking-wide text-sm font-bold'>
-          Total: S/{cash_registerI.total}
+          Total: S/ {cash_registerI.total}
         </div>
       }
       <div className={`${cash_registerI.state === 0 ? 'bg-red-400 text-amber-200 ' : 'bg-green-400 text-black '} uppercase tracking-wide text-sm font-semibold rounded-lg w-fullpx-4 py-1 flex justify-center`}>
