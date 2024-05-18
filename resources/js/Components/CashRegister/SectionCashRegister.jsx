@@ -253,7 +253,7 @@ function Search({ render, setSearchByFilter, setMustLoad, setPage, placeholder, 
     <>
       {
         render && (
-          <div className='relative min-w-[calc(80%)] bg-white rounded-full shadow-lg'>
+          <div className='relative min-w-[calc(80%)] bg-white rounded-full shadow-lg border'>
             <input type='text' placeholder={placeholder} className='w-full bg-transparent focus:outline-none ml-2 py-2 ps-3 pe-12 md:pe-16 font-semibold'
               value={inputFilter}
               onChange={(e) => {
