@@ -9,7 +9,7 @@ import ReactSelect from '../ReactSelect'
 import { v1 as uuidv4 } from 'uuid'
 import ModalCashRegister from './ModalCashRegister'
 import { toast } from 'react-toastify'
-import { dateCalculator, fetchHelper, getLocaleString, getPageQuery, getStringTime, showSWToDelete } from '../../utils/utils'
+import { dateCalculator, fetchData, fetchHelper, getLocaleString, getPageQuery, getStringTime, showSWToDelete } from '../../utils/utils'
 import ToastifyErrorList from '../ToastifyErrorList'
 import { initialStateCustomer } from '../Customer/initialStateCustomer'
 import AddCustomer from '../Customer/CustomerModal'
@@ -70,7 +70,7 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
           console.log(err);
           toast.update(loadingToastId, { render: 'Hay problemas de conexión', type: toast.TYPE.WARNING, autoClose: 2500, hideProgressBar: false, })
         })
-    }, null, '¡ciérralo!')
+    }, '¡Solo un administrador podrá volver a abrirla!', '¡ciérralo!')
   }
 
   const handleDelete = (deleteId) => {
@@ -111,7 +111,7 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
         cashRegister.id !== null
           ?
           <>
-            <button className='bg-gray-300 right-0 absolute p-3 rounded-xl m-2 opacity-80 hover:opacity-45 z-40 animate-bounce' onClick={handleClose}>
+            <button className='bg-gray-400 right-0 absolute p-3 rounded-xl m-2 opacity-80 hover:opacity-45 z-40 animate-bounce' onClick={handleClose}>
               <Icon css={'text-green-900'} icon={faX} size='22px' />
             </button>
             <br /> <br />
@@ -191,9 +191,11 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
               &&
               <>
                 <SectionCashRegister.SectionCashRegisterModal cashRegisterId={cashRegister.id} open={open} setOpen={setOpen} setHelper={setHelper} />
-                <button type='button' className='bg-red-600 w-full px-3 py-2 leading-[1.6] mt-5 rounded hover:rotate-[1deg] transition ease-out text-white text-xl' onClick={handleCloseCashRegister}>
-                  Cerrar caja
-                </button>
+                <div className='flex justify-center'>
+                  <button type='button' className='bg-red-600 w-full lg:w-1/2 px-3 py-4 leading-[1.6] mt-5 rounded-xl hover:rotate-[1deg] transition ease-out text-white text-xl' onClick={handleCloseCashRegister}>
+                    Cerrar caja
+                  </button>
+                </div>
               </>
             }
           </>
@@ -925,6 +927,8 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper }) 
   const [typeOfMovement, setTypeOfMovement] = useState(1)
   const [total, setTotal] = useState(0)
   const [cash, setCash] = useState('')
+  const [voucherId, setVoucherId] = useState('')
+  const [voucherIdHelper, setVoucherIdHelper] = useState(1)
 
   const [customerId, setCustomerId] = useState('')
   const [filterCustomer, setFilterCustomer] = useState('name')
@@ -996,6 +1000,11 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper }) 
     ))
   }, [products, services])
 
+  useEffect(() => {
+    fetchData('/cash_registers/get_voucher_id')
+      .then((id) => setVoucherId(id))
+  }, [voucherIdHelper])
+
   const handleClick = () => {
 
     setLoading(true)
@@ -1042,6 +1051,7 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper }) 
         setExpenses([])
         setHelper((prev) => prev + 1)
         setOpen(false)
+        setVoucherIdHelper((prev) => prev + 1)
       })
       .catch((err) => {
         console.log(err);
@@ -1060,6 +1070,13 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper }) 
         optionSearchv2 === valuesv2.inc
           ?
           <>
+            <SectionCashRegisterModal.ButtonContainer css='border-2 border-gray-200 bg-gray-300'>
+              <span className='text-base absolute -translate-y-2 -translate-x-12'>Comprobante</span>
+              <p class="text-2xl font-bold text-gray-500 mt-2">
+                {voucherId || 'V-00000001'}
+              </p>
+            </SectionCashRegisterModal.ButtonContainer>
+
             <SectionCashRegisterModal.ButtonContainer css='bg-blue-500 hover:bg-blue-700 order-5 mt-10'>
               <button className='w-full text-white' onClick={() => {
                 setCustomerId('')

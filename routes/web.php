@@ -138,6 +138,7 @@ Route::middleware(['auth'])->group(function () {
             ->middleware(['can:admin', EnsureCashRegisterIsOpen::class]);
         Route::delete('/destroy_voucher', [CashRegisterController::class, 'destroyVoucher'])
             ->middleware(['can:admin']);
+        Route::get('/get_voucher_id', [CashRegisterController::class, 'getVoucherId']);
         Route::get('/get_voucher_pdf/{cash_register}', [CashRegisterController::class, 'pdfVoucher']);
         Route::get('/get_excel_by_cash_register', [CashRegisterController::class, 'excelProducts'])->middleware(['can:admin']);
         Route::get('/get_excel_by_month', [CashRegisterController::class, 'excelByMonth'])->middleware(['can:admin']);

@@ -1186,7 +1186,7 @@ function CheckedBoxImage({ id, image, onChangeFunc }) {
           onChangeFunc(file)
         }}
       />
-      <label htmlFor={`history-${id}`} className='order-1 cursor-pointer block w-full py-2 text-center text-white bg-gray-800 rounded transition duration-200 ease-in-out hover:bg-gray-600 mb-2'>
+      <label htmlFor={`history-${id}`} className='order-1 border border-gray-600 cursor-pointer block w-full py-2 text-center text-gray-600 bg-transparent rounded transition duration-200 ease-in-out hover:bg-gray-300 mb-2'>
         --- Seleccionar imagen ---
       </label>
 

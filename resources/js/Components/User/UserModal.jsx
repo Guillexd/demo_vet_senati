@@ -109,7 +109,6 @@ export default function UserModal({ user, option, open, setOpen, setMustLoad, se
           <input
             type='text'
             className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-700 placeholder:text-gray-700 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
-            placeholder='Email address'
             value={state.name}
             onChange={(e) => {
               dispatch({
@@ -150,7 +149,6 @@ export default function UserModal({ user, option, open, setOpen, setMustLoad, se
           <input
             type='text'
             className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-700 placeholder:text-gray-700 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
-            placeholder='Email address'
             value={state.email}
             onChange={(e) => {
               dispatch({
@@ -170,7 +168,6 @@ export default function UserModal({ user, option, open, setOpen, setMustLoad, se
           <input
             type='text'
             className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-700 placeholder:text-gray-700 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
-            placeholder='Email address'
             value={state.dni}
             onChange={(e) => {
               dispatch({
@@ -190,7 +187,6 @@ export default function UserModal({ user, option, open, setOpen, setMustLoad, se
           <input
             type='text'
             className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-700 placeholder:text-gray-700 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
-            placeholder='Email address'
             value={state.phone}
             onChange={(e) => {
               dispatch({
@@ -210,7 +206,6 @@ export default function UserModal({ user, option, open, setOpen, setMustLoad, se
           <input
             type='text'
             className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-700 placeholder:text-gray-700 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
-            placeholder='Email address'
             value={state.direction}
             onChange={(e) => {
               dispatch({
@@ -234,7 +229,6 @@ export default function UserModal({ user, option, open, setOpen, setMustLoad, se
                 type={showPassword ? 'text' : 'password'}
                 autoComplete='on'
                 className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-700 placeholder:text-gray-700 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
-                placeholder='Email address'
                 value={state.password}
                 onChange={(e) => {
                   dispatch({
@@ -260,7 +254,6 @@ export default function UserModal({ user, option, open, setOpen, setMustLoad, se
                 type={showPasswordConfirm ? 'text' : 'password'}
                 autoComplete='on'
                 className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-700 placeholder:text-gray-700 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
-                placeholder='Email address'
                 value={state.password_confirmation}
                 onChange={(e) => {
                   dispatch({

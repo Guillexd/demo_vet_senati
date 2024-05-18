@@ -5,7 +5,7 @@ export default function Footer() {
       <div className='container mx-auto py-8 px-4'>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
           <div className='text-center'>
-            <a href='https://heylink.me/scriptify/' target='_blank' rel='noopener noreferrer'><img src='image/Logobgwhite.png' alt='Logo de la Empresa' className='w-24 mb-4 mx-auto' /></a>
+            <img src='image/Logobgwhite.png' alt='Logo de la Empresa' className='w-24 mb-4 mx-auto' />
             <h3 className='text-lg font-semibold mb-4'>ReyCan S.A.C.</h3>
           </div>
           <div className='text-center'>

@@ -277,6 +277,13 @@ class CashRegisterController extends Controller
         return response()->json($request->all());
     }
 
+    public function getVoucherId()
+    {
+        $sale = Sales::firstOrFail();
+        $voucher= $sale->code . '-' . Str::padLeft($sale->correlativo, 7, '0');
+        return response()->json($voucher);
+    }
+
     public function pdfVoucher(Request $request, CashRegister $cashRegister)
     {
         $data = $cashRegister->products()->wherePivot('voucher_id', $request->uuid)->first() ?? $cashRegister->services()->wherePivot('voucher_id', $request->uuid)->first();

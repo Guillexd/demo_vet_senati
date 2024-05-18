@@ -159,9 +159,9 @@
     <div class="container">
         <div class="column">
             <section class="column__section logo">
-                <img src="https://res.cloudinary.com/dfpspbjlq/image/upload/v1711808737/ReyCan/v7kcbxlifwhw57h7m3f3.png" alt="xd" height="50px"
-                    style="transform: translate(10%, 25%);">
-                <span class="enterprice">Scriptify perú</span>
+                <img src="https://res.cloudinary.com/dfpspbjlq/image/upload/v1715999312/ReyCan/t25bl4ijo25vkbgmo3kh.png" alt="xd" height="140px"
+                    style="transform: translate(80%, 5%);">
+                {{-- <span class="enterprice">ReyCan</span> --}}
             </section>
         </div>
         <div class="column">
