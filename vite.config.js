@@ -26,7 +26,7 @@ export default defineConfig({
                 short_name: "ReyCan",
                 start_url: "/",
                 display: "standalone",
-                background_color: "#ffffff",
+                background_color: "#2E3C3B",
                 lang: "es",
                 scope: "/",
                 icons: [

@@ -13,7 +13,7 @@ class CashRegisterSeeder extends Seeder
      */
     public function run(): void
     {
-        // CashRegister::factory(48)->create();
+        CashRegister::factory(48)->create();
         CashRegister::create([
             'initial_amount' => 0.00
         ]);
