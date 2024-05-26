@@ -35,7 +35,7 @@ export default function PetHistory({ petHistoryI, setPetHistory, setOption, setO
 
   return (
     <>
-      <img className='w-full h-96 object-cover' src={petHistoryI?.pet?.pet_image_url || '/image/mascota.webp'} alt={petHistoryI?.pet?.name} onClick={() => {
+      <img className='w-full h-60 object-cover' src={petHistoryI?.pet?.pet_image_url || '/image/mascota.webp'} alt={petHistoryI?.pet?.name} onClick={() => {
         setImage({
           url: petHistoryI?.pet?.pet_image_url || '/image/mascota.webp',
           label: petHistoryI?.pet?.name
@@ -87,7 +87,7 @@ export default function PetHistory({ petHistoryI, setPetHistory, setOption, setO
           </div>
         </div>
         <div className='my-3 flex gap-2'>
-          <button className='bg-vetsky rounded-md py-1 px-4 font-semibold hover:bg-gray-400'
+          <button id={`btn-history-${petHistoryI.id}`} className='bg-vetsky rounded-md py-1 px-4 font-semibold hover:bg-gray-400'
             onClick={() => {
               setOption('Actualizar')
               setOpenModal(true)

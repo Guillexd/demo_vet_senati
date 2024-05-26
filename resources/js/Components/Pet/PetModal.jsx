@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { fetchHelper } from '../../utils/utils';
 import ToastifyErrorList from '../ToastifyErrorList';
 import Spinner from '../presentational/Spinner';
-import { faDog, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faDog, faShieldCat, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import useDebounce from '../useDebounce';
 import useFetchData from '../../utils/useFetchData';
 import ReactSelect from '../ReactSelect';
@@ -12,6 +12,8 @@ import Selector from '../Selector';
 import Icon from '../../utils/Icon';
 import { initialStateCustomer } from '../Customer/initialStateCustomer';
 import AddCustomer from '../Customer/CustomerModal';
+import { initialStateBreed } from '../Breed/initialStateBreed'
+import AddBreed from '../Breed/BreedModal'
 
 const REDUCER_ACTION_TYPE = {
   id: 'MODIFY_ID',
@@ -69,6 +71,7 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
   }
 
   const [openCustomer, setOpenCustomer] = useState(false)
+  const [openBreed, setOpenBreed] = useState(false)
 
   const [state, dispatch] = useReducer(reducer, pet)
   const [isLoading, setIsLoading] = useState(false)
@@ -186,86 +189,95 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
         </div>
 
         <div className='relative w-full col-span-full grid grid-cols-1 sm:grid-cols-2 gap-6'>
-        <ReactSelect setMustSearch={setMustSearchCustomer} filters={[
-          {
-            tag: 'Nombre del dueño',
-            value: 'name',
-          },
-          {
-            tag: 'Número de documento',
-            value: 'document_number',
-          },
-        ]} filter={filterCustomer} setFilter={setFilterCustomer} input={inputCustomer} setInput={setInputCustomer} label={'Dueño'} setHelperSearch={setHelperSearchCustomer} setHelper={setHelperCustomer} css={'w-full col-span-full order-1 pe-10'} listStyle={'w-full max-h-72'}>
-          {
-            loadingCustomer
-              ?
-              <div className='w-full sm:w-1/2 mx-auto py-4'>
-                <Spinner message={'Buscando a los clientes ...'} />
-              </div>
-              :
-              dataCustomer.data?.length === 0
+          <ReactSelect setMustSearch={setMustSearchCustomer} filters={[
+            {
+              tag: 'Nombre del dueño',
+              value: 'name',
+            },
+            {
+              tag: 'Número de documento',
+              value: 'document_number',
+            },
+          ]} filter={filterCustomer} setFilter={setFilterCustomer} input={inputCustomer} setInput={setInputCustomer} label={'Dueño'} setHelperSearch={setHelperSearchCustomer} setHelper={setHelperCustomer} css={'w-full col-span-full order-1 pe-10'} listStyle={'w-full max-h-72'}>
+            {
+              loadingCustomer
                 ?
-                <h3 className='cursor-pointer py-4 text-center'>No hay clientes con este dato ...</h3>
+                <div className='w-full sm:w-1/2 mx-auto py-4'>
+                  <Spinner message={'Buscando a los clientes ...'} />
+                </div>
                 :
-                <ul className='px-5 py-2'>
-                  {
-                    dataCustomer.data?.map((el, index) => (
-                      <li
-                        key={index} className='cursor-pointer hover:bg-slate-600 rounded p-2'
-                        onClick={() => {
-                          dispatch({
-                            type: REDUCER_ACTION_TYPE.customer_id,
-                            payload: el.id
-                          })
-                          setMustSearchCustomer(false)
-                          setInputCustomer(el.name)
-                        }
-                        }
-                      >{`${el.name} - ${el.identity_document ? `${el.identity_document.abbreviation}: ${el.document_number}` : '--'}`}</li>))
-                  }
-                </ul>
-          }
-        </ReactSelect>
-        <button type='button' className='order-1 absolute bottom-1 right-12 bg-gray-100 rounded-full px-2 py-1 z-10 hover:bg-gray-300'
-            onClick={() => setOpenCustomer(true)}>
-            <Icon icon={faUserPlus} />
+                dataCustomer.data?.length === 0
+                  ?
+                  <h3 className='cursor-pointer py-4 text-center'>No hay clientes con este dato ...</h3>
+                  :
+                  <ul className='px-5 py-2'>
+                    {
+                      dataCustomer.data?.map((el, index) => (
+                        <li
+                          key={index} className='cursor-pointer hover:bg-slate-600 rounded p-2'
+                          onClick={() => {
+                            dispatch({
+                              type: REDUCER_ACTION_TYPE.customer_id,
+                              payload: el.id
+                            })
+                            setMustSearchCustomer(false)
+                            setInputCustomer(el.name)
+                          }
+                          }
+                        >{`${el.name} - ${el.identity_document ? `${el.identity_document.abbreviation}: ${el.document_number}` : '--'}`}</li>))
+                    }
+                  </ul>
+            }
+          </ReactSelect>
+          <button type='button' className='order-1 absolute bottom-1 right-12 bg-gray-100 rounded-full px-2 py-1 z-10 hover:bg-gray-300'
+              onClick={() => setOpenCustomer(true)}>
+              <Icon icon={faUserPlus} />
           </button>
         </div>
         <div className='absolute'>
           <AddCustomer customer={{ ...initialStateCustomer }} option={'Crear'} open={openCustomer} setOpen={setOpenCustomer} actions={false} mustBeToast={false} focus={false} />
         </div>
 
-        <ReactSelect setMustSearch={setMustSearchBreed} input={inputBreed} setInput={setInputBreed} label={'Raza'} setHelperSearch={setHelperSearchBreed} setHelper={setHelperBreed} listStyle={'w-full max-h-72'}>
-          {
-            loadingBreed
-              ?
-              <div className='w-full sm:w-1/2 mx-auto py-4'>
-                <Spinner message={'Buscando a las razas ...'} />
-              </div>
-              :
-              dataBreed.data?.length === 0
+        <div className='relative w-full col-span-full grid grid-cols-1 sm:grid-cols-2 gap-6 order-1'>
+          <ReactSelect setMustSearch={setMustSearchBreed} input={inputBreed} setInput={setInputBreed} label={'Raza'} setHelperSearch={setHelperSearchBreed} setHelper={setHelperBreed} listStyle={'w-full max-h-72'}>
+            {
+              loadingBreed
                 ?
-                <h3 className='cursor-pointer py-4 text-center'>No hay razas con este dato ...</h3>
+                <div className='w-full sm:w-1/2 mx-auto py-4'>
+                  <Spinner message={'Buscando a las razas ...'} />
+                </div>
                 :
-                <ul className='px-5 py-2'>
-                  {
-                    dataBreed.data?.map((el, index) => (
-                      <li
-                        key={index} className='cursor-pointer hover:bg-slate-600 rounded p-2'
-                        onClick={() => {
-                          dispatch({
-                            type: REDUCER_ACTION_TYPE.breed_id,
-                            payload: el.id
-                          })
-                          setMustSearchBreed(false)
-                          setInputBreed(el.name)
-                        }
-                        }
-                      >{el.name}</li>))
-                  }
-                </ul>
-          }
-        </ReactSelect>
+                dataBreed.data?.length === 0
+                  ?
+                  <h3 className='cursor-pointer py-4 text-center'>No hay razas con este dato ...</h3>
+                  :
+                  <ul className='px-5 py-2'>
+                    {
+                      dataBreed.data?.map((el, index) => (
+                        <li
+                          key={index} className='cursor-pointer hover:bg-slate-600 rounded p-2'
+                          onClick={() => {
+                            dispatch({
+                              type: REDUCER_ACTION_TYPE.breed_id,
+                              payload: el.id
+                            })
+                            setMustSearchBreed(false)
+                            setInputBreed(el.name)
+                          }
+                          }
+                        >{el.name}</li>))
+                    }
+                  </ul>
+            }
+          </ReactSelect>
+          <button type='button' className='order-1 absolute bottom-1 right-12 top-1 bg-gray-100 rounded-full px-2 py-1 z-10 hover:bg-gray-300'
+              onClick={() => setOpenBreed(true)}>
+              <Icon icon={faShieldCat} size='22px' />
+          </button>
+        </div>
+        <div className='absolute'>
+          <AddBreed breed={{ ...initialStateBreed }} option={'Crear'} open={openBreed} setOpen={setOpenBreed} actions={false} mustBeToast={false} focus={false} />
+        </div>
 
         <Selector
           message={'Sexo'}

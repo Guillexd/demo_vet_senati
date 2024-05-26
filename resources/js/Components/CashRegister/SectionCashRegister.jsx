@@ -42,7 +42,7 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
   useEffect(() => {
     if (optionSearch === values.prod) {
       setCashHelper(null)
-      setTitles(['Transacción', 'Producto', 'Precio', 'cantidad', 'subtotal', 'Cliente', 'descripción', 'fecha', 'voucher', 'eliminar'])
+      setTitles(['Transacción', 'Imagen', 'Producto', 'Precio', 'cantidad', 'subtotal', 'Cliente', 'descripción', 'fecha', 'voucher', 'eliminar'])
     } else if (optionSearch === values.serv) {
       setCashHelper(null)
       setTitles(['Transacción', 'Servicio', 'Precio', 'cantidad', 'subtotal', 'Cliente', 'descripción', 'fecha', 'voucher', 'eliminar'])
@@ -266,7 +266,7 @@ function Search({ render, setSearchByFilter, setMustLoad, setPage, placeholder, 
       }
 
       <section className={`${hide && 'hidden'} px-2 py-1 overflow-hidden flex flex-wrap cursor-pointer`}>
-        <span className='font-medium me-4 text-white'>Filtro: </span>
+        <span className='font-medium me-4 text-black'>Filtro: </span>
         {
           data.map((value, index) => (
             value.input ? (
@@ -414,6 +414,17 @@ function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSe
                       </div>
                     </div>
                   </td>
+
+                  {
+                    el.product_image_url && (
+                      <td className='px-2 py-4 whitespace-no-wrap border-b border-gray-200 h-24'>
+                        <div className='transition-all ease-out text-gray-900 w-20 cursor-pointer hover:absolute hover:scale-[300%]  hover:z-10 mx-auto'>
+                          <img src={el.product_image_url} alt={el.name} className='rounded-sm h-16 mx-auto' />
+                        </div>
+                      </td>
+                    )
+                  }
+
                   <td className='px-2 py-4 whitespace-no-wrap border-b border-gray-200'>
                     <div className='text-sm leading-5 text-gray-900 max-w-40 overflow-hidden mx-auto'>{el.name}</div>
                   </td>
@@ -899,6 +910,7 @@ function Pagination({ pageQuantity, quantity, setLimit, setPage, nextPage, prevP
 function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper }) {
   const initialStateProduct = {
     id: uuidv4(),
+    img: '',
     product_id: '',
     name: '',
     price: 0,
@@ -1072,7 +1084,7 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper }) 
           <>
             <SectionCashRegisterModal.ButtonContainer css='border-2 border-gray-200 bg-gray-300'>
               <span className='text-base absolute -translate-y-2 -translate-x-12'>Comprobante</span>
-              <p class="text-2xl font-bold text-gray-500 mt-2">
+              <p className="text-2xl font-bold text-gray-500 mt-2">
                 {voucherId || 'V-00000001'}
               </p>
             </SectionCashRegisterModal.ButtonContainer>
@@ -1242,6 +1254,7 @@ function ProductModal({ setMustSearchProduct, inputProduct, setInputProduct, loa
                           setSelectProduct(prev => {
                             return {
                               ...prev,
+                              img: el.product_image_url,
                               product_id: el.id,
                               name: el.name,
                               price: el.price
@@ -1311,7 +1324,7 @@ function ProductModal({ setMustSearchProduct, inputProduct, setInputProduct, loa
         products.length > 0 && (
           <div className='col-span-full order-2'>
             <Table>
-              <Table.HeaderTable names={['Producto', 'precio', 'cantidad', 'subtotal', 'descripción', 'Eliminar']} />
+              <Table.HeaderTable names={['Imagen', 'Producto', 'precio', 'cantidad', 'subtotal', 'descripción', 'Eliminar']} />
               <ModalTableBody data={products} setData={setProducts} />
             </Table>
           </div>
@@ -1466,6 +1479,17 @@ function ModalTableBody({ data, setData }) {
       {
         data.map((el, index) => (
           <tr className='hover:bg-sky-200' key={index}>
+
+            {
+              el.img && (
+                <td className='whitespace-no-wrap border-b border-gray-200 h-20'>
+                  <div className='transition-all text-gray-900 w-20 cursor-pointer hover:absolute hover:scale-[300%] hover:translate-x-20 hover:z-10'>
+                    <img src={el.img} alt={el.name} className='rounded-sm h-16 mx-auto' />
+                  </div>
+                </td>
+              )
+            }
+
             <td className='py-2 whitespace-no-wrap border-b border-gray-200'>
               <div className='text-sm leading-5 text-gray-900 w-40 overflow-hidden mx-auto'>{el.name}</div>
             </td>

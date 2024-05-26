@@ -35,7 +35,7 @@ export default function Product({ productI, setProduct, setOption, setOpenModal,
 
   return (
     <>
-      <img className='w-full h-96 object-contain' src={productI.product_image_url || '/image/juguete.webp'} alt={productI.name} onClick={() => {
+      <img className='w-full h-60 object-contain' src={productI.product_image_url || '/image/juguete.webp'} alt={productI.name} onClick={() => {
         setImage({
           url: productI.product_image_url || '/image/juguete.webp',
           label: productI.name

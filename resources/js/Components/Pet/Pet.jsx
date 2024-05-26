@@ -35,7 +35,7 @@ export default function Pet({ petI, setPet, setOption, setOpenModal, setHelper, 
 
   return (
     <>
-      <img className='w-full h-96 object-cover' src={petI.pet_image_url || '/image/mascota.webp'} alt={petI.name} onClick={() => {
+      <img className='w-full h-60 object-cover' src={petI.pet_image_url || '/image/mascota.webp'} alt={petI.name} onClick={() => {
         setImage({
           url: petI.pet_image_url || '/image/mascota.webp',
           label: petI.name

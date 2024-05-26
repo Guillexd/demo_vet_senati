@@ -11,13 +11,11 @@ import Icon from '../../utils/Icon';
 import Footer from '../Footer';
 import Breed from './Breed';
 import BreedModal from './BreedModal';
+import { initialStateBreed as initialStateBreedExport } from './initialStateBreed';
 
 function BreedContainer() {
 
-  const initialStateBreed = {
-    id: '',
-    name: '',
-  }
+  const initialStateBreed = {...initialStateBreedExport}
 
   const filters = [
     {

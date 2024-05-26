@@ -267,7 +267,10 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
         toast.update(loadingToastId, { render: options.sucessMessage, type: toast.TYPE.SUCCESS, autoClose: 1500, hideProgressBar: false, })
         setMustLoad(false)
         setHelper((prev) => prev + 1)
-        setOpen(false)
+        // setOpen(false)
+        setTimeout(() => {
+            document.getElementById(`btn-history-${data.id}`)?.click()
+        }, 1000)
       })
       .catch((err) => {
         console.log(err);

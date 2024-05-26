@@ -112,8 +112,8 @@ class PetHistoryController extends Controller
             $data[$key] = $value;
         }
 
-        PetHistory::create($data);
-        return response()->json($request->only('name'));
+        $pet_history = PetHistory::create($data);
+        return response()->json($pet_history);
     }
 
     public function update(StorePetHistoryRequest $request)
@@ -142,8 +142,8 @@ class PetHistoryController extends Controller
             $data[$key] = $value;
         }
 
-        $pet_history = PetHistory::whereId($request->id)->update($data);
-        return response()->json($pet_history);
+        PetHistory::whereId($request->id)->update($data);
+        return response()->json(['id' => $request->id]);
     }
 
     public function destroy(Request $request)
