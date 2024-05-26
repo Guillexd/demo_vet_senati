@@ -13,33 +13,6 @@ class PetSeeder extends Seeder
      */
     public function run(): void
     {
-        // Pet::factory(36)->create();
-        // $images = [
-        //     (object) [
-        //         'url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1709147463/ReyCan/xcmkue1wxznar2whjz69.jpg',
-        //         'id' => 'ReyCan/xcmkue1wxznar2whjz69'
-        //     ],
-        //     (object) [
-        //         'url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1709147472/ReyCan/dagwjkh5wfemlpdgjky7.jpg',
-        //         'id' => 'ReyCan/dagwjkh5wfemlpdgjky7'
-        //     ],
-        //     (object) [
-        //         'url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1709147481/ReyCan/axxshihjqn5k7rcdeiti.jpg',
-        //         'id' => 'ReyCan/axxshihjqn5k7rcdeiti'
-        //     ],
-        //     (object) [
-        //         'url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1709147581/ReyCan/gfwsetlbjvggxiz0euce.jpg',
-        //         'id' => 'ReyCan/gfwsetlbjvggxiz0euce'
-        //     ],
-        // ];
-
-        // foreach ($images as $image) {
-        //     Pet::factory()->create([
-        //         'pet_image_url' => $image->url,
-        //         'pet_public_id' => $image->id,
-        //     ]);
-        // }
-
         Pet::factory()->create([
             'name' => 'Coto',
             'customer_id' => 3,

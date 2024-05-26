@@ -32,5 +32,25 @@ class BreedSeeder extends Seeder
         Breed::create([
             'name' => 'Pastor Alemán (perro)'
         ]);
+
+        Breed::create([
+            'name' => 'Persa (gato)'
+        ]);
+        Breed::create([
+            'name' => 'Siamés (gato)'
+        ]);
+        Breed::create([
+            'name' => 'Maine Coon (gato)'
+        ]);
+        Breed::create([
+            'name' => 'Bengala (gato)'
+        ]);
+        Breed::create([
+            'name' => 'Sphynx (gato)'
+        ]);
+        Breed::create([
+            'name' => 'Angora (gato)'
+        ]);
+
     }
 }

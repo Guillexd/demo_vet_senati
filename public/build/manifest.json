@@ -57,7 +57,7 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-fc8fbfdd.css",
+    "file": "assets/app-c59afbe4.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -106,7 +106,7 @@
     "src": "resources/js/Components/Expense/ExpenseContainer.jsx"
   },
   "resources/js/Components/Graphics/Graphics.jsx": {
-    "file": "assets/Graphics-d9d05edf.js",
+    "file": "assets/Graphics-2eb69fdb.js",
     "imports": [
       "_Footer-53ea2814.js"
     ],
@@ -200,7 +200,7 @@
       "resources/js/Components/CashRegister/CashRegisterContainer.jsx",
       "resources/js/Components/Graphics/Graphics.jsx"
     ],
-    "file": "assets/app-a0a6ae9e.js",
+    "file": "assets/app-764ed046.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }

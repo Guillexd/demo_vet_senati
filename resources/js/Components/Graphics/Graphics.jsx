@@ -26,7 +26,7 @@ export default function Graphics() {
     fetchData();
   }, []);
 
-  const ContainerStyle = "w-full md:w-5/6 xl:w-[calc(40%)] border rounded-lg border-vetgreen-200 shadow-lg p-4 my-4"
+  const ContainerStyle = "border rounded-lg border-vetgreen-200 shadow-lg p-4 my-4"
   return (
     <div className='relative' >
       <DefaultHeader icon={faPeopleArrows} message={"Estadísticas"} />
@@ -38,15 +38,15 @@ export default function Graphics() {
         </div>
       </div>
       <div className='flex flex-col xl:flex-row flex-wrap justify-center items-center xl:items-stretch gap-5'>
-        <div className={ContainerStyle}>
+        <div className={ContainerStyle + " w-full md:w-5/6 xl:w-[calc(40%)]"}>
           <DefaultTitle message={"Productos más vendidos del mes"} />
           <BarChart sale={datos.sale} />
         </div>
-        <div className={ContainerStyle}>
+        <div className={ContainerStyle + " w-full md:w-3/6 xl:w-2/6"}>
           <DefaultTitle message={"Servicios más solicitados del mes"} />
           <Piechart services={datos.services} />
         </div>
-        <div className={ContainerStyle}>
+        <div className={ContainerStyle + " w-full md:w-5/6 xl:w-[calc(40%)]"}>
           <DefaultTitle message={"Ingreso Neto"} />
           <div>
             <LinesChart neto={datos.neto} />

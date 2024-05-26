@@ -13,7 +13,7 @@ class CustomerSeeder extends Seeder
      */
     public function run(): void
     {
-        // Customer::factory(24)->create();
+        Customer::factory(36)->create();
         Customer::factory()->create([
             'name' => 'Alicia Contreras Porras',
             'identity_document_id' => 1,
@@ -35,7 +35,7 @@ class CustomerSeeder extends Seeder
             'document_number' => '12345678954',
         ]);
         Customer::create([
-            'name' => 'Cliente anónimo'
+            'name' => 'Clientes varios'
         ]);
     }
 }

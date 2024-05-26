@@ -13,81 +13,50 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        // $names = [
-        //     "Medicamento para perros",
-        //     "Collar antipulgas para gatos",
-        //     "Alimento balanceado para cachorros",
-        //     "Champú para perros con piel sensible",
-        //     "Juguete masticable para perros",
-        //     "Pipetas antipulgas para perros y gatos",
-        //     "Cepillo de dientes para perros",
-        //     "Arena aglomerante para gatos",
-        //     "Snack dental para perros",
-        //     "Comedero automático para mascotas",
-        //     "Cama ortopédica para perros mayores",
-        //     "Peine antipulgas para gatos",
-        //     "Bola de heno para conejos",
-        //     "Shampoo antipulgas para cachorros",
-        //     "Piedra mineral para roedores",
-        //     "Cepillo de pelo largo para gatos",
-        //     "Suplemento vitamínico para hurones",
-        //     "Jaula para hamsters",
-        //     "Hueso de cuero natural para perros",
-        //     "Cortaúñas para conejos y roedores",
-        //     "Champú para perros de pelo blanco",
-        //     "Arena aglomerante con aroma a lavanda para gatos",
-        //     "Alimento húmedo para cachorros de razas pequeñas",
-        //     "Cepillo de dientes con sabor a pollo para perros",
-        //     "Pelota de goma resistente para masticar",
-        //     "Pipetas antipulgas y garrapatas para perros grandes",
-        //     "Camita con forma de cueva para gatos tímidos",
-        //     "Snack natural de zanahoria para conejos",
-        //     "Bebedero automático para aves",
-        //     "Arnés reflectante para perros nocturnos",
-        //     "Piedra mineral para desgaste de uñas de roedores",
-        //     "Suplemento vitamínico para fortalecer el pelaje de gatos",
-        //     "Jaula grande con ruedas para hurones activos",
-        //     "Collar ajustable con luz LED para perros de noche",
-        //     "Comedero elevado para gatos con problemas de digestión",
-        //     "Cama ortopédica con sistema de calor para perros artríticos",
-        // ];
+        $names = [
+            "Medicamento para perros",
+            "Collar antipulgas para gatos",
+            "Alimento balanceado para cachorros",
+            "Champú para perros con piel sensible",
+            "Juguete masticable para perros",
+            "Pipetas antipulgas para perros y gatos",
+            "Cepillo de dientes para perros",
+            "Arena aglomerante para gatos",
+            "Snack dental para perros",
+            "Comedero automático para mascotas",
+            "Cama ortopédica para perros mayores",
+            "Peine antipulgas para gatos",
+            "Bola de heno para conejos",
+            "Shampoo antipulgas para cachorros",
+            "Piedra mineral para roedores",
+            "Cepillo de pelo largo para gatos",
+            "Suplemento vitamínico para hurones",
+            "Jaula para hamsters",
+            "Hueso de cuero natural para perros",
+            "Cortaúñas para conejos y roedores",
+            "Champú para perros de pelo blanco",
+            "Arena aglomerante con aroma a lavanda para gatos",
+            "Alimento húmedo para cachorros de razas pequeñas",
+            "Cepillo de dientes con sabor a pollo para perros",
+            "Pelota de goma resistente para masticar",
+            "Pipetas antipulgas y garrapatas para perros grandes",
+            "Camita con forma de cueva para gatos tímidos",
+            "Snack natural de zanahoria para conejos",
+            "Bebedero automático para aves",
+            "Arnés reflectante para perros nocturnos",
+            "Piedra mineral para desgaste de uñas de roedores",
+            "Suplemento vitamínico para fortalecer el pelaje de gatos",
+            "Jaula grande con ruedas para hurones activos",
+            "Collar ajustable con luz LED para perros de noche",
+            "Comedero elevado para gatos con problemas de digestión",
+            "Cama ortopédica con sistema de calor para perros artríticos",
+        ];
 
-        // foreach ($names as $productName) {
-        //     Product::factory()->create([
-        //         'name' => $productName,
-        //     ]);
-        // }
-
-        // $products = [
-        //     (object) [
-        //         'name' => 'Juguete interactivo con dispensador de premios para gatos inteligentes',
-        //         'url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1709147873/ReyCan/uas6dlwrtoopl2kjkbdv.jpg',
-        //         'id' => 'ReyCan/uas6dlwrtoopl2kjkbdv'
-        //     ],
-        //     (object) [
-        //         'name' => 'Cortaúñas de precisión para aves de pequeño tamaño',
-        //         'url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1709147891/ReyCan/lfrllrjotq1xe4qau9jw.jpg',
-        //         'id' => 'ReyCan/lfrllrjotq1xe4qau9jw'
-        //     ],
-        //     (object) [
-        //         'name' => 'Bebedero de cristal antigoteo para roedores delicados',
-        //         'url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1709147912/ReyCan/jlmem8ctuupbw9n1meoz.jpg',
-        //         'id' => 'ReyCan/jlmem8ctuupbw9n1meoz'
-        //     ],
-        //     (object) [
-        //         'name' => 'Pelota de heno con hierbas aromáticas para conejos mimados',
-        //         'url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1709147922/ReyCan/zqjwbypdavrwkcrphnfq.jpg',
-        //         'id' => 'ReyCan/zqjwbypdavrwkcrphnfq'
-        //     ],
-        // ];
-
-        // foreach ($products as $product) {
-        //     Product::factory()->create([
-        //         'name' => $product->name,
-        //         'product_image_url' => $product->url,
-        //         'product_public_id' => $product->id,
-        //     ]);
-        // }
+        foreach ($names as $productName) {
+            Product::factory()->create([
+                'name' => $productName,
+            ]);
+        }
 
         Product::create([
             'name' => 'Churru',
@@ -97,7 +66,7 @@ class ProductSeeder extends Seeder
             'utility' => 4.50,
             'product_image_url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1709590341/ReyCan/d5a4fsf8r3gscz7ler1b.webp',
             'product_public_id' => null,
-            'due_date' => '2025-06-07 16:39:00',
+            'due_date' => '2024-06-17 16:39:00',
             'description' => 'Para gato',
         ]);
         Product::create([
@@ -108,7 +77,7 @@ class ProductSeeder extends Seeder
             'utility' => 5.20,
             'product_image_url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1712107931/ReyCan/dblbn5h4o3ptvmx80ge1.jpg',
             'product_public_id' => null,
-            'due_date' => '2025-06-25 20:55:00',
+            'due_date' => '2024-06-24 20:55:00',
             'description' => 'Para perros',
         ]);
         Product::create([
@@ -128,7 +97,7 @@ class ProductSeeder extends Seeder
             'utility' => 5.20,
             'product_image_url' => 'https://res.cloudinary.com/dfpspbjlq/image/upload/v1714059629/ReyCan/nwf5zygdwzklfdldf913.png',
             'product_public_id' => null,
-            'due_date' => '2024-05-28 18:01:00',
+            'due_date' => '2024-06-24 18:01:00',
             'description' => 'CANTIDAD DE GRASA O ALGUNOS COMPONETES',
         ]);
     }

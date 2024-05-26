@@ -45,6 +45,7 @@ export default function BarChart({ sale }) {
         responsive: true,
         maintainAspectRatio: true,
         borderRadius: 5,
+        aspectRatio: (window.innerWidth < 1023 || window.innerWidth > 1279) ? 1/0.7 : null
     };
     return <Bar data={datos} options={options} />
 
