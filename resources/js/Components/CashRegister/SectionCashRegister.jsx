@@ -168,7 +168,7 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
                       :
                       optionSearch === values.vous
                         ?
-                        <BodyAllVouchersTable page={page} limit={limit} searchByFilter={searchByFilter} helper={helper} setData={setData} mustLoad={mustLoad} setOptionSearch={setOptionSearch} setSearchByFilter={setSearchByFilter} setCashHelper={setCashHelper} setHelper={setHelper} setMustLoad={setMustLoad} />
+                        <BodyAllVouchersTable cashId={cashRegister.id} page={page} limit={limit} searchByFilter={searchByFilter} helper={helper} setData={setData} mustLoad={mustLoad} setOptionSearch={setOptionSearch} setSearchByFilter={setSearchByFilter} setCashHelper={setCashHelper} setHelper={setHelper} setMustLoad={setMustLoad} />
                         :
                         optionSearch === values.vou
                           ?
@@ -563,7 +563,7 @@ function BodyExpenseTable({ id, setData, page, limit, helper, searchByFilter, mu
   )
 }
 
-function BodyAllVouchersTable({ page, limit, searchByFilter, helper, setData, mustLoad, setOptionSearch, setSearchByFilter, setCashHelper, setHelper, setMustLoad }) {
+function BodyAllVouchersTable({ cashId, page, limit, searchByFilter, helper, setData, mustLoad, setOptionSearch, setSearchByFilter, setCashHelper, setHelper, setMustLoad }) {
   const url = `/cash_registers/get_all_vouchers?page=${page}&limit=${limit}&inputFilter=${searchByFilter}`
   const { data, loading } = useFetchData(url, [page, limit, helper, searchByFilter])
 
@@ -620,7 +620,7 @@ function BodyAllVouchersTable({ page, limit, searchByFilter, helper, setData, mu
               </tr>
               :
               data.data?.map((el, index) => (
-                <tr className='hover:bg-sky-200' key={index}>
+                <tr className={`${cashId === el.cash_id && 'bg-gray-300'} hover:bg-sky-200`} key={index}>
                   <td
                     className='py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200 relative w-96'>
                     <button className='bg-red-500 hover:bg-red-700 text-sm leading-5 w-40 md:w-3/4 mx-auto text-white flex flex-col items-center p-1 rounded'

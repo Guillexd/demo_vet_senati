@@ -20,6 +20,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\EnsureCashRegisterIsOpen;
+use App\Http\Middleware\EnsureJustOneCashRegisterIsOpen;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,18 +127,18 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/get_expenses/{cash_register}', [CashRegisterController::class, 'getExpenses']);
         Route::get('/get_all_vouchers', [CashRegisterController::class, 'getAllVouchers']);
         Route::get('/get_voucher/{cash_register}', [CashRegisterController::class, 'getVoucher']);
-        Route::post('/store', [CashRegisterController::class, 'storeInitialCashRegister'])->middleware(['can:admin']);
+        Route::post('/store', [CashRegisterController::class, 'storeInitialCashRegister'])->middleware(['can:admin', EnsureJustOneCashRegisterIsOpen::class]);
         Route::post('/store_movements', [CashRegisterController::class, 'storeMovements'])
             ->middleware(EnsureCashRegisterIsOpen::class);
         Route::put('/update', [CashRegisterController::class, 'update'])
-            ->middleware(['can:admin']);
+            ->middleware(['can:admin', EnsureJustOneCashRegisterIsOpen::class]);
         Route::put('/update_state', [CashRegisterController::class, 'updateState']);
         Route::delete('/destroy', [CashRegisterController::class, 'destroy'])
             ->middleware(['can:admin', EnsureCashRegisterIsOpen::class]);
         Route::delete('/destroy_movement', [CashRegisterController::class, 'destroyMovement'])
             ->middleware(['can:admin', EnsureCashRegisterIsOpen::class]);
         Route::delete('/destroy_voucher', [CashRegisterController::class, 'destroyVoucher'])
-            ->middleware(['can:admin']);
+            ->middleware(['can:admin', EnsureCashRegisterIsOpen::class]);
         Route::get('/get_voucher_id', [CashRegisterController::class, 'getVoucherId']);
         Route::get('/get_voucher_pdf/{cash_register}', [CashRegisterController::class, 'pdfVoucher']);
         Route::get('/get_excel_by_cash_register', [CashRegisterController::class, 'excelProducts'])->middleware(['can:admin']);

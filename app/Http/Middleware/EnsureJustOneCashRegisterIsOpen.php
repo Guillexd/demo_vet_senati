@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class EnsureCashRegisterIsOpen
+class EnsureJustOneCashRegisterIsOpen
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,11 @@ class EnsureCashRegisterIsOpen
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $id = $request->cash_register_id ?? $request->id;
-        $cash_register = CashRegister::findOrFail($id);
+        $cash_register = CashRegister::where('state', true)->exists();
 
-        if($cash_register->state === 0) {
+        if($cash_register) {
             $errors = [
-                'request_error' => ["La caja $id debe estar abierta para realizar esta acción."],
+                'request_error' => ["Ya existe una caja registradora abierta."],
             ];
             return response()->json(['errors' => $errors], 404);
         }
