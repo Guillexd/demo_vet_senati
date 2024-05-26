@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $sale = Sales::firstOrFail();
-        $uuid = $sale->code . '-' . Str::padLeft($sale->correlativo, 7, '0');
+        $uuid = $sale->code . '-' . Str::padLeft(2, 7, '0');
 
         $products = [
             (object) [
@@ -109,8 +109,7 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-        $sale->correlativo = $sale->correlativo + 1;
-        $uuid = $sale->code . '-' . Str::padLeft($sale->correlativo, 7, '0');
+        $uuid = $sale->code . '-' . Str::padLeft(1, 7, '0');
 
         foreach ($services as $record) {
             $service = Service::find($record->cash_registerable_id);
@@ -163,7 +162,7 @@ class DatabaseSeeder extends Seeder
             DB::table('cash_registerables')->insert((array) $record);
         }
 
-        $sale->correlativo = $sale->correlativo + 1;
+        $sale->correlativo = 3;
         $sale->save();
     }
 }
