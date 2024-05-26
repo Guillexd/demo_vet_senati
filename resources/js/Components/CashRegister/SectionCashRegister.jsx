@@ -418,8 +418,8 @@ function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSe
                   {
                     el.product_image_url && (
                       <td className='px-2 py-4 whitespace-no-wrap border-b border-gray-200 h-24'>
-                        <div className='transition-all ease-out text-gray-900 w-20 cursor-pointer hover:absolute hover:scale-[300%]  hover:z-10 mx-auto'>
-                          <img src={el.product_image_url} alt={el.name} className='rounded-sm h-16 mx-auto' />
+                        <div className='text-gray-900 w-20 mx-auto'>
+                          <img src={el.product_image_url} alt={el.name} className='rounded-sm h-16 mx-auto transition-all ease-out cursor-pointer hover:absolute hover:scale-[300%] hover:z-10' />
                         </div>
                       </td>
                     )
@@ -1483,8 +1483,8 @@ function ModalTableBody({ data, setData }) {
             {
               el.img && (
                 <td className='whitespace-no-wrap border-b border-gray-200 h-20'>
-                  <div className='transition-all text-gray-900 w-20 cursor-pointer hover:absolute hover:scale-[300%] hover:translate-x-20 hover:z-10'>
-                    <img src={el.img} alt={el.name} className='rounded-sm h-16 mx-auto' />
+                  <div className='text-gray-900 w-20'>
+                    <img src={el.img} alt={el.name} className='rounded-sm h-16 mx-auto transition-all cursor-pointer hover:absolute hover:scale-[300%] hover:translate-x-20 hover:z-10' />
                   </div>
                 </td>
               )
