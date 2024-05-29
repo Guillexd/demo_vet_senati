@@ -150,7 +150,7 @@ function Pagination({ pageQuantity, quantity, setMustLoad, setLimit, setPage, ne
           Anterior
         </button>
 
-        <div className='hidden xl:block text-vetbrown rounded-full bg-vetgreen-100 border border-vetbrown p-2 mb-1'>
+        <div className='hidden xl:block text-vetbrown rounded-full bg-slate-50 border border-vetbrown p-2 mb-1'>
           <span className=''> Por página: </span>
           <select className='px-2 py-1 bg-transparent rounded-lg cursor-pointer'
             defaultValue='12'
@@ -161,9 +161,9 @@ function Pagination({ pageQuantity, quantity, setMustLoad, setLimit, setPage, ne
               setPage(1)
             }}
           >
-            <option value='6' className='bg-vetgreen-100'>6</option>
-            <option value='12' className='bg-vetgreen-100'>12</option>
-            <option value='20' className='bg-vetgreen-100'>20</option>
+            <option value='6' className='bg-slate-50'>6</option>
+            <option value='12' className='bg-slate-50'>12</option>
+            <option value='20' className='bg-slate-50'>20</option>
           </select>
         </div>
         <div className='xl:hidden text-gray-600 rounded-xl bg-white border border-gray-200 p-2'>
@@ -176,14 +176,14 @@ function Pagination({ pageQuantity, quantity, setMustLoad, setLimit, setPage, ne
               setPage(1)
             }}
           >
-            <option value='6' className=' bg-vetgreen-100'>6</option>
-            <option value='12' className=' bg-vetgreen-100'>12</option>
-            <option value='20' className=' bg-vetgreen-100'>20</option>
+            <option value='6' className=' bg-slate-50'>6</option>
+            <option value='12' className=' bg-slate-50'>12</option>
+            <option value='20' className=' bg-slate-50'>20</option>
           </select>
         </div>
 
         <nav className='hidden xl:flex rounded-lg divide-vetbrown ease-out duration-300'>
-          <button className={`px-4 py-2 text-vetbrown bg-vetgreen-100 border border-vetbrown rounded-l-full ${prevPage && 'hover:text-indigo-500 hover:scale-[105%]'}`}
+          <button className={`px-4 py-2 text-vetbrown bg-slate-50 border border-vetbrown rounded-l-full ${prevPage && 'hover:text-indigo-500 hover:scale-[105%]'}`}
             disabled={!prevPage}
             onClick={() => {
               if (prevPage) {
@@ -221,7 +221,7 @@ function Pagination({ pageQuantity, quantity, setMustLoad, setLimit, setPage, ne
             </button>
           }
 
-          <button className='px-4 py-2 text-indigo-500 bg-vetgreen-100 border border-vetbrown mx-2 font-medium'>{page}</button>
+          <button className='px-4 py-2 text-indigo-500 bg-slate-50 border border-vetbrown mx-2 font-medium'>{page}</button>
 
           {
             lastPage - page > 0 && <button className='px-4 py-2 text-gray-500 hover:text-indigo-500 hover:scale-[105%]'
@@ -249,7 +249,7 @@ function Pagination({ pageQuantity, quantity, setMustLoad, setLimit, setPage, ne
             </button>
           }
 
-          <button className={`px-4 py-2 text-vetbrown rounded-r-full bg-vetgreen-100 border border-vetbrown ${nextPage && 'hover:text-indigo-500 hover:scale-[105%]'}`}
+          <button className={`px-4 py-2 text-vetbrown rounded-r-full bg-slate-50 border border-vetbrown ${nextPage && 'hover:text-indigo-500 hover:scale-[105%]'}`}
             disabled={!nextPage}
             onClick={() => {
               if (nextPage) {

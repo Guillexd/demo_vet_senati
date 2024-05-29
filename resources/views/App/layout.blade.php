@@ -119,7 +119,7 @@
     </div>
 
     <button id="btn-up" type="button"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 absolute right-3 min-[1670px]:right-20 bottom-3 animate-bounce">
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center items-center me-2 absolute right-3 min-[1670px]:right-20 bottom-3 animate-bounce hidden">
         <svg class="w-5 h-5 -rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
             viewBox="0 0 14 10">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -164,6 +164,14 @@
                     behavior: 'smooth'
                 });
             });
+
+            scrollableDiv.addEventListener('scroll', () => {
+            if (scrollableDiv.scrollTop > 300) {
+                scrollToTopBtn.classList.remove('hidden');
+            } else {
+                scrollToTopBtn.classList.add('hidden');
+            }
+        });
         })
     </script>
 </body>
