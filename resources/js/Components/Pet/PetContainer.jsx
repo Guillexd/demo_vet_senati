@@ -144,13 +144,22 @@ function PetContainer() {
           </div>
         </SectionData.Search>
         <SectionData.FilterBar
-          hide={!debounceValue && !startDate && !finishDate}
+          hide={!debounceValue && !sex && !startDate && !finishDate}
           data={
             [
               {
                 tag: filters.find(el => el.value === filter)?.name,
                 input: debounceValue,
                 handleClick: () => setInputFilter('')
+              },
+              {
+                tag: 'Sexo de la mascota',
+                input: sex.length > 0 ? sex : null,
+                handleClick: () => {
+                  setSex('')
+                  setPage(1)
+                  setHelper((prev) => prev + 1)
+                }
               },
               {
                 tag: 'Fecha de inicio',

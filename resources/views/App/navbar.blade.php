@@ -53,7 +53,7 @@
             <div
                 class="rounded-lg mt-2 h-0 transition-all ease-out duration-700 {{ Request::is('mascotas') || Request::is('historial-de-mascotas') || Request::is('razas') ? 'menu' : '' }}">
 
-                <a class='flex items-center mx-1 pl-1 py-2 {{ Request::is('mascotas') ? 'text-black font-semibold border-b-2 border-black' : 'text-white hover:text-black' }}'
+                <a class='flex items-center mx-1 pl-1 py-2 {{ Request::is('mascotas') ? 'text-black border-b-2 border-black' : 'text-white hover:text-black' }}'
                     href='{{ Request::is('mascotas') ? '#' : url('/mascotas') }}'>
                     &#8226
                     <svg class='ml-2 w-6 h-6' xmlns='http://www.w3.org/2000/svg' fill='currentColor' stroke='currentColor'
@@ -62,10 +62,10 @@
                             d="M309.6 158.5L332.7 19.8C334.6 8.4 344.5 0 356.1 0c7.5 0 14.5 3.5 19 9.5L392 32h52.1c12.7 0 24.9 5.1 33.9 14.1L496 64h56c13.3 0 24 10.7 24 24v24c0 44.2-35.8 80-80 80H464 448 426.7l-5.1 30.5-112-64zM416 256.1L416 480c0 17.7-14.3 32-32 32H352c-17.7 0-32-14.3-32-32V364.8c-24 12.3-51.2 19.2-80 19.2s-56-6.9-80-19.2V480c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V249.8c-28.8-10.9-51.4-35.3-59.2-66.5L1 167.8c-4.3-17.1 6.1-34.5 23.3-38.8s34.5 6.1 38.8 23.3l3.9 15.5C70.5 182 83.3 192 98 192h30 16H303.8L416 256.1zM464 80a16 16 0 1 0 -32 0 16 16 0 1 0 32 0z" />
                     </svg>
 
-                    <span class='mx-3'>Mascotas</span>
+                    <span class='mx-3 font-semibold'>Mascotas</span>
                 </a>
 
-                <a class='flex items-center mx-1 pl-1 py-2 {{ Request::is('historial-de-mascotas') ? 'text-black font-semibold border-b-2 border-black' : 'text-white hover:text-black' }}'
+                <a class='flex items-center mx-1 pl-1 py-2 {{ Request::is('historial-de-mascotas') ? 'text-black border-b-2 border-black' : 'text-white hover:text-black' }}'
                     href='{{ Request::is('historial-de-mascotas') ? '#' : url('/historial-de-mascotas') }}'>
                     &#8226
                     <svg class='ml-2 w-6 h-6' xmlns='http://www.w3.org/2000/svg' fill='currentColor' stroke='currentColor'
@@ -74,10 +74,10 @@
                             d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
                     </svg>
 
-                    <span class='mx-3 truncate'>Historial (mascotas)</span>
+                    <span class='mx-3 truncate font-semibold'>Historial (mascotas)</span>
                 </a>
 
-                <a class='flex items-center mx-1 pl-1 py-2 {{ Request::is('razas') ? 'text-black font-semibold border-b-2 border-black' : 'text-white hover:text-black' }}'
+                <a class='flex items-center mx-1 pl-1 py-2 {{ Request::is('razas') ? 'text-black border-b-2 border-black' : 'text-white hover:text-black' }}'
                     href='{{ Request::is('razas') ? '#' : url('/razas') }}'>
                     &#8226
                     <svg class='mx-2 w-6 h-6' xmlns='http://www.w3.org/2000/svg' fill='currentColor' stroke='currentColor'
@@ -86,7 +86,7 @@
                             d="M269.4 2.9C265.2 1 260.7 0 256 0s-9.2 1-13.4 2.9L54.3 82.8c-22 9.3-38.4 31-38.3 57.2c.5 99.2 41.3 280.7 213.6 363.2c16.7 8 36.1 8 52.8 0C454.7 420.7 495.5 239.2 496 140c.1-26.2-16.3-47.9-38.3-57.2L269.4 2.9zM160 154.4c0-5.8 4.7-10.4 10.4-10.4h.2c3.4 0 6.5 1.6 8.5 4.3l40 53.3c3 4 7.8 6.4 12.8 6.4h48c5 0 9.8-2.4 12.8-6.4l40-53.3c2-2.7 5.2-4.3 8.5-4.3h.2c5.8 0 10.4 4.7 10.4 10.4V272c0 53-43 96-96 96s-96-43-96-96V154.4zM216 288a16 16 0 1 0 0-32 16 16 0 1 0 0 32zm96-16a16 16 0 1 0 -32 0 16 16 0 1 0 32 0z" />
                     </svg>
 
-                    <span class='mx-1'>Razas</span>
+                    <span class='mx-1 font-semibold'>Razas</span>
                 </a>
             </div>
         </div>
