@@ -4,7 +4,8 @@ import { toast } from 'react-toastify';
 import { fetchData, fetchHelper } from '../../utils/utils';
 import ToastifyErrorList from '../ToastifyErrorList';
 import Spinner from '../presentational/Spinner';
-import { faPeopleRoof } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faPeopleRoof } from '@fortawesome/free-solid-svg-icons'
+import Icon from '../../utils/Icon';
 
 const REDUCER_ACTION_TYPE = {
   id: 'MODIFY_ID',
@@ -82,6 +83,8 @@ export default function CustomerModal({ customer, option, open, setOpen, setMust
       .finally(() => setIsLoading(false))
   }
 
+  const capitalizeFirstLetterOfEachWord = (sentence) => sentence ? sentence.split(' ').map(word => word ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() : '').join(' ') : '';
+
   useEffect(() => {
     (async () => {
       const info = await fetchData('/identity-documents/list')
@@ -99,6 +102,34 @@ export default function CustomerModal({ customer, option, open, setOpen, setMust
       })
     }
   }, [customer])
+
+  const setInfo = async () => {
+    if (state.document_number.length < 8 || state.document_number.length > 11) {
+      return
+    }
+    let api
+    if (state.identity_document_id == 1) {
+      api = await axios.get(`/inquiry/dni?dni=${state.document_number}`)
+    } else if (state.identity_document_id == 2) {
+      api = await axios.get(`/inquiry/ruc?ruc=${state.document_number}`)
+    }
+
+    if (api.data.original.hasOwnProperty('razonSocial')) {
+      dispatch({
+        type: REDUCER_ACTION_TYPE.name,
+        payload: api.data.original.razonSocial
+      })
+    } else if (api.data.original.hasOwnProperty('nombres')) {
+      dispatch({
+        type: REDUCER_ACTION_TYPE.name,
+        payload: capitalizeFirstLetterOfEachWord(api.data.original.nombres) + ' ' + capitalizeFirstLetterOfEachWord(api.data.original.apellidoPaterno) + ' ' + capitalizeFirstLetterOfEachWord(api.data.original.apellidoMaterno)
+      })
+    } else {
+      toast.error('DNI o RUC inválido o no encontrando', {
+        autoClose: 1500
+      })
+    }
+  }
 
   return (
     <>
@@ -144,6 +175,15 @@ export default function CustomerModal({ customer, option, open, setOpen, setMust
           >
             Documento de identidad (opcional)
           </label>
+          {
+            state.identity_document_id == 1 || state.identity_document_id == 2
+              ?
+              <div className='absolute top-1 right-2 h-full cursor-pointer' onClick={setInfo}>
+                <Icon icon={faMagnifyingGlass} css={'transition-all text-black hover:scale-125'} size='25px' />
+              </div>
+              :
+              null
+          }
         </div>
 
         <div className='relative border border-gray-600 rounded w-full col-span-full order-1'>

@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             BreedSeeder::class,
             PetSeeder::class,
+            PetHistorySeeder::class,
             ServiceSeeder::class,
             ProductSeeder::class,
             CashRegisterSeeder::class,
@@ -32,7 +33,71 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $sale = Sales::firstOrFail();
+        $uuid = $sale->code . '-' . Str::padLeft(1, 7, '0');
+
+        $services = [
+            (object) [
+                'cash_registerable_id' => 1,
+            ],
+            (object) [
+                'cash_registerable_id' => 2,
+            ],
+            (object) [
+                'cash_registerable_id' => 3,
+            ],
+            (object) [
+                'cash_registerable_id' => 4,
+            ],
+        ];
+
+        foreach ($services as $record) {
+            $service = Service::find($record->cash_registerable_id);
+            $record->quantity = rand(1, 15);
+            $record->subtotal = $service->price * $record->quantity;
+            $record->cash_register_id = 48;
+            $record->cash_registerable_type = 'App\\Models\\Service';
+            $record->voucher_id = $uuid;
+            $record->customer_id = 37;
+            $record->transactions_type = 1;
+            $record->description = 'Este es un servicio muy solicitado.';
+            $record->created_at = now()->subHours(2);
+
+            DB::table('cash_registerables')->insert((array) $record);
+        }
+
         $uuid = $sale->code . '-' . Str::padLeft(2, 7, '0');
+
+        $services = [
+            (object) [
+                'cash_registerable_id' => 5,
+            ],
+            (object) [
+                'cash_registerable_id' => 6,
+            ],
+            (object) [
+                'cash_registerable_id' => 7,
+            ],
+            (object) [
+                'cash_registerable_id' => 8,
+            ],
+        ];
+
+        foreach ($services as $record) {
+            $service = Service::find($record->cash_registerable_id);
+            $record->quantity = rand(1, 15);
+            $record->subtotal = $service->price * $record->quantity;
+            $record->cash_register_id = 49;
+            $record->cash_registerable_type = 'App\\Models\\Service';
+            $record->voucher_id = $uuid;
+            $record->customer_id = 38;
+            $record->transactions_type = 1;
+            $record->description = 'Este es un servicio muy solicitado.';
+            $record->created_at = now()->subHour();
+
+            DB::table('cash_registerables')->insert((array) $record);
+        }
+
+        $uuid = $sale->code . '-' . Str::padLeft(3, 7, '0');
 
         $products = [
             (object) [
@@ -77,50 +142,6 @@ class DatabaseSeeder extends Seeder
             $record->customer_id = 40;
             $record->transactions_type = 1;
             $record->description = 'Este es un producto que se vende mucho.';
-            $record->created_at = now();
-
-            DB::table('cash_registerables')->insert((array) $record);
-        }
-
-        $services = [
-            (object) [
-                'cash_registerable_id' => 1,
-            ],
-            (object) [
-                'cash_registerable_id' => 2,
-            ],
-            (object) [
-                'cash_registerable_id' => 3,
-            ],
-            (object) [
-                'cash_registerable_id' => 4,
-            ],
-            (object) [
-                'cash_registerable_id' => 5,
-            ],
-            (object) [
-                'cash_registerable_id' => 6,
-            ],
-            (object) [
-                'cash_registerable_id' => 7,
-            ],
-            (object) [
-                'cash_registerable_id' => 8,
-            ],
-        ];
-
-        $uuid = $sale->code . '-' . Str::padLeft(1, 7, '0');
-
-        foreach ($services as $record) {
-            $service = Service::find($record->cash_registerable_id);
-            $record->quantity = rand(1, 15);
-            $record->subtotal = $service->price * $record->quantity;
-            $record->cash_register_id = 49;
-            $record->cash_registerable_type = 'App\\Models\\Service';
-            $record->voucher_id = $uuid;
-            $record->customer_id = 37;
-            $record->transactions_type = 1;
-            $record->description = 'Este es un servicio muy solicitado.';
             $record->created_at = now();
 
             DB::table('cash_registerables')->insert((array) $record);

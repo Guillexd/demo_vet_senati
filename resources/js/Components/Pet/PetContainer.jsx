@@ -50,11 +50,12 @@ function PetContainer() {
   const [limit, setLimit] = useState(12);
   const [filter, setFilter] = useState('name');
   const [inputFilter, setInputFilter] = useState('');
+  const [sex, setSex] = useState('');
   const [startDate, setStartDate] = useState('');
   const [finishDate, setFinishDate] = useState('');
   const { debounceValue } = useDebounce(inputFilter, 500)
   const [helper, setHelper] = useState(0)
-  const url = `/pets/list?page=${page}&limit=${limit}&filter=${filter}&inputFilter=${debounceValue}&startDate=${startDate}&finishDate=${finishDate}`
+  const url = `/pets/list?page=${page}&limit=${limit}&filter=${filter}&inputFilter=${debounceValue}&sex=${sex}&startDate=${startDate}&finishDate=${finishDate}`
   const { data, loading } = useFetchData(url, [page, limit, helper])
   const [option, setOption] = useState('Crear')
   const [open, setOpen] = useState(false)
@@ -99,11 +100,27 @@ function PetContainer() {
 
       <SectionData>
         <SectionData.Search inputFilter={inputFilter} setInputFilter={setInputFilter} handleReset={() => {
+          setSex('')
           setStartDate('')
           setFinishDate('')
           setPage(1)
           setHelper((prev) => prev + 1)
-        }}>
+        }} filter={filter} filters={filters} >
+          <div className='flex flex-col'>
+            <span className='font-bold text-sm my-2'>Sexo de la mascota</span>
+            <select className='p-2 rounded-xl bg-gray-300 w-full'
+              value={sex}
+              onChange={(e) => {
+                setSex(e.target.value)
+                setPage(1)
+                setHelper(prev => prev + 1)
+              }}
+              >
+              <option value=''>Ambos</option>
+              <option value='Macho'>Macho</option>
+              <option value='Hembra'>Hembra</option>
+            </select>
+          </div>
           <div className='flex flex-col'>
             <span className='font-bold text-sm my-2'>Fecha de inicio</span>
             <input type='date' className='p-2 rounded-xl bg-gray-300 w-full'

@@ -125,7 +125,7 @@ function PetHistoryContainer() {
 
         const title = document.createElement('p');
         title.classList.add('text-center')
-        title.innerText = `!Tienes ${value.count} cita(s) pendientes en el rango de 2 semanas!`;
+        title.innerText = `!Tienes ${value.count} cita(s) pendiente(s) en el rango de 2 semanas!`;
 
         const footer = document.createElement('div');
         footer.classList.add('text-start')
@@ -170,7 +170,7 @@ function PetHistoryContainer() {
           setFinishNextDate('')
           setPage(1)
           setHelper((prev) => prev + 1)
-        }}>
+        }} filter={filter} filters={filters} >
           <div className='flex flex-col'>
             <span className='font-bold text-sm my-2'>Fecha de inicio</span>
             <input type='date' className='p-2 rounded-xl bg-gray-300 w-full'

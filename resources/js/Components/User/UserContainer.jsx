@@ -97,7 +97,7 @@ function UserContainer() {
           setFinishDate('')
           setPage(1)
           setHelper((prev) => prev + 1)
-        }}>
+        }} filter={filter} filters={filters} >
           <div className='flex flex-col'>
             <span className='font-bold text-sm my-2'>Rol de usuario</span>
             <select className='p-2 rounded-xl bg-gray-300 w-full'
@@ -108,7 +108,7 @@ function UserContainer() {
                 setHelper(prev => prev + 1)
               }}
               >
-              <option value=''></option>
+              <option value=''>Cualquiera</option>
               <option value='1'>Administrador</option>
               <option value='2'>Empleado</option>
             </select>

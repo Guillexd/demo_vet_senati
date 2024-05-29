@@ -33,6 +33,9 @@ class PetController extends Controller
                     $subQuery->where('name', 'LIKE', "%{$request->inputFilter}%");
                 });
             }
+            if (isset($request->sex)) {
+                $query->where('sex', $request->sex);
+            }
             if (isset($request->startDate)) {
                 $query->whereDate('created_at', '>=', $request->startDate);
             }

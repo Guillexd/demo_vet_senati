@@ -213,7 +213,7 @@ function Header({ message, messageButton, disabled, handleClick }) {
         <Icon icon={faCashRegister} css={'mr-3'} size='37px' />
         {message}
       </p>
-      <button className={`bg-sky-700 hover:bg-sky-900 text-white font-bold py-2 px-4 rounded mr-4 mb-4 mt-4 sm:mt-0 ${disabled && 'opacity-0'}`} disabled={disabled} onClick={handleClick}>
+      <button className={`bg-sky-700 hover:bg-sky-900 text-white font-bold py-2 px-4 rounded mr-4 mb-4 mt-4 sm:mt-0 shadow-xl ${disabled && 'opacity-0'}`} disabled={disabled} onClick={handleClick}>
         {messageButton}
       </button>
     </header>

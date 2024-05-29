@@ -7,7 +7,7 @@ export default function HeaderTable({ icon, message, name, setOpen, setOption, s
         <Icon icon={icon} css={'mr-3'} size='37px' />
         {message}
       </p>
-      <button className='bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full mr-4 mb-4 mt-4 sm:mt-0' onClick={() => {
+      <button className='bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full mr-4 mb-4 mt-4 sm:mt-0 shadow-xl' onClick={() => {
         setOpen(true)
         setOption('Crear')
         setData(initialState)

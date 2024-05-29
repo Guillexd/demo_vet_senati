@@ -11,6 +11,7 @@ use App\Http\Controllers\EmailVerificationNotificationController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\GraphicController;
 use App\Http\Controllers\IdentityDocumentController;
+use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\VerifyEmailController;
 use App\Http\Controllers\PasswordResetLinkController;
 use App\Http\Controllers\NewPasswordController;
@@ -153,5 +154,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('identity-documents')->group(function () {
         Route::get('/list', [IdentityDocumentController::class, 'list']);
+    });
+
+    Route::prefix('inquiry')->group(function () {
+        Route::get('/ruc', [InquiryController::class, 'getRUC']);
+        Route::get('/dni', [InquiryController::class, 'getDNI']);
     });
 });

@@ -78,9 +78,10 @@ export default function CashRegisterModal({ cashRegister, option, open, setOpen,
       <Modal option={option} open={open} setOpen={setOpen} isLoading={isLoading} handleSubmit={handleSubmit} icon={faCashRegister} text={'Caja'}>
         <div className='relative border border-gray-600 rounded w-full col-span-full order-1'>
           <input
-            type='text'
+            type='number'
+            step='any'
+            min={0}
             className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-600  placeholder:text-gray-600  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
-            placeholder='Email address'
             value={state.initial_amount}
             onChange={(e) => {
               dispatch({

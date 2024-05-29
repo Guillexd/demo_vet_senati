@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { fetchHelper } from '../../utils/utils';
 import ToastifyErrorList from '../ToastifyErrorList';
 import Spinner from '../presentational/Spinner';
-import { faEye, faEyeSlash, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faEye, faEyeSlash, faMagnifyingGlass, faUser } from '@fortawesome/free-solid-svg-icons'
 import Icon from '../../utils/Icon'
 
 const REDUCER_ACTION_TYPE = {
@@ -91,6 +91,8 @@ export default function UserModal({ user, option, open, setOpen, setMustLoad, se
       .finally(() => setIsLoading(false))
   }
 
+  const capitalizeFirstLetterOfEachWord = (sentence) => sentence ? sentence.split(' ').map(word => word ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() : '').join(' ') : '';
+
   useEffect(() => {
     for (const key in REDUCER_ACTION_TYPE) {
       const actionType = REDUCER_ACTION_TYPE[key]
@@ -101,6 +103,25 @@ export default function UserModal({ user, option, open, setOpen, setMustLoad, se
       })
     }
   }, [user])
+
+  const setInfo = async () => {
+    if (state.dni.length < 8) {
+      return
+    }
+
+    let api = await axios.get(`/inquiry/dni?dni=${state.dni}`)
+
+    if (api.data.original.hasOwnProperty('nombres')) {
+      dispatch({
+        type: REDUCER_ACTION_TYPE.name,
+        payload: capitalizeFirstLetterOfEachWord(api.data.original.nombres) + ' ' + capitalizeFirstLetterOfEachWord(api.data.original.apellidoPaterno) + ' ' + capitalizeFirstLetterOfEachWord(api.data.original.apellidoMaterno)
+      })
+    } else {
+      toast.error('DNI inválido o no encontrando', {
+        autoClose: 1500
+      })
+    }
+  }
 
   return (
     <>
@@ -181,6 +202,9 @@ export default function UserModal({ user, option, open, setOpen, setMustLoad, se
           >
             DNI
           </label>
+          <div className='absolute top-1 right-2 h-full cursor-pointer' onClick={setInfo}>
+            <Icon icon={faMagnifyingGlass} css={'transition-all text-black hover:scale-125'} size='25px' />
+          </div>
         </div>
 
         <div className='relative border border-gray-600 rounded w-full order-1'>

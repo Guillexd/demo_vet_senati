@@ -83,7 +83,7 @@ function BreedContainer() {
                 setStartDate(e.target.value)
                 setPage(1)
                 setHelper(prev => prev + 1)
-              }} />
+              }} filter={filter} filters={filters} />
           </div>
           <div className='flex flex-col'>
             <span className='font-bold text-sm my-2'>Fecha de finalización</span>

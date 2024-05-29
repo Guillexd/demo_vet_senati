@@ -52,20 +52,21 @@
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const passwordInput = document.querySelector('.password');
-        const toggleButton = document.querySelector('.toogleButton');
-        const eye = toggleButton.firstElementChild
+        document.querySelectorAll('.password').forEach((passwordInput, index) => {
+            const toggleButton = document.querySelectorAll('.toogleButton')[index];
+            const eye = toggleButton.firstElementChild;
 
-        toggleButton.addEventListener('click', function() {
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                eye.classList.remove('hidden')
-                eye.nextElementSibling.classList.add('hidden')
-            } else {
-                passwordInput.type = 'password';
-                eye.classList.add('hidden')
-                eye.nextElementSibling.classList.remove('hidden')
-            }
+            toggleButton.addEventListener('click', function() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    eye.classList.remove('hidden');
+                    eye.nextElementSibling.classList.add('hidden');
+                } else {
+                    passwordInput.type = 'password';
+                    eye.classList.add('hidden');
+                    eye.nextElementSibling.classList.remove('hidden');
+                }
+            });
         });
     })
 </script>

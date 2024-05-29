@@ -76,7 +76,7 @@ function ExpenseContainer() {
           setFinishDate('')
           setPage(1)
           setHelper((prev) => prev + 1)
-        }}>
+        }} filter={filter} filters={filters} >
           <div className='flex flex-col'>
             <span className='font-bold text-sm my-2'>Fecha de inicio</span>
             <input type='date' className='p-2 rounded-xl bg-gray-300 w-full'
