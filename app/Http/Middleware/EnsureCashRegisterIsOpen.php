@@ -21,7 +21,7 @@ class EnsureCashRegisterIsOpen
 
         if($cash_register->state === 0) {
             $errors = [
-                'request_error' => ["La caja $id debe estar abierta para realizar esta acción."],
+                'request_error' => ["¡La caja $id debe estar abierta para realizar esta acción!"],
             ];
             return response()->json(['errors' => $errors], 404);
         }
