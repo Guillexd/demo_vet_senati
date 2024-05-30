@@ -185,7 +185,7 @@ export default function UserModal({ user, option, open, setOpen, setMustLoad, se
           </label>
         </div>
 
-        <div className='relative border border-gray-600 rounded w-full order-1'>
+        <div className='relative border border-gray-600 rounded w-full'>
           <input
             type='text'
             className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-700 placeholder:text-gray-700 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
@@ -251,7 +251,6 @@ export default function UserModal({ user, option, open, setOpen, setMustLoad, se
             <div className='relative border border-gray-600 rounded w-full order-2'>
               <input
                 type={showPassword ? 'text' : 'password'}
-                autoComplete='on'
                 className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-700 placeholder:text-gray-700 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
                 value={state.password}
                 onChange={(e) => {
@@ -276,7 +275,6 @@ export default function UserModal({ user, option, open, setOpen, setMustLoad, se
             <div className='relative border border-gray-600 rounded w-full order-2'>
               <input
                 type={showPasswordConfirm ? 'text' : 'password'}
-                autoComplete='on'
                 className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-700 placeholder:text-gray-700 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
                 value={state.password_confirmation}
                 onChange={(e) => {

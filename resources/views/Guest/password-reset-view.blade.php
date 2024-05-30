@@ -59,7 +59,7 @@
     <table>
         <tr>
             <td>
-                <img src="https://res.cloudinary.com/dfpspbjlq/image/upload/v1715999312/ReyCan/t25bl4ijo25vkbgmo3kh.png" alt="Scriptify">
+                <img src="https://res.cloudinary.com/dfpspbjlq/image/upload/v1715999312/ReyCan/t25bl4ijo25vkbgmo3kh.png" alt="Scriptify" width="200px">
                 <h1>{{ __('dictionary.verify_reset_password') }}</h1>
                 <p>
                     {{ __('dictionary.verify_reset_password_greeting') }}

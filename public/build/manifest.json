@@ -172,7 +172,7 @@
     "src": "resources/js/Components/Services/ServiceContainer.jsx"
   },
   "resources/js/Components/User/UserContainer.jsx": {
-    "file": "assets/UserContainer-c5770578.js",
+    "file": "assets/UserContainer-425cb2ad.js",
     "imports": [
       "_Footer-5a793555.js",
       "_Filters-5c1cd9b5.js",
@@ -201,7 +201,7 @@
       "resources/js/Components/CashRegister/CashRegisterContainer.jsx",
       "resources/js/Components/Graphics/Graphics.jsx"
     ],
-    "file": "assets/app-11c45726.js",
+    "file": "assets/app-af40e209.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
