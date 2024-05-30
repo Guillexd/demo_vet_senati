@@ -12,6 +12,7 @@ import CheckBox from '../CheckBox';
 import Selector from '../Selector';
 import SectionData from '../SectionData'
 import ImageModal from '../ImageModal';
+import { flushSync } from 'react-dom';
 
 const values = {
   consul: 'consulta',
@@ -233,7 +234,7 @@ function reducer(state, action) {
   }
 }
 
-export default function PetHistoryModal({ petHistory, option, open, setOpen, setMustLoad, setHelper }) {
+export default function PetHistoryModal({ petHistory, option, open, setOpen, setMustLoad, setHelper, transitionName, setTransitionName, setImage }) {
 
   const options = {
     method: option === 'Crear' ? 'POST' : 'POST',
@@ -269,7 +270,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
         setHelper((prev) => prev + 1)
         // setOpen(false)
         setTimeout(() => {
-            document.getElementById(`btn-history-${data.id}`)?.click()
+          document.getElementById(`btn-history-${data.id}`)?.click()
         }, 1000)
       })
       .catch((err) => {
@@ -822,7 +823,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                           <CheckedBoxImage id={1} image={state.hemograma_image_url} onChangeFunc={(img) => dispatch({
                             type: REDUCER_ACTION_TYPE.hemograma_image_url,
                             payload: img
-                          })} /> : null
+                          })} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} /> : null
                       }
                     </div>
 
@@ -843,7 +844,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                           <CheckedBoxImage id={2} image={state.ecografia_image_url} onChangeFunc={(img) => dispatch({
                             type: REDUCER_ACTION_TYPE.ecografia_image_url,
                             payload: img
-                          })} /> : null
+                          })} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} /> : null
                       }
                     </div>
 
@@ -864,7 +865,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                           <CheckedBoxImage id={9} image={state.radiografias_image_url} onChangeFunc={(img) => dispatch({
                             type: REDUCER_ACTION_TYPE.radiografias_image_url,
                             payload: img
-                          })} /> : null
+                          })} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} /> : null
                       }
                     </div>
 
@@ -1179,8 +1180,7 @@ function Pages({ names, optionSearch, setOptionSearch }) {
   )
 }
 
-function CheckedBoxImage({ id, image, onChangeFunc }) {
-  const [open, setOpen] = useState(false)
+function CheckedBoxImage({ id, image, onChangeFunc, transitionName, setTransitionName, setImage }) {
   return (
     <>
       <input type='file' className='hidden' id={`history-${id}`} accept='image/*'
@@ -1198,17 +1198,21 @@ function CheckedBoxImage({ id, image, onChangeFunc }) {
           <img src={URL.createObjectURL(image)} alt='exámen' className='order-1 mx-auto rounded-lg' />
         ) : (
           image.length > 0 ?
-            <>
-              <img src={image} alt='exámen' className='order-1 mx-auto rounded-lg cursor-pointer hover:scale-105 transition-all'
-                onClick={() => {
-                  setOpen(true)
-                }}
-              />
-              <ImageModal image={{
-                url: image,
-                label: 'examen'
-              }} open={open} setOpen={setOpen} />
-            </>
+            <img src={image} alt='exámen'
+              className='order-1 mx-auto rounded-lg cursor-pointer hover:scale-105 transition-all'
+              onClick={() => {
+                document.startViewTransition(() => {
+                  flushSync(() => {
+                    setTransitionName(image)
+                    setImage({
+                      url: image,
+                      label: 'exámen',
+                    })
+                  })
+                })
+              }}
+              style={{ viewTransitionName: !transitionName && image }}
+            />
             : null
         )
       }

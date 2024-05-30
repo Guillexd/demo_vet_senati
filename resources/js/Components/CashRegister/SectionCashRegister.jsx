@@ -13,6 +13,8 @@ import { dateCalculator, fetchData, fetchHelper, getLocaleString, getPageQuery, 
 import ToastifyErrorList from '../ToastifyErrorList'
 import { initialStateCustomer } from '../Customer/initialStateCustomer'
 import AddCustomer from '../Customer/CustomerModal'
+import { flushSync } from 'react-dom'
+import ImageModal from '../ImageModal'
 
 const values = {
   prod: 'product',
@@ -38,6 +40,11 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
   const [open, setOpen] = useState(false)
   const [helper, setHelper] = useState(0)
   const [cashHelper, setCashHelper] = useState(null)
+  const [image, setImage] = useState({
+    url: '',
+    label: '',
+  })
+  const [transitionName, setTransitionName] = useState('')
 
   useEffect(() => {
     if (optionSearch === values.prod) {
@@ -156,7 +163,7 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
               {
                 optionSearch === values.prod
                   ?
-                  <Table.BodyProductTable {...commonProps} setOptionSearch={setOptionSearch} setSearchByFilter={setSearchByFilter} />
+                  <Table.BodyProductTable {...commonProps} setOptionSearch={setOptionSearch} setSearchByFilter={setSearchByFilter} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} />
                   :
                   optionSearch === values.serv
                     ?
@@ -190,13 +197,23 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
               cashRegister.state !== 0
               &&
               <>
-                <SectionCashRegister.SectionCashRegisterModal cashRegisterId={cashRegister.id} open={open} setOpen={setOpen} setHelper={setHelper} />
+                <SectionCashRegister.SectionCashRegisterModal cashRegisterId={cashRegister.id} open={open} setOpen={setOpen} setHelper={setHelper} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} />
                 <div className='flex justify-center'>
                   <button type='button' className='bg-red-600 w-full lg:w-1/2 px-3 py-4 leading-[1.6] mt-5 rounded-xl hover:rotate-[1deg] transition ease-out text-white text-xl' onClick={handleCloseCashRegister}>
                     Cerrar caja
                   </button>
                 </div>
               </>
+            }
+
+            {
+              transitionName
+              &&
+              <ImageModal
+                image={image}
+                transitionName={transitionName}
+                setTransitionName={setTransitionName}
+              />
             }
           </>
           :
@@ -349,7 +366,7 @@ function HeaderTable({ names, css }) {
   )
 }
 
-function BodyProductTable({ id, setData, page, limit, helper, searchByFilter, mustLoad, handleDelete, setOptionSearch, setSearchByFilter }) {
+function BodyProductTable({ id, setData, page, limit, helper, searchByFilter, mustLoad, handleDelete, setOptionSearch, setSearchByFilter, transitionName, setTransitionName, setImage }) {
   const url = `/cash_registers/get_products/${id}?page=${page}&limit=${limit}&filter=name&inputFilter=${searchByFilter}`
   const { data, loading } = useFetchData(url, [page, limit, helper, searchByFilter])
 
@@ -359,7 +376,7 @@ function BodyProductTable({ id, setData, page, limit, helper, searchByFilter, mu
     }
   }, [data, loading])
   return (
-    <TableBody loading={loading} mustLoad={mustLoad} message={'Cargando ingresos de productos'} data={data} handleDelete={handleDelete} setOptionSearch={setOptionSearch} setSearchByFilter={setSearchByFilter} />
+    <TableBody loading={loading} mustLoad={mustLoad} message={'Cargando ingresos de productos'} data={data} handleDelete={handleDelete} setOptionSearch={setOptionSearch} setSearchByFilter={setSearchByFilter} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} />
   )
 }
 
@@ -377,7 +394,7 @@ function BodyServiceTable({ id, setData, page, limit, helper, searchByFilter, mu
   )
 }
 
-function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSearch, setSearchByFilter }) {
+function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSearch, setSearchByFilter, transitionName, setTransitionName, setImage }) {
   return (
     <tbody className='bg-white text-center'>
       {
@@ -419,7 +436,23 @@ function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSe
                     el.product_image_url && (
                       <td className='px-2 py-4 whitespace-no-wrap border-b border-gray-200 h-24'>
                         <div className='text-gray-900 w-20 mx-auto'>
-                          <img src={el.product_image_url} alt={el.name} className='rounded-sm h-16 mx-auto transition-all ease-out cursor-pointer hover:absolute hover:scale-[300%] hover:z-10' />
+                          <img
+                          src={el.product_image_url}
+                          alt={el.name}
+                          className='rounded-sm h-16 mx-auto cursor-pointer'
+                          onClick={() => {
+                            document.startViewTransition(() => {
+                              flushSync(() => {
+                                setTransitionName(`${el.name}-${el.id}`)
+                                setImage({
+                                  url: el.product_image_url,
+                                  label: el.name,
+                                })
+                              })
+                            })
+                          }}
+                          style={{ viewTransitionName: !transitionName && `${el.name}-${el.id}` }}
+                          />
                         </div>
                       </td>
                     )
@@ -907,7 +940,7 @@ function Pagination({ pageQuantity, quantity, setLimit, setPage, nextPage, prevP
   );
 }
 
-function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper }) {
+function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper, transitionName, setTransitionName, setImage }) {
   const initialStateProduct = {
     id: uuidv4(),
     img: '',
@@ -1137,7 +1170,7 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper }) 
 
             <hr className='col-span-full' />
 
-            <SectionCashRegisterModal.ProductModal setMustSearchProduct={setMustSearchProduct} inputProduct={inputProduct} setInputProduct={setInputProduct} loadingProduct={loadingProduct} dataProduct={dataProduct} selectProduct={selectProduct} setSelectProduct={setSelectProduct} setProducts={setProducts} initialStateProduct={initialStateProduct} products={products} setHelperSearchProduct={setHelperSearchProduct} setHelperProduct={setHelperProduct} />
+            <SectionCashRegisterModal.ProductModal setMustSearchProduct={setMustSearchProduct} inputProduct={inputProduct} setInputProduct={setInputProduct} loadingProduct={loadingProduct} dataProduct={dataProduct} selectProduct={selectProduct} setSelectProduct={setSelectProduct} setProducts={setProducts} initialStateProduct={initialStateProduct} products={products} setHelperSearchProduct={setHelperSearchProduct} setHelperProduct={setHelperProduct} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} />
 
             <hr className='col-span-full sm:hidden' />
 
@@ -1227,7 +1260,7 @@ function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustome
   )
 }
 
-function ProductModal({ setMustSearchProduct, inputProduct, setInputProduct, loadingProduct, dataProduct, selectProduct, setSelectProduct, setProducts, initialStateProduct, products, setHelperSearchProduct, setHelperProduct }) {
+function ProductModal({ setMustSearchProduct, inputProduct, setInputProduct, loadingProduct, dataProduct, selectProduct, setSelectProduct, setProducts, initialStateProduct, products, setHelperSearchProduct, setHelperProduct, transitionName, setTransitionName, setImage }) {
   return (
     <>
       <div className='w-full col-span-1 grid grid-cols-1 gap-6 sm:gap-x-6'>
@@ -1325,7 +1358,7 @@ function ProductModal({ setMustSearchProduct, inputProduct, setInputProduct, loa
           <div className='col-span-full order-2'>
             <Table>
               <Table.HeaderTable names={['Imagen', 'Producto', 'precio', 'cantidad', 'subtotal', 'descripción', 'Eliminar']} />
-              <ModalTableBody data={products} setData={setProducts} />
+              <ModalTableBody data={products} setData={setProducts} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} />
             </Table>
           </div>
         )
@@ -1473,7 +1506,7 @@ function ModalBody({ select, handleChange, handleClick, message }) {
   )
 }
 
-function ModalTableBody({ data, setData }) {
+function ModalTableBody({ data, setData, transitionName, setTransitionName, setImage }) {
   return (
     <tbody className='bg-white text-center'>
       {
@@ -1484,7 +1517,23 @@ function ModalTableBody({ data, setData }) {
               el.img && (
                 <td className='whitespace-no-wrap border-b border-gray-200 h-20'>
                   <div className='text-gray-900 w-20'>
-                    <img src={el.img} alt={el.name} className='rounded-sm h-16 mx-auto transition-all cursor-pointer hover:absolute hover:scale-[300%] hover:translate-x-20 hover:z-10' />
+                    <img
+                    src={el.img}
+                    alt={el.name}
+                    className='rounded-sm h-16 mx-auto cursor-pointer'
+                    onClick={() => {
+                      document.startViewTransition(() => {
+                        flushSync(() => {
+                          setTransitionName(`${el.name}-${el.id}`)
+                          setImage({
+                            url: el.img,
+                            label: el.name,
+                          })
+                        })
+                      })
+                    }}
+                    style={{ viewTransitionName: !transitionName && `${el.name}-${el.id}` }}
+                    />
                   </div>
                 </td>
               )

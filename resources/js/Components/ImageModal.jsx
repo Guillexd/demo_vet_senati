@@ -19,7 +19,7 @@ export default function ImageModal({ image, transitionName, setTransitionName })
 
   return (
     <>
-      <div ref={modal} className={`fixed top-0 left-0 w-full h-full flex items-center justify-center`} style={{ zIndex: '40' }}>
+      <div ref={modal} className={`fixed top-0 left-0 w-full h-full flex items-center justify-center`} style={{ zIndex: '50' }}>
         <button className='bg-gray-400 right-0 top-0 absolute p-3 rounded-xl m-2 opacity-80 hover:opacity-45'
           onClick={() => {
             document.startViewTransition(() => {

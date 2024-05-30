@@ -299,7 +299,7 @@ function PetHistoryContainer() {
           setTransitionName={setTransitionName}
         />
       }
-      <PetHistoryModal petHistory={petHistory} option={option} open={open} setOpen={setOpen} setMustLoad={setMustLoad} setHelper={setHelper} />
+      <PetHistoryModal petHistory={petHistory} option={option} open={open} setOpen={setOpen} setMustLoad={setMustLoad} setHelper={setHelper} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} />
       <Footer />
     </>
   )
