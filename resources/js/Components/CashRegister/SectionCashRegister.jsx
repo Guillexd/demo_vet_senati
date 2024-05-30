@@ -14,7 +14,6 @@ import ToastifyErrorList from '../ToastifyErrorList'
 import { initialStateCustomer } from '../Customer/initialStateCustomer'
 import AddCustomer from '../Customer/CustomerModal'
 import { flushSync } from 'react-dom'
-import ImageModal from '../ImageModal'
 
 const values = {
   prod: 'product',
@@ -29,7 +28,7 @@ const valuesv2 = {
   exp: 'expense',
 }
 
-function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperContainer, setMustLoad: setMustLoadContainer }) {
+function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperContainer, setMustLoad: setMustLoadContainer, transitionName, setTransitionName, setImage, hide, setHide }) {
   const [optionSearch, setOptionSearch] = useState(values.prod)
   const [titles, setTitles] = useState([])
   const [data, setData] = useState([])
@@ -40,16 +39,6 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
   const [open, setOpen] = useState(false)
   const [helper, setHelper] = useState(0)
   const [cashHelper, setCashHelper] = useState(null)
-  const [image, setImage] = useState({
-    url: '',
-    label: '',
-  })
-  const [transitionName, setTransitionName] = useState('')
-  const [hide, setHide] = useState(false)
-
-  useEffect(() => {
-    console.log(hide);
-  }, [hide])
 
   useEffect(() => {
     if (optionSearch === values.prod) {
@@ -209,17 +198,6 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
                   </button>
                 </div>
               </>
-            }
-
-            {
-              transitionName
-              &&
-              <ImageModal
-                image={image}
-                transitionName={transitionName}
-                setTransitionName={setTransitionName}
-                setHide={setHide}
-              />
             }
           </>
           :

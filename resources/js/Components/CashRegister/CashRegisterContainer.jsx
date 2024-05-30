@@ -11,6 +11,7 @@ import CashRegisterModal from './CashRegisterModal';
 import HeaderTable from '../HeaderTable';
 import SectionCashRegister from './SectionCashRegister';
 import { getLocaleString } from '../../utils/utils';
+import ImageModal from '../ImageModal';
 
 function CashRegisterContainer() {
 
@@ -36,6 +37,12 @@ function CashRegisterContainer() {
     name: '',
     state: 1,
   })
+  const [image, setImage] = useState({
+    url: '',
+    label: '',
+  })
+  const [transitionName, setTransitionName] = useState('')
+  const [hide, setHide] = useState(false)
 
   return (
     <>
@@ -109,9 +116,19 @@ function CashRegisterContainer() {
         </SectionData.CardContainer>
         <SectionData.Pagination pageQuantity={data.current_page * data.per_page} quantity={data.total} setMustLoad={setMustLoad} setLimit={setLimit} setPage={setPage} nextPage={data.next_page_url} prevPage={data.prev_page_url} page={data.current_page} lastPage={data.last_page} setMustAnimate={setMustAnimate} />
       </SectionData>
+      {
+        transitionName
+        &&
+        <ImageModal
+          image={image}
+          transitionName={transitionName}
+          setTransitionName={setTransitionName}
+          setHide={setHide}
+        />
+      }
       <CashRegisterModal cashRegister={cashRegister} option={option} open={open} setOpen={setOpen} setMustLoad={setMustLoad} setHelper={setHelper} />
       <Footer />
-      <SectionCashRegister cashRegister={cashRegisterId} handleClose={() => setCashRegisterId({ id: null, name: '', state: 1 })} setHelper={setHelper} setMustLoad={setMustLoad} />
+      <SectionCashRegister cashRegister={cashRegisterId} handleClose={() => setCashRegisterId({ id: null, name: '', state: 1 })} setHelper={setHelper} setMustLoad={setMustLoad} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} hide={hide} setHide={setHide} />
     </>
   )
 }

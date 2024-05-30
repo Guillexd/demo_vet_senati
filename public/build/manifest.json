@@ -73,7 +73,7 @@
     "src": "resources/js/Components/Breed/BreedContainer.jsx"
   },
   "resources/js/Components/CashRegister/CashRegisterContainer.jsx": {
-    "file": "assets/CashRegisterContainer-52cfd114.js",
+    "file": "assets/CashRegisterContainer-07829f1f.js",
     "imports": [
       "_Footer-5a793555.js",
       "_Spinner-4014f47c.js",
@@ -201,7 +201,7 @@
       "resources/js/Components/CashRegister/CashRegisterContainer.jsx",
       "resources/js/Components/Graphics/Graphics.jsx"
     ],
-    "file": "assets/app-3ec38794.js",
+    "file": "assets/app-a4563ea1.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
