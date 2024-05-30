@@ -3,8 +3,9 @@ import { toast } from 'react-toastify';
 import Spinner from '../presentational/Spinner';
 import ToastifyErrorList from '../ToastifyErrorList';
 import { useState } from 'react';
+import { flushSync } from 'react-dom';
 
-export default function Product({ productI, setProduct, setOption, setOpenModal, setHelper, setMustLoad, setMustAnimate, setOpenImage, setImage, setIsDeleted }) {
+export default function Product({ productI, setProduct, setOption, setOpenModal, setHelper, setMustLoad, setMustAnimate, setImage, transitionName, setTransitionName, setIsDeleted }) {
 
   const [open, setOpen] = useState(false)
 
@@ -35,13 +36,20 @@ export default function Product({ productI, setProduct, setOption, setOpenModal,
 
   return (
     <>
-      <img className='w-full h-60 object-contain' src={productI.product_image_url || '/image/juguete.webp'} alt={productI.name} onClick={() => {
-        setImage({
-          url: productI.product_image_url || '/image/juguete.webp',
-          label: productI.name
-        })
-        setOpenImage(true)
-      }} />
+       <img className='w-full h-60 object-cover' src={productI.product_image_url} alt={productI.name}
+        onClick={() => {
+          document.startViewTransition(() => {
+            flushSync(() => {
+              setTransitionName(`${productI.name}-${productI.id}`)
+              setImage({
+                url: productI.product_image_url,
+                label: productI.name,
+              })
+            })
+          })
+        }}
+        style={{ viewTransitionName: !transitionName && `${productI.name}-${productI.id}` }}
+      />
       <div className='px-8 pt-5 flex flex-col justify-between flex-1'>
         <div>
           <div className='uppercase tracking-wide text-sm text-indigo-500 font-semibold'>Nombre: {productI.name}</div>

@@ -5,8 +5,9 @@ import ToastifyErrorList from '../ToastifyErrorList';
 import Icon from '../../utils/Icon';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { faFilePdf } from '@fortawesome/free-regular-svg-icons';
+import { flushSync } from 'react-dom';
 
-export default function PetHistory({ petHistoryI, setPetHistory, setOption, setOpenModal, setHelper, setMustLoad, setMustAnimate, setOpenImage, setImage, setIsDeleted }) {
+export default function PetHistory({ petHistoryI, setPetHistory, setOption, setOpenModal, setHelper, setMustLoad, setMustAnimate, setImage, transitionName, setTransitionName, setIsDeleted }) {
 
   const handleDelete = () => {
     showSWToDelete('¿Quieres eliminar este historial?', () => {
@@ -35,13 +36,20 @@ export default function PetHistory({ petHistoryI, setPetHistory, setOption, setO
 
   return (
     <>
-      <img className='w-full h-60 object-cover' src={petHistoryI?.pet?.pet_image_url || '/image/mascota.webp'} alt={petHistoryI?.pet?.name} onClick={() => {
-        setImage({
-          url: petHistoryI?.pet?.pet_image_url || '/image/mascota.webp',
-          label: petHistoryI?.pet?.name
-        })
-        setOpenImage(true)
-      }} />
+      <img className='w-full h-60 object-cover' src={petHistoryI?.pet?.pet_image_url} alt={petHistoryI?.pet?.name}
+        onClick={() => {
+          document.startViewTransition(() => {
+            flushSync(() => {
+              setTransitionName(`${petHistoryI?.pet?.name}-${petHistoryI.id}`)
+              setImage({
+                url: petHistoryI?.pet?.pet_image_url,
+                label: petHistoryI?.pet?.name,
+              })
+            })
+          })
+        }}
+        style={{ viewTransitionName: !transitionName && `${petHistoryI?.pet?.name}-${petHistoryI.id}` }}
+      />
       <div className='px-8 pt-5 flex flex-col justify-between overflow-hidden flex-1'>
         <div>
           <div className='uppercase tracking-wide text-sm text-indigo-500 font-semibold'>Nombre: {petHistoryI.pet?.name}</div>

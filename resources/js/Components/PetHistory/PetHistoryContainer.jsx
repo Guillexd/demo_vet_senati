@@ -107,6 +107,7 @@ function PetHistoryContainer() {
     url: '',
     label: '',
   })
+  const [transitionName, setTransitionName] = useState('')
 
   useEffect(() => {
     if (!loading) {
@@ -280,7 +281,7 @@ function PetHistoryContainer() {
                   <>
                     {data?.data?.map((petHistoryI, index) => (
                       <SectionData.CardContainer.Card mustAnimate={mustAnimate} setMustAnimate={setMustAnimate} key={`${petHistoryI.id}-${index}`}>
-                        <PetHistory petHistoryI={petHistoryI} setPetHistory={setPetHistory} setOption={setOption} setOpenModal={setOpen} setHelper={setHelper} setMustLoad={setMustLoad} setMustAnimate={setMustAnimate} setOpenImage={setOpenImage} setImage={setImage} />
+                        <PetHistory petHistoryI={petHistoryI} setPetHistory={setPetHistory} setOption={setOption} setOpenModal={setOpen} setHelper={setHelper} setMustLoad={setMustLoad} setMustAnimate={setMustAnimate} setImage={setImage} transitionName={transitionName} setTransitionName={setTransitionName} />
                       </SectionData.CardContainer.Card>
                     ))}
                   </>
@@ -289,7 +290,15 @@ function PetHistoryContainer() {
         </SectionData.CardContainer>
         <SectionData.Pagination pageQuantity={data.current_page * data.per_page} quantity={data.total} setMustLoad={setMustLoad} setLimit={setLimit} setPage={setPage} nextPage={data.next_page_url} prevPage={data.prev_page_url} page={data.current_page} lastPage={data.last_page} setMustAnimate={setMustAnimate} />
       </SectionData>
-      <ImageModal image={image} open={openImage} setOpen={setOpenImage} />
+      {
+        transitionName
+        &&
+        <ImageModal
+          image={image}
+          transitionName={transitionName}
+          setTransitionName={setTransitionName}
+        />
+      }
       <PetHistoryModal petHistory={petHistory} option={option} open={open} setOpen={setOpen} setMustLoad={setMustLoad} setHelper={setHelper} />
       <Footer />
     </>

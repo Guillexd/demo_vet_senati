@@ -19,7 +19,7 @@ return new class extends Migration
             $table->smallInteger('stock');
             $table->decimal('utility', 8, 2);
             $table->string('serie', 20)->nullable();
-            $table->string('product_image_url')->default('/image/juguete.webp');
+            $table->string('product_image_url')->default('/image/juguete.jpeg');
             $table->string('product_public_id')->nullable();
             $table->dateTimeTz('due_date')->nullable();
             $table->text('description')->nullable();

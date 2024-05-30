@@ -62,11 +62,11 @@ function PetContainer() {
   const [pet, setPet] = useState(initialStatePet)
   const [mustLoad, setMustLoad] = useState(true)
   const [mustAnimate, setMustAnimate] = useState(true)
-  const [openImage, setOpenImage] = useState(false)
   const [image, setImage] = useState({
     url: '',
     label: '',
   })
+  const [transitionName, setTransitionName] = useState('')
 
   useEffect(() => {
     if (!loading) {
@@ -115,7 +115,7 @@ function PetContainer() {
                 setPage(1)
                 setHelper(prev => prev + 1)
               }}
-              >
+            >
               <option value=''>Ambos</option>
               <option value='Macho'>Macho</option>
               <option value='Hembra'>Hembra</option>
@@ -200,7 +200,7 @@ function PetContainer() {
                   <>
                     {data?.data?.map((petI, index) => (
                       <SectionData.CardContainer.Card mustAnimate={mustAnimate} setMustAnimate={setMustAnimate} key={`${petI.id}-${index}`}>
-                        <Pet petI={petI} setPet={setPet} setOption={setOption} setOpenModal={setOpen} setHelper={setHelper} setMustLoad={setMustLoad} setMustAnimate={setMustAnimate} setOpenImage={setOpenImage} setImage={setImage} />
+                        <Pet petI={petI} setPet={setPet} setOption={setOption} setOpenModal={setOpen} setHelper={setHelper} setMustLoad={setMustLoad} setMustAnimate={setMustAnimate} setImage={setImage} transitionName={transitionName} setTransitionName={setTransitionName} />
                       </SectionData.CardContainer.Card>
                     ))}
                   </>
@@ -209,7 +209,15 @@ function PetContainer() {
         </SectionData.CardContainer>
         <SectionData.Pagination pageQuantity={data.current_page * data.per_page} quantity={data.total} setMustLoad={setMustLoad} setLimit={setLimit} setPage={setPage} nextPage={data.next_page_url} prevPage={data.prev_page_url} page={data.current_page} lastPage={data.last_page} setMustAnimate={setMustAnimate} />
       </SectionData>
-      <ImageModal image={image} open={openImage} setOpen={setOpenImage} />
+      {
+        transitionName
+        &&
+        <ImageModal
+          image={image}
+          transitionName={transitionName}
+          setTransitionName={setTransitionName}
+        />
+      }
       <PetModal pet={pet} option={option} open={open} setOpen={setOpen} setMustLoad={setMustLoad} setHelper={setHelper} />
       <Footer />
     </>

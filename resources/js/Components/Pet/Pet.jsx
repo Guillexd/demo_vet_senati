@@ -3,8 +3,9 @@ import { toast } from 'react-toastify';
 import Spinner from '../presentational/Spinner';
 import ToastifyErrorList from '../ToastifyErrorList';
 import { useState } from 'react';
+import { flushSync } from 'react-dom';
 
-export default function Pet({ petI, setPet, setOption, setOpenModal, setHelper, setMustLoad, setMustAnimate, setOpenImage, setImage, setIsDeleted }) {
+export default function Pet({ petI, setPet, setOption, setOpenModal, setHelper, setMustLoad, setMustAnimate, setImage, transitionName, setTransitionName, setIsDeleted }) {
 
   const [open, setOpen] = useState(false)
 
@@ -35,13 +36,21 @@ export default function Pet({ petI, setPet, setOption, setOpenModal, setHelper, 
 
   return (
     <>
-      <img className='w-full h-60 object-cover' src={petI.pet_image_url || '/image/mascota.webp'} alt={petI.name} onClick={() => {
-        setImage({
-          url: petI.pet_image_url || '/image/mascota.webp',
-          label: petI.name
-        })
-        setOpenImage(true)
-      }} />
+      <img className='w-full h-60 object-cover' src={petI.pet_image_url} alt={petI.name}
+        onClick={() => {
+          document.startViewTransition(() => {
+            flushSync(() => {
+              setTransitionName(`${petI.name}-${petI.id}`)
+              setImage({
+                url: petI.pet_image_url,
+                label: petI.name,
+              })
+            })
+          })
+        }}
+        style={{ viewTransitionName: !transitionName && `${petI.name}-${petI.id}` }}
+      />
+
       <div className='px-8 pt-5 flex flex-col justify-between flex-1'>
         <div>
           <div className='uppercase tracking-wide text-sm text-indigo-500 font-semibold'>Nombre: {petI.name}</div>

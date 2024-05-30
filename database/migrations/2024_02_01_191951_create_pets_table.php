@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('breed_id');
             $table->string('sex', 10)->nullable();
             $table->string('ce', 20)->nullable();
-            $table->string('pet_image_url')->nullable();
+            $table->string('pet_image_url')->default('/image/mascota.webp');
             $table->string('pet_public_id')->nullable();
             $table->text('observations')->nullable();
             $table->timestamps();
