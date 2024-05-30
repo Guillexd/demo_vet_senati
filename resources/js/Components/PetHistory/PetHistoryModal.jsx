@@ -234,7 +234,7 @@ function reducer(state, action) {
   }
 }
 
-export default function PetHistoryModal({ petHistory, option, open, setOpen, setMustLoad, setHelper, transitionName, setTransitionName, setImage }) {
+export default function PetHistoryModal({ petHistory, option, open, setOpen, setMustLoad, setHelper, transitionName, setTransitionName, setImage, setHide }) {
 
   const options = {
     method: option === 'Crear' ? 'POST' : 'POST',
@@ -823,7 +823,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                           <CheckedBoxImage id={1} image={state.hemograma_image_url} onChangeFunc={(img) => dispatch({
                             type: REDUCER_ACTION_TYPE.hemograma_image_url,
                             payload: img
-                          })} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} /> : null
+                          })} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} setHide={setHide} /> : null
                       }
                     </div>
 
@@ -844,7 +844,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                           <CheckedBoxImage id={2} image={state.ecografia_image_url} onChangeFunc={(img) => dispatch({
                             type: REDUCER_ACTION_TYPE.ecografia_image_url,
                             payload: img
-                          })} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} /> : null
+                          })} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} setHide={setHide} /> : null
                       }
                     </div>
 
@@ -865,7 +865,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                           <CheckedBoxImage id={9} image={state.radiografias_image_url} onChangeFunc={(img) => dispatch({
                             type: REDUCER_ACTION_TYPE.radiografias_image_url,
                             payload: img
-                          })} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} /> : null
+                          })} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} setHide={setHide} /> : null
                       }
                     </div>
 
@@ -1180,7 +1180,7 @@ function Pages({ names, optionSearch, setOptionSearch }) {
   )
 }
 
-function CheckedBoxImage({ id, image, onChangeFunc, transitionName, setTransitionName, setImage }) {
+function CheckedBoxImage({ id, image, onChangeFunc, transitionName, setTransitionName, setImage, setHide }) {
   return (
     <>
       <input type='file' className='hidden' id={`history-${id}`} accept='image/*'
@@ -1201,6 +1201,7 @@ function CheckedBoxImage({ id, image, onChangeFunc, transitionName, setTransitio
             <img src={image} alt='exámen'
               className='order-1 mx-auto rounded-lg cursor-pointer hover:scale-105 transition-all'
               onClick={() => {
+                setHide(true)
                 document.startViewTransition(() => {
                   flushSync(() => {
                     setTransitionName(image)

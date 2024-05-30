@@ -45,6 +45,11 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
     label: '',
   })
   const [transitionName, setTransitionName] = useState('')
+  const [hide, setHide] = useState(false)
+
+  useEffect(() => {
+    console.log(hide);
+  }, [hide])
 
   useEffect(() => {
     if (optionSearch === values.prod) {
@@ -163,7 +168,7 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
               {
                 optionSearch === values.prod
                   ?
-                  <Table.BodyProductTable {...commonProps} setOptionSearch={setOptionSearch} setSearchByFilter={setSearchByFilter} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} />
+                  <Table.BodyProductTable {...commonProps} setOptionSearch={setOptionSearch} setSearchByFilter={setSearchByFilter} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} hide={hide} />
                   :
                   optionSearch === values.serv
                     ?
@@ -197,7 +202,7 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
               cashRegister.state !== 0
               &&
               <>
-                <SectionCashRegister.SectionCashRegisterModal cashRegisterId={cashRegister.id} open={open} setOpen={setOpen} setHelper={setHelper} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} />
+                <SectionCashRegister.SectionCashRegisterModal cashRegisterId={cashRegister.id} open={open} setOpen={setOpen} setHelper={setHelper} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} setHide={setHide} />
                 <div className='flex justify-center'>
                   <button type='button' className='bg-red-600 w-full lg:w-1/2 px-3 py-4 leading-[1.6] mt-5 rounded-xl hover:rotate-[1deg] transition ease-out text-white text-xl' onClick={handleCloseCashRegister}>
                     Cerrar caja
@@ -213,6 +218,7 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
                 image={image}
                 transitionName={transitionName}
                 setTransitionName={setTransitionName}
+                setHide={setHide}
               />
             }
           </>
@@ -366,7 +372,7 @@ function HeaderTable({ names, css }) {
   )
 }
 
-function BodyProductTable({ id, setData, page, limit, helper, searchByFilter, mustLoad, handleDelete, setOptionSearch, setSearchByFilter, transitionName, setTransitionName, setImage }) {
+function BodyProductTable({ id, setData, page, limit, helper, searchByFilter, mustLoad, handleDelete, setOptionSearch, setSearchByFilter, transitionName, setTransitionName, setImage, hide }) {
   const url = `/cash_registers/get_products/${id}?page=${page}&limit=${limit}&filter=name&inputFilter=${searchByFilter}`
   const { data, loading } = useFetchData(url, [page, limit, helper, searchByFilter])
 
@@ -376,7 +382,7 @@ function BodyProductTable({ id, setData, page, limit, helper, searchByFilter, mu
     }
   }, [data, loading])
   return (
-    <TableBody loading={loading} mustLoad={mustLoad} message={'Cargando ingresos de productos'} data={data} handleDelete={handleDelete} setOptionSearch={setOptionSearch} setSearchByFilter={setSearchByFilter} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} />
+    <TableBody loading={loading} mustLoad={mustLoad} message={'Cargando ingresos de productos'} data={data} handleDelete={handleDelete} setOptionSearch={setOptionSearch} setSearchByFilter={setSearchByFilter} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} hide={hide} />
   )
 }
 
@@ -394,7 +400,7 @@ function BodyServiceTable({ id, setData, page, limit, helper, searchByFilter, mu
   )
 }
 
-function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSearch, setSearchByFilter, transitionName, setTransitionName, setImage }) {
+function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSearch, setSearchByFilter, transitionName, setTransitionName, setImage, hide }) {
   return (
     <tbody className='bg-white text-center'>
       {
@@ -439,7 +445,7 @@ function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSe
                           <img
                           src={el.product_image_url}
                           alt={el.name}
-                          className='rounded-sm h-16 mx-auto cursor-pointer'
+                          className={`rounded-sm h-16 mx-auto cursor-pointer ${hide > 0 ? 'opacity-0' : ''}`}
                           onClick={() => {
                             document.startViewTransition(() => {
                               flushSync(() => {
@@ -940,7 +946,7 @@ function Pagination({ pageQuantity, quantity, setLimit, setPage, nextPage, prevP
   );
 }
 
-function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper, transitionName, setTransitionName, setImage }) {
+function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper, transitionName, setTransitionName, setImage, setHide }) {
   const initialStateProduct = {
     id: uuidv4(),
     img: '',
@@ -1170,7 +1176,7 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper, tr
 
             <hr className='col-span-full' />
 
-            <SectionCashRegisterModal.ProductModal setMustSearchProduct={setMustSearchProduct} inputProduct={inputProduct} setInputProduct={setInputProduct} loadingProduct={loadingProduct} dataProduct={dataProduct} selectProduct={selectProduct} setSelectProduct={setSelectProduct} setProducts={setProducts} initialStateProduct={initialStateProduct} products={products} setHelperSearchProduct={setHelperSearchProduct} setHelperProduct={setHelperProduct} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} />
+            <SectionCashRegisterModal.ProductModal setMustSearchProduct={setMustSearchProduct} inputProduct={inputProduct} setInputProduct={setInputProduct} loadingProduct={loadingProduct} dataProduct={dataProduct} selectProduct={selectProduct} setSelectProduct={setSelectProduct} setProducts={setProducts} initialStateProduct={initialStateProduct} products={products} setHelperSearchProduct={setHelperSearchProduct} setHelperProduct={setHelperProduct} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} setHide={setHide} />
 
             <hr className='col-span-full sm:hidden' />
 
@@ -1260,7 +1266,7 @@ function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustome
   )
 }
 
-function ProductModal({ setMustSearchProduct, inputProduct, setInputProduct, loadingProduct, dataProduct, selectProduct, setSelectProduct, setProducts, initialStateProduct, products, setHelperSearchProduct, setHelperProduct, transitionName, setTransitionName, setImage }) {
+function ProductModal({ setMustSearchProduct, inputProduct, setInputProduct, loadingProduct, dataProduct, selectProduct, setSelectProduct, setProducts, initialStateProduct, products, setHelperSearchProduct, setHelperProduct, transitionName, setTransitionName, setImage, setHide }) {
   return (
     <>
       <div className='w-full col-span-1 grid grid-cols-1 gap-6 sm:gap-x-6'>
@@ -1358,7 +1364,7 @@ function ProductModal({ setMustSearchProduct, inputProduct, setInputProduct, loa
           <div className='col-span-full order-2'>
             <Table>
               <Table.HeaderTable names={['Imagen', 'Producto', 'precio', 'cantidad', 'subtotal', 'descripción', 'Eliminar']} />
-              <ModalTableBody data={products} setData={setProducts} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} />
+              <ModalTableBody data={products} setData={setProducts} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} setHide={setHide} />
             </Table>
           </div>
         )
@@ -1506,7 +1512,7 @@ function ModalBody({ select, handleChange, handleClick, message }) {
   )
 }
 
-function ModalTableBody({ data, setData, transitionName, setTransitionName, setImage }) {
+function ModalTableBody({ data, setData, transitionName, setTransitionName, setImage, setHide }) {
   return (
     <tbody className='bg-white text-center'>
       {
@@ -1522,6 +1528,7 @@ function ModalTableBody({ data, setData, transitionName, setTransitionName, setI
                     alt={el.name}
                     className='rounded-sm h-16 mx-auto cursor-pointer'
                     onClick={() => {
+                      setHide(true)
                       document.startViewTransition(() => {
                         flushSync(() => {
                           setTransitionName(`${el.name}-${el.id}`)

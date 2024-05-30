@@ -3,7 +3,7 @@ import Icon from "../utils/Icon";
 import { useEffect, useRef } from "react";
 import { flushSync } from "react-dom";
 
-export default function ImageModal({ image, transitionName, setTransitionName }) {
+export default function ImageModal({ image, transitionName, setTransitionName, setHide }) {
 
   const modal = useRef(null)
 
@@ -27,6 +27,11 @@ export default function ImageModal({ image, transitionName, setTransitionName })
                 setTransitionName('')
               });
             });
+            if (typeof setHide === 'function') {
+              setTimeout(() => {
+                setHide(false);
+              }, 500)
+            }
           }}
         >
           <Icon css={'text-green-800'} icon={faX} size='22px' />

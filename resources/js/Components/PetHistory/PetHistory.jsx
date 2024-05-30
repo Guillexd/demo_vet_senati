@@ -7,7 +7,7 @@ import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { faFilePdf } from '@fortawesome/free-regular-svg-icons';
 import { flushSync } from 'react-dom';
 
-export default function PetHistory({ petHistoryI, setPetHistory, setOption, setOpenModal, setHelper, setMustLoad, setMustAnimate, setImage, transitionName, setTransitionName, setIsDeleted }) {
+export default function PetHistory({ petHistoryI, setPetHistory, setOption, setOpenModal, setHelper, setMustLoad, setMustAnimate, setImage, transitionName, setTransitionName, hide, setIsDeleted }) {
 
   const handleDelete = () => {
     showSWToDelete('¿Quieres eliminar este historial?', () => {
@@ -36,7 +36,7 @@ export default function PetHistory({ petHistoryI, setPetHistory, setOption, setO
 
   return (
     <>
-      <img className='w-full h-60 object-cover' src={petHistoryI?.pet?.pet_image_url} alt={petHistoryI?.pet?.name}
+      <img className={`w-full h-60 object-cover ${hide > 0 ? 'opacity-0' : ''}`} src={petHistoryI?.pet?.pet_image_url} alt={petHistoryI?.pet?.name}
         onClick={() => {
           document.startViewTransition(() => {
             flushSync(() => {

@@ -102,12 +102,12 @@ function PetHistoryContainer() {
   const [petHistory, setPetHistory] = useState(initialStateHistory)
   const [mustLoad, setMustLoad] = useState(true)
   const [mustAnimate, setMustAnimate] = useState(true)
-  const [openImage, setOpenImage] = useState(false)
   const [image, setImage] = useState({
     url: '',
     label: '',
   })
   const [transitionName, setTransitionName] = useState('')
+  const [hide, setHide] = useState(false)
 
   useEffect(() => {
     if (!loading) {
@@ -281,7 +281,7 @@ function PetHistoryContainer() {
                   <>
                     {data?.data?.map((petHistoryI, index) => (
                       <SectionData.CardContainer.Card mustAnimate={mustAnimate} setMustAnimate={setMustAnimate} key={`${petHistoryI.id}-${index}`}>
-                        <PetHistory petHistoryI={petHistoryI} setPetHistory={setPetHistory} setOption={setOption} setOpenModal={setOpen} setHelper={setHelper} setMustLoad={setMustLoad} setMustAnimate={setMustAnimate} setImage={setImage} transitionName={transitionName} setTransitionName={setTransitionName} />
+                        <PetHistory petHistoryI={petHistoryI} setPetHistory={setPetHistory} setOption={setOption} setOpenModal={setOpen} setHelper={setHelper} setMustLoad={setMustLoad} setMustAnimate={setMustAnimate} setImage={setImage} transitionName={transitionName} setTransitionName={setTransitionName} hide={hide} />
                       </SectionData.CardContainer.Card>
                     ))}
                   </>
@@ -297,9 +297,10 @@ function PetHistoryContainer() {
           image={image}
           transitionName={transitionName}
           setTransitionName={setTransitionName}
+          setHide={setHide}
         />
       }
-      <PetHistoryModal petHistory={petHistory} option={option} open={open} setOpen={setOpen} setMustLoad={setMustLoad} setHelper={setHelper} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} />
+      <PetHistoryModal petHistory={petHistory} option={option} open={open} setOpen={setOpen} setMustLoad={setMustLoad} setHelper={setHelper} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} setHide={setHide} />
       <Footer />
     </>
   )
