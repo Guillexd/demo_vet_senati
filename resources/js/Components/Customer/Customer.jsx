@@ -72,9 +72,8 @@ export default function Customer({ customerI, setCustomer, setOption, setOpenMod
         }
         <p className='text-gray-700'>Dirección: {customerI.direction || '---'}</p>
         <p className='text-gray-700'>Fecha: { getLocaleDate(customerI.created_at) }</p>
-        <p className='text-gray-900'>{ dateCalculator(customerI.created_at) }</p>
       </div>
-      <div className='my-3 flex gap-2'>
+      <div className='my-3 flex gap-2 pb-4'>
         <button className='bg-vetsky rounded-md py-1 px-4 font-semibold hover:bg-gray-400'
           onClick={() => {
             setOption('Actualizar')
@@ -86,6 +85,7 @@ export default function Customer({ customerI, setCustomer, setOption, setOpenMod
           onClick={handleDelete}
         >Eliminar</button>
       </div>
+      <p className='text-gray-600 font-medium text-sm absolute bottom-1 right-8'>Agregado { dateCalculator(customerI.created_at) }</p>
     </div>
   )
 }

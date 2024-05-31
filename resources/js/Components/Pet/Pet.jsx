@@ -60,7 +60,6 @@ export default function Pet({ petI, setPet, setOption, setOpenModal, setHelper, 
           <p className='text-gray-900 font-semibold'>C/E: {petI.ce}</p>
           <p className='mt-2 text-gray-700'>Dueño: {petI.customer?.name} - {petI.customer?.identity_document?.abbreviation}: {petI.customer?.document_number}</p>
           <p className='text-gray-700'>Fecha: {getLocaleString(petI.created_at)}</p>
-          <p className='text-gray-900'>{dateCalculator(petI.created_at)}</p>
           {
             petI.observations?.length > 50
               ?
@@ -83,7 +82,7 @@ export default function Pet({ petI, setPet, setOption, setOpenModal, setHelper, 
               <p className='text-gray-700 font-semibold'> <strong>Observaciones:</strong> {petI.observations || '---'}</p>
           }
         </div>
-        <div className='my-3 flex gap-2'>
+        <div className='my-3 flex gap-2 pb-4'>
           <button className='bg-vetsky rounded-md py-1 px-4 font-semibold hover:bg-gray-400'
             onClick={() => {
               setOption('Actualizar')
@@ -95,6 +94,7 @@ export default function Pet({ petI, setPet, setOption, setOpenModal, setHelper, 
             onClick={handleDelete}
           >Eliminar</button>
         </div>
+        <p className='text-gray-600 font-medium text-sm absolute bottom-1 right-8'>Agregado { dateCalculator(petI.created_at) }</p>
       </div></>
   )
 }

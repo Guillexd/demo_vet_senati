@@ -36,9 +36,8 @@ export default function User({ userI, setUser, setOption, setOpenModal, setHelpe
         <p className='text-gray-700'>Teléfono: {userI.phone}</p>
         <p className='text-gray-700'>Dirección: {userI.direction}</p>
         <p className='text-gray-700'>Fecha: { getLocaleDate(userI.created_at) }</p>
-        <p className='text-gray-900'>{ dateCalculator(userI.created_at) }</p>
       </div>
-      <div className='my-3 flex gap-2'>
+      <div className='my-3 flex gap-2 pb-4'>
         <button className='bg-vetsky rounded-md py-1 px-4 font-semibold hover:bg-gray-400'
           onClick={() => {
             setOption('Actualizar')
@@ -50,6 +49,7 @@ export default function User({ userI, setUser, setOption, setOpenModal, setHelpe
           onClick={handleDelete}
         >Eliminar</button>
       </div>
+      <p className='text-gray-600 font-medium text-sm absolute bottom-1 right-8'>Agregado { dateCalculator(userI.created_at) }</p>
     </div>
   )
 }

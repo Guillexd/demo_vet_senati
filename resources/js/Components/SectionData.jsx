@@ -8,7 +8,7 @@ function Search({ children, inputFilter, setInputFilter, handleReset, filter, fi
   return (
     <section className='w-full py-2 px-4 flex justify-center'>
       <div className='relative min-w-[calc(80%)] bg-vetgreen-100 rounded-full shadow-lg'>
-        <input type='text' className='w-full bg-transparent focus:outline-none ml-2 py-2 ps-3 pe-8 font-semibold'
+        <input type='text' className='w-full bg-transparent focus:outline-none ml-2 py-2 ps-3 pe-12 font-semibold'
           value={inputFilter}
           placeholder={`Buscar por ${(filters.find(el => el.value === filter)?.name).toLowerCase()}`}
           onChange={(e) => {

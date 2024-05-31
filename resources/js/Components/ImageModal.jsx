@@ -29,7 +29,7 @@ export default function ImageModal({ image, transitionName, setTransitionName, s
           if (typeof setHide === 'function') {
             setTimeout(() => {
               setHide(false);
-            }, 500)
+            }, 300)
           }
         }}
       >
