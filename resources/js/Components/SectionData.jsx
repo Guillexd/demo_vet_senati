@@ -3,7 +3,7 @@ import Icon from '../utils/Icon';
 import { getPageQuery } from '../utils/utils';
 import { useRef, useEffect, useState, Children, cloneElement } from 'react';
 
-function Search({ children, inputFilter, setInputFilter, handleReset, filter, filters }) {
+function Search({ children, inputFilter, setInputFilter, handleReset, filter, filters, renderMoreFilters = true }) {
   const [open, setOpen] = useState(true)
   return (
     <section className='w-full py-2 px-4 flex justify-center'>
@@ -16,20 +16,24 @@ function Search({ children, inputFilter, setInputFilter, handleReset, filter, fi
           }} />
         <Icon css={'absolute inset-y-2.5 right-3'} icon={faMagnifyingGlass} size='20px' />
       </div>
-      <div>
-        <div onClick={() => setOpen(prev => !prev)}>
-          <Icon css={'mt-3 ms-3 hover:text-gray-400 animate-bounce cursor-pointer'} icon={faFilter} />
-        </div>
-        <div className={`${open && 'hidden'} ease-in duration-150 absolute min-w-64 mt-4 shadow-2xl -translate-x-60 bg-vetwhite rounded-xl z-10 p-5 ms-2`}>
-          <div className='flex justify-between'>
-            <span className='font-semibold text-lg text-gray-600'>Filtros</span>
-            <span className='font-bold text-lg text-red-600 cursor-pointer'
-              onClick={handleReset}
-            >Resetear</span>
+      {
+        renderMoreFilters
+        &&
+        <div>
+          <div onClick={() => setOpen(prev => !prev)}>
+            <Icon css={'mt-3 ms-3 hover:text-gray-400 animate-bounce cursor-pointer'} icon={faFilter} />
           </div>
-          {children}
+          <div className={`${open && 'hidden'} ease-in duration-150 absolute min-w-64 mt-4 shadow-2xl -translate-x-60 bg-vetwhite rounded-xl z-10 p-5 ms-2`}>
+            <div className='flex justify-between'>
+              <span className='font-semibold text-lg text-gray-600'>Filtros</span>
+              <span className='font-bold text-lg text-red-600 cursor-pointer'
+                onClick={handleReset}
+              >Resetear</span>
+            </div>
+            {children}
+          </div>
         </div>
-      </div>
+      }
     </section>
   );
 }

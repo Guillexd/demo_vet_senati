@@ -35,11 +35,9 @@ function ServiceContainer() {
   const [limit, setLimit] = useState(12);
   const [filter, setFilter] = useState('name');
   const [inputFilter, setInputFilter] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [finishDate, setFinishDate] = useState('');
   const { debounceValue } = useDebounce(inputFilter, 500)
   const [helper, setHelper] = useState(0)
-  const url = `/services/list?page=${page}&limit=${limit}&filter=${filter}&inputFilter=${debounceValue}&startDate=${startDate}&finishDate=${finishDate}`
+  const url = `/services/list?page=${page}&limit=${limit}&filter=${filter}&inputFilter=${debounceValue}`
   const { data, loading } = useFetchData(url, [page, limit, helper])
   const [option, setOption] = useState('Crear')
   const [open, setOpen] = useState(false)
@@ -76,60 +74,18 @@ function ServiceContainer() {
       </Filters>
 
       <SectionData>
-        <SectionData.Search inputFilter={inputFilter} setInputFilter={setInputFilter} handleReset={() => {
-          setStartDate('')
-          setFinishDate('')
-          setPage(1)
-          setHelper((prev) => prev + 1)
-        }} filter={filter} filters={filters} >
-          <div className='flex flex-col'>
-            <span className='font-bold text-sm my-2'>Fecha de inicio</span>
-            <input type='date' className='p-2 rounded-xl bg-gray-300 w-full'
-              value={startDate}
-              onChange={(e) => {
-                setStartDate(e.target.value)
-                setPage(1)
-                setHelper(prev => prev + 1)
-              }} />
-          </div>
-          <div className='flex flex-col'>
-            <span className='font-bold text-sm my-2'>Fecha de finalización</span>
-            <input type='date' className='p-2 rounded-xl bg-gray-300 w-full'
-              value={finishDate}
-              onChange={(e) => {
-                setFinishDate(e.target.value)
-                setPage(1)
-                setHelper(prev => prev + 1)
-              }}
-            />
-          </div>
-        </SectionData.Search>
+        <SectionData.Search inputFilter={inputFilter} setInputFilter={setInputFilter}
+         filter={filter}
+         filters={filters}
+         renderMoreFilters={false} />
         <SectionData.FilterBar
-          hide={!debounceValue && !startDate && !finishDate}
+          hide={!debounceValue}
           data={
             [
               {
                 tag: filters.find(el => el.value === filter)?.name,
                 input: debounceValue,
                 handleClick: () => setInputFilter('')
-              },
-              {
-                tag: 'Fecha de inicio',
-                input: startDate.length > 0 ? startDate : null,
-                handleClick: () => {
-                  setStartDate('')
-                  setPage(1)
-                  setHelper((prev) => prev + 1)
-                }
-              },
-              {
-                tag: 'Fecha de finalización',
-                input: finishDate.length > 0 ? finishDate : null,
-                handleClick: () => {
-                  setFinishDate('')
-                  setPage(1)
-                  setHelper((prev) => prev + 1)
-                }
               },
             ]
           } />

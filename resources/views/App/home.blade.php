@@ -1,7 +1,6 @@
 @extends('App.layout')
 @section('title', 'Dashboard')
 @section('content')
-
     <div class="flex flex-col min-w-full m-auto pb-10"
         style="background-image: linear-gradient(to bottom, rgba(154, 219, 234, 0.35), rgba(39, 47, 44, 0.88)), url('{{ asset('image/backgrounds/bg' . rand(1, 4) . '.jpg') }}'); background-size: contain; background-position: top; background-repeat: repeat">
         {{-- Logo --}}

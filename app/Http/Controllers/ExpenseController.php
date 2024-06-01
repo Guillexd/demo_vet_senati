@@ -12,15 +12,6 @@ class ExpenseController extends Controller
     public function list(Request $request)
     {
         $expense = Expense::orderBy('id', 'desc')->where(function (Builder $query) use ($request) {
-            if (isset($request->startDate)) {
-                $query->whereDate('created_at', '>=', $request->startDate);
-            }
-            if (isset($request->finishDate) && empty($request->startDate)) {
-                $query->whereDate('created_at', '<=', $request->finishDate);
-            }
-            if (isset($request->finishDate) && isset($request->startDate)) {
-                $query->whereBetween('created_at', [$request->startDate, $request->finishDate]);
-            }
             if (isset($request->inputFilter)) {
                 $query->where($request->filter, 'LIKE', "%$request->inputFilter%");
             }
