@@ -36,9 +36,19 @@ export default function Product({ productI, setProduct, setOption, setOpenModal,
 
   return (
     <>
-       <img className='w-full h-60 object-cover' src={productI.product_image_url} alt={productI.name}
+      <img className='w-full h-60 object-cover' src={productI.product_image_url} alt={productI.name}
         onClick={() => {
-          document.startViewTransition(() => {
+          if (document.startViewTransition) {
+            document.startViewTransition(() => {
+              flushSync(() => {
+                setTransitionName(`${productI.name}-${productI.id}`)
+                setImage({
+                  url: productI.product_image_url,
+                  label: productI.name,
+                })
+              })
+            });
+          } else {
             flushSync(() => {
               setTransitionName(`${productI.name}-${productI.id}`)
               setImage({
@@ -46,7 +56,7 @@ export default function Product({ productI, setProduct, setOption, setOpenModal,
                 label: productI.name,
               })
             })
-          })
+          }
         }}
         style={{ viewTransitionName: !transitionName && `${productI.name}-${productI.id}` }}
       />
@@ -107,7 +117,7 @@ export default function Product({ productI, setProduct, setOption, setOpenModal,
             onClick={handleDelete}
           >Eliminar</button>
         </div>
-        <p className='text-gray-600 font-medium text-sm absolute bottom-1 right-6'>Agregado { dateCalculator(productI.created_at) }</p>
+        <p className='text-gray-600 font-medium text-sm absolute bottom-1 right-6'>Agregado {dateCalculator(productI.created_at)}</p>
       </div></>
   )
 }

@@ -38,7 +38,17 @@ export default function Pet({ petI, setPet, setOption, setOpenModal, setHelper, 
     <>
       <img className='w-full h-60 object-cover' src={petI.pet_image_url} alt={petI.name}
         onClick={() => {
-          document.startViewTransition(() => {
+          if (document.startViewTransition) {
+            document.startViewTransition(() => {
+              flushSync(() => {
+                setTransitionName(`${petI.name}-${petI.id}`)
+                setImage({
+                  url: petI.pet_image_url,
+                  label: petI.name,
+                })
+              })
+            });
+          } else {
             flushSync(() => {
               setTransitionName(`${petI.name}-${petI.id}`)
               setImage({
@@ -46,7 +56,7 @@ export default function Pet({ petI, setPet, setOption, setOpenModal, setHelper, 
                 label: petI.name,
               })
             })
-          })
+          }
         }}
         style={{ viewTransitionName: !transitionName && `${petI.name}-${petI.id}` }}
       />
@@ -94,7 +104,7 @@ export default function Pet({ petI, setPet, setOption, setOpenModal, setHelper, 
             onClick={handleDelete}
           >Eliminar</button>
         </div>
-        <p className='text-gray-600 font-medium text-sm absolute bottom-1 right-8'>Agregado { dateCalculator(petI.created_at) }</p>
+        <p className='text-gray-600 font-medium text-sm absolute bottom-1 right-6'>Agregado {dateCalculator(petI.created_at)}</p>
       </div></>
   )
 }

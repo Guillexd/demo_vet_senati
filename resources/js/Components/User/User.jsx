@@ -49,7 +49,7 @@ export default function User({ userI, setUser, setOption, setOpenModal, setHelpe
           onClick={handleDelete}
         >Eliminar</button>
       </div>
-      <p className='text-gray-600 font-medium text-sm absolute bottom-1 right-8'>Agregado { dateCalculator(userI.created_at) }</p>
+      <p className='text-gray-600 font-medium text-sm absolute bottom-1 right-6'>Agregado { dateCalculator(userI.created_at) }</p>
     </div>
   )
 }

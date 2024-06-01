@@ -1202,7 +1202,17 @@ function CheckedBoxImage({ id, image, onChangeFunc, transitionName, setTransitio
               className='order-1 mx-auto rounded-lg cursor-pointer hover:scale-105 transition-all'
               onClick={() => {
                 setHide(true)
-                document.startViewTransition(() => {
+                if (document.startViewTransition) {
+                  document.startViewTransition(() => {
+                    flushSync(() => {
+                      setTransitionName(image)
+                      setImage({
+                        url: image,
+                        label: 'exámen',
+                      })
+                    })
+                  });
+                } else {
                   flushSync(() => {
                     setTransitionName(image)
                     setImage({
@@ -1210,7 +1220,7 @@ function CheckedBoxImage({ id, image, onChangeFunc, transitionName, setTransitio
                       label: 'exámen',
                     })
                   })
-                })
+                }
               }}
               style={{ viewTransitionName: !transitionName && image }}
             />

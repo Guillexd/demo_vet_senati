@@ -38,7 +38,17 @@ export default function PetHistory({ petHistoryI, setPetHistory, setOption, setO
     <>
       <img className={`w-full h-60 object-cover ${hide > 0 ? 'opacity-0' : ''}`} src={petHistoryI?.pet?.pet_image_url} alt={petHistoryI?.pet?.name}
         onClick={() => {
-          document.startViewTransition(() => {
+          if (document.startViewTransition) {
+            document.startViewTransition(() => {
+              flushSync(() => {
+                setTransitionName(`${petHistoryI?.pet?.name}-${petHistoryI.id}`)
+                setImage({
+                  url: petHistoryI?.pet?.pet_image_url,
+                  label: petHistoryI?.pet?.name,
+                })
+              })
+            });
+          } else {
             flushSync(() => {
               setTransitionName(`${petHistoryI?.pet?.name}-${petHistoryI.id}`)
               setImage({
@@ -46,7 +56,7 @@ export default function PetHistory({ petHistoryI, setPetHistory, setOption, setO
                 label: petHistoryI?.pet?.name,
               })
             })
-          })
+          }
         }}
         style={{ viewTransitionName: !transitionName && `${petHistoryI?.pet?.name}-${petHistoryI.id}` }}
       />

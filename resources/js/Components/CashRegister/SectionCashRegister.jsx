@@ -29,7 +29,7 @@ const valuesv2 = {
 }
 
 function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperContainer, setMustLoad: setMustLoadContainer, transitionName, setTransitionName, setImage, hide, setHide }) {
-  const [optionSearch, setOptionSearch] = useState(values.prod)
+  const [optionSearch, setOptionSearch] = useState(values.vous)
   const [titles, setTitles] = useState([])
   const [data, setData] = useState([])
   const [page, setPage] = useState(1)
@@ -425,7 +425,17 @@ function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSe
                           alt={el.name}
                           className={`rounded-sm h-16 mx-auto cursor-pointer ${hide > 0 ? 'opacity-0' : ''}`}
                           onClick={() => {
-                            document.startViewTransition(() => {
+                            if (document.startViewTransition) {
+                              document.startViewTransition(() => {
+                                flushSync(() => {
+                                  setTransitionName(`${el.name}-${el.id}`)
+                                setImage({
+                                  url: el.product_image_url,
+                                  label: el.name,
+                                })
+                                })
+                              });
+                            } else {
                               flushSync(() => {
                                 setTransitionName(`${el.name}-${el.id}`)
                                 setImage({
@@ -433,7 +443,7 @@ function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSe
                                   label: el.name,
                                 })
                               })
-                            })
+                            }
                           }}
                           style={{ viewTransitionName: !transitionName && `${el.name}-${el.id}` }}
                           />
@@ -1507,7 +1517,17 @@ function ModalTableBody({ data, setData, transitionName, setTransitionName, setI
                     className='rounded-sm h-16 mx-auto cursor-pointer'
                     onClick={() => {
                       setHide(true)
-                      document.startViewTransition(() => {
+                      if (document.startViewTransition) {
+                        document.startViewTransition(() => {
+                          flushSync(() => {
+                            setTransitionName(`${el.name}-${el.id}`)
+                            setImage({
+                              url: el.img,
+                              label: el.name,
+                            })
+                          })
+                        });
+                      } else {
                         flushSync(() => {
                           setTransitionName(`${el.name}-${el.id}`)
                           setImage({
@@ -1515,7 +1535,7 @@ function ModalTableBody({ data, setData, transitionName, setTransitionName, setI
                             label: el.name,
                           })
                         })
-                      })
+                      }
                     }}
                     style={{ viewTransitionName: !transitionName && `${el.name}-${el.id}` }}
                     />

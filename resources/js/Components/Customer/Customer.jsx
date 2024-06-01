@@ -85,7 +85,7 @@ export default function Customer({ customerI, setCustomer, setOption, setOpenMod
           onClick={handleDelete}
         >Eliminar</button>
       </div>
-      <p className='text-gray-600 font-medium text-sm absolute bottom-1 right-8'>Agregado { dateCalculator(customerI.created_at) }</p>
+      <p className='text-gray-600 font-medium text-sm absolute bottom-1 right-6'>Agregado { dateCalculator(customerI.created_at) }</p>
     </div>
   )
 }

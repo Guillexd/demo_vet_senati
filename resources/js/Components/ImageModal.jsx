@@ -21,15 +21,21 @@ export default function ImageModal({ image, transitionName, setTransitionName, s
     <>
       <div ref={modal} className={`fixed top-0 left-0 w-full h-full flex items-center justify-center`} style={{ zIndex: '50' }}
         onClick={() => {
-          document.startViewTransition(() => {
+          if (document.startViewTransition) {
+            document.startViewTransition(() => {
+              flushSync(() => {
+                setTransitionName('')
+                if (typeof setHide === 'function') {
+                  setTimeout(() => {
+                    setHide(false);
+                  }, 400)
+                }
+              });
+            });
+          } else {
             flushSync(() => {
               setTransitionName('')
             });
-          });
-          if (typeof setHide === 'function') {
-            setTimeout(() => {
-              setHide(false);
-            }, 300)
           }
         }}
       >
