@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use App\Services\UploadImageService;
 use Illuminate\Database\Eloquent\Builder;
@@ -59,7 +60,7 @@ class ProductController extends Controller
         return response()->json($request->only('name'));
     }
 
-    public function update(StoreProductRequest $request)
+    public function update(UpdateProductRequest $request)
     {
         $product = Product::findOrFail($request->id);
         $product->name = $request->name;

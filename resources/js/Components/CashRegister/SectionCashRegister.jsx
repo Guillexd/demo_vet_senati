@@ -457,7 +457,7 @@ function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSe
                   </td>
 
                   <td className='px-2 py-4 whitespace-no-wrap border-b border-gray-200 text-center'>
-                    <div className='text-sm leading-5 text-gray-900 min-w-16'>S/ {el.price}</div>
+                    <div className='text-sm leading-5 text-gray-900 min-w-16'>S/. {el.price}</div>
                   </td>
 
                   <td className='px-2 py-4 whitespace-no-wrap border-b border-gray-200 text-center'>
@@ -466,7 +466,7 @@ function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSe
 
                   <td
                     className='px-2 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200 relative text-center'>
-                    <div className='text-sm leading-5 text-gray-900 min-w-20'>S/ {el.pivot?.subtotal}</div>
+                    <div className='text-sm leading-5 text-gray-900 min-w-20'>S/. {el.pivot?.subtotal}</div>
                   </td>
 
                   <td
@@ -561,7 +561,7 @@ function BodyExpenseTable({ id, setData, page, limit, helper, searchByFilter, mu
                     </div>
                   </td>
                   <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center w-40'>
-                    <div className='text-sm leading-5 text-gray-900 min-w-16'>S/ {el.pivot?.subtotal}</div>
+                    <div className='text-sm leading-5 text-gray-900 min-w-16'>S/. {el.pivot?.subtotal}</div>
                   </td>
                   <td
                     className='px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200 relative min-w-[400px]'>
@@ -743,7 +743,7 @@ function BodyVoucherTable({ id, searchByFilter, mustLoad, helper, handleDelete }
                   </td>
 
                   <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center'>
-                    <div className='text-sm leading-5 text-gray-900 min-w-16'>S/ {el.price}</div>
+                    <div className='text-sm leading-5 text-gray-900 min-w-16'>S/. {el.price}</div>
                   </td>
 
                   <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center '>
@@ -752,7 +752,7 @@ function BodyVoucherTable({ id, searchByFilter, mustLoad, helper, handleDelete }
 
                   <td
                     className='px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200 relative text-center'>
-                    <div className='text-sm leading-5 text-gray-900 min-w-20'>S/ {el.pivot?.subtotal}</div>
+                    <div className='text-sm leading-5 text-gray-900 min-w-20'>S/. {el.pivot?.subtotal}</div>
                   </td>
 
                   <td
@@ -784,7 +784,7 @@ function BodyVoucherTable({ id, searchByFilter, mustLoad, helper, handleDelete }
             <tr className='hover:bg-sky-200'>
               <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200' colSpan={100}>
                 <div className='text-lg font-bold leading-5 text-gray-600 text-center'>
-                  Total: S/ {total}
+                  Total: S/. {total}
                 </div>
               </td>
             </tr>
@@ -980,12 +980,13 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper, tr
 
   const [selectProduct, setSelectProduct] = useState(initialStateProduct)
   const [products, setProducts] = useState([])
+  const [filterProduct, setFilterProduct] = useState('name')
   const [inputProduct, setInputProduct] = useState('')
   const [helperProduct, setHelperProduct] = useState(1)
   const [mustSearchProduct, setMustSearchProduct] = useState(false)
   const [helperSearchProduct, setHelperSearchProduct] = useState(false)
   const { debounceValue: debounceValueProduct } = useDebounce(inputProduct, 400)
-  const { data: dataProduct, loading: loadingProduct } = useFetchData(`/products/list?filter=name&inputFilter=${debounceValueProduct}`, [helperProduct], helperSearchProduct)
+  const { data: dataProduct, loading: loadingProduct } = useFetchData(`/products/list?filter=${filterProduct}&inputFilter=${debounceValueProduct}`, [helperProduct], helperSearchProduct)
 
   const [selectService, setSelectService] = useState(initialStateService)
   const [services, setServices] = useState([])
@@ -1160,17 +1161,19 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper, tr
               )
             }
 
+            <hr className='col-span-full border' />
+
             <SectionCashRegisterModal.CustomerModal setMustSearchCustomer={setMustSearchCustomer} filterCustomer={filterCustomer} setFilterCustomer={setFilterCustomer} inputCustomer={inputCustomer} setInputCustomer={setInputCustomer} loadingCustomer={loadingCustomer} dataCustomer={dataCustomer} setCustomerId={setCustomerId} setHelperSearchCustomer={setHelperSearchCustomer} setHelperCustomer={setHelperCustomer} />
 
-            <hr className='col-span-full' />
+            <hr className='col-span-full border' />
 
-            <SectionCashRegisterModal.ProductModal setMustSearchProduct={setMustSearchProduct} inputProduct={inputProduct} setInputProduct={setInputProduct} loadingProduct={loadingProduct} dataProduct={dataProduct} selectProduct={selectProduct} setSelectProduct={setSelectProduct} setProducts={setProducts} initialStateProduct={initialStateProduct} products={products} setHelperSearchProduct={setHelperSearchProduct} setHelperProduct={setHelperProduct} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} setHide={setHide} />
+            <SectionCashRegisterModal.ProductModal setMustSearchProduct={setMustSearchProduct} filterProduct={filterProduct} setFilterProduct={setFilterProduct} inputProduct={inputProduct} setInputProduct={setInputProduct} loadingProduct={loadingProduct} dataProduct={dataProduct} selectProduct={selectProduct} setSelectProduct={setSelectProduct} setProducts={setProducts} initialStateProduct={initialStateProduct} products={products} setHelperSearchProduct={setHelperSearchProduct} setHelperProduct={setHelperProduct} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} setHide={setHide} />
 
-            <hr className='col-span-full sm:hidden' />
+            <hr className='col-span-full border sm:hidden' />
 
             <SectionCashRegisterModal.ServiceModal setMustSearchService={setMustSearchService} inputService={inputService} setInputService={setInputService} loadingService={loadingService} dataService={dataService} selectService={selectService} setSelectService={setSelectService} setServices={setServices} initialStateService={initialStateService} services={services} setHelperSearchService={setHelperSearchService} setHelperService={setHelperService} />
 
-            <hr className='col-span-full' />
+            <hr className='col-span-full border' />
           </>
           :
           <>
@@ -1205,7 +1208,7 @@ function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustome
       <div className='relative w-full col-span-full grid grid-cols-1 sm:grid-cols-2 gap-6'>
         <ReactSelect setMustSearch={setMustSearchCustomer} filters={[
           {
-            tag: 'Nombre',
+            tag: 'Nombre del cliente',
             value: 'name',
           },
           {
@@ -1233,11 +1236,11 @@ function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustome
                         key={index} className='cursor-pointer hover:bg-slate-600 rounded p-2'
                         onClick={() => {
                           setMustSearchCustomer(false)
-                          setInputCustomer(`${el.name} - ${el.identity_document?.abbreviation || '--'}: ${el.document_number || '--'}`)
+                          setInputCustomer(`${el.name} - ${el.identity_document?.abbreviation ?? ''}: ${el.document_number ?? ''}`)
                           setCustomerId(el.id)
                         }
                         }
-                      >{`${el.name} - ${el.identity_document ? `${el.identity_document.abbreviation}: ${el.document_number}` : '--'}`}</li>))
+                      >{`${el.name} - ${el.identity_document?.abbreviation ?? '- '}: ${el.document_number ?? ' -'}`}</li>))
                   }
                 </ul>
           }
@@ -1254,11 +1257,20 @@ function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustome
   )
 }
 
-function ProductModal({ setMustSearchProduct, inputProduct, setInputProduct, loadingProduct, dataProduct, selectProduct, setSelectProduct, setProducts, initialStateProduct, products, setHelperSearchProduct, setHelperProduct, transitionName, setTransitionName, setImage, setHide }) {
+function ProductModal({ setMustSearchProduct, filterProduct, setFilterProduct, inputProduct, setInputProduct, loadingProduct, dataProduct, selectProduct, setSelectProduct, setProducts, initialStateProduct, products, setHelperSearchProduct, setHelperProduct, transitionName, setTransitionName, setImage, setHide }) {
   return (
     <>
-      <div className='w-full col-span-1 grid grid-cols-1 gap-6 sm:gap-x-6'>
-        <ReactSelect setMustSearch={setMustSearchProduct} input={inputProduct} setInput={setInputProduct} label={'Producto'} setHelperSearch={setHelperSearchProduct} setHelper={setHelperProduct} css={'w-full max-h-10'} listStyle={'w-full sm:w-[200%] max-h-72'}>
+      <div className='w-full col-span-1 grid grid-cols-1 self-start gap-6 sm:gap-x-6'>
+        <ReactSelect setMustSearch={setMustSearchProduct} filters={[
+          {
+            tag: 'Nombre del producto',
+            value: 'name',
+          },
+          {
+            tag: 'Serie',
+            value: 'serie',
+          },
+        ]} filter={filterProduct} setFilter={setFilterProduct} input={inputProduct} setInput={setInputProduct} label={'Producto'} setHelperSearch={setHelperSearchProduct} setHelper={setHelperProduct} css={'w-full max-h-10 order-1'} listStyle={'w-full sm:w-[200%] max-h-72'}>
           {
             loadingProduct
               ?
@@ -1296,6 +1308,11 @@ function ProductModal({ setMustSearchProduct, inputProduct, setInputProduct, loa
                             <p> <strong>Nombre:</strong> {`${el.name}`}</p>
                             <p> <strong>Precio:</strong> {`S/. ${el.price}`}</p>
                             <p> <strong>Stock:</strong> {`${el.stock}`} u.</p>
+                            {
+                              el.serie && (
+                                <p> <strong>Serie:</strong> {`${el.serie}`}</p>
+                              )
+                            }
                           </div>
                         </article>
                       </li>))
@@ -1364,8 +1381,13 @@ function ProductModal({ setMustSearchProduct, inputProduct, setInputProduct, loa
 function ServiceModal({ setMustSearchService, inputService, setInputService, loadingService, dataService, selectService, setSelectService, setServices, initialStateService, services, setHelperSearchService, setHelperService }) {
   return (
     <>
-      <div className='w-full col-span-1 grid grid-cols-1 gap-6 sm:gap-x-6'>
-        <ReactSelect setMustSearch={setMustSearchService} input={inputService} setInput={setInputService} label={'Servicio'} setHelperSearch={setHelperSearchService} setHelper={setHelperService} css={'w-full max-h-10'} listStyle={'w-full max-h-72'}>
+      <div className='w-full col-span-1 grid grid-cols-1 self-start gap-6 sm:gap-x-6'>
+        <ReactSelect setMustSearch={setMustSearchService} filters={[
+          {
+            tag: 'Nombre del servicio',
+            value: 'name',
+          },
+        ]} filter='name' input={inputService} setInput={setInputService} label={'Servicio'} setHelperSearch={setHelperSearchService} setHelper={setHelperService} css={'w-full max-h-10 order-1'} listStyle={'w-full max-h-72'}>
           {
             loadingService
               ?
@@ -1459,7 +1481,7 @@ function ServiceModal({ setMustSearchService, inputService, setInputService, loa
 
 function ModalQuantity({ select, handleClick }) {
   return (
-    <div className='relative border border-gray-600 rounded w-full'>
+    <div className='relative border border-gray-600 rounded w-full order-1'>
       <input
         type='number'
         step='any'
@@ -1480,7 +1502,7 @@ function ModalQuantity({ select, handleClick }) {
 function ModalBody({ select, handleChange, handleClick, message }) {
   return (
     <>
-      <div className='relative border border-gray-600 rounded w-full col-span-full'>
+      <div className='relative border border-gray-600 rounded w-full col-span-full order-1'>
         <textarea
           className='peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none text-gray-600  placeholder:text-gray-600  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0'
           value={select.description}
@@ -1493,7 +1515,7 @@ function ModalBody({ select, handleChange, handleClick, message }) {
         </label>
       </div>
 
-      <button type='button' className='w-full col-span-full bg-blue-500 text-white font-semibold rounded-lg py-2 hover:bg-blue-700' onClick={handleClick}>
+      <button type='button' className='w-full col-span-full bg-blue-500 text-white font-semibold rounded-lg py-2 hover:bg-blue-700 order-1' onClick={handleClick}>
         Agregar {message}
       </button>
     </>
@@ -1549,7 +1571,7 @@ function ModalTableBody({ data, setData, transitionName, setTransitionName, setI
             </td>
 
             <td className='py-2 whitespace-no-wrap border-b border-gray-200'>
-              <div className='text-sm leading-5 text-gray-900'>S/ {el.price}</div>
+              <div className='text-sm leading-5 text-gray-900'>S/. {el.price}</div>
             </td>
 
             <td className='py-2 whitespace-no-wrap border-b border-gray-200'>
@@ -1559,7 +1581,7 @@ function ModalTableBody({ data, setData, transitionName, setTransitionName, setI
             <td
               className='py-2 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200 relative'>
               <div className='text-sm leading-5 text-gray-900'>
-                S/ {(parseFloat(el.price) * parseFloat(el.quantity))?.toFixed(2)}
+                S/. {(parseFloat(el.price) * parseFloat(el.quantity))?.toFixed(2)}
               </div>
             </td>
             <td
@@ -1585,8 +1607,13 @@ function ModalTableBody({ data, setData, transitionName, setTransitionName, setI
 function ExpenseModal({ setMustSearchExpense, inputExpense, setInputExpense, loadingExpense, dataExpense, selectExpense, setSelectExpense, setExpenses, initialStateExpense, expenses, setHelperSearchExpense, setHelperExpense }) {
   return (
     <>
-      <div className='relative w-full col-span-full'>
-        <ReactSelect setMustSearch={setMustSearchExpense} input={inputExpense} setInput={setInputExpense} label={'Egresos'} setHelperSearch={setHelperSearchExpense} setHelper={setHelperExpense} >
+      <div className='relative w-full col-span-full grid grid-cols-1 gap-6'>
+        <ReactSelect setMustSearch={setMustSearchExpense} filters={[
+          {
+            tag: 'Razón',
+            value: 'reason',
+          },
+        ]} filter='reason' input={inputExpense} setInput={setInputExpense} label={'Egresos'} setHelperSearch={setHelperSearchExpense} setHelper={setHelperExpense} >
           {
             loadingExpense
               ?
@@ -1674,7 +1701,7 @@ function ExpenseModal({ setMustSearchExpense, inputExpense, setInputExpense, loa
                   expenses.map((el, index) => (
                     <tr className='hover:bg-sky-200' key={index}>
                       <td className='py-2 whitespace-no-wrap border-b border-gray-200'>
-                        <div className='text-sm leading-5 text-gray-900'>S/ {el.subtotal}</div>
+                        <div className='text-sm leading-5 text-gray-900'>S/. {el.subtotal}</div>
                       </td>
 
                       <td className='py-2 whitespace-no-wrap border-b border-gray-200 min-w-72'>

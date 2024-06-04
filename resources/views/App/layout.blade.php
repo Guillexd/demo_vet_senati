@@ -166,7 +166,7 @@
             });
 
             scrollableDiv.addEventListener('scroll', () => {
-            if (scrollableDiv.scrollTop > 300) {
+            if (scrollableDiv.scrollTop > 400) {
                 scrollToTopBtn.classList.remove('hidden');
             } else {
                 scrollToTopBtn.classList.add('hidden');

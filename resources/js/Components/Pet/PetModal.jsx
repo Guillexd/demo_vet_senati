@@ -198,7 +198,7 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
               tag: 'Número de documento',
               value: 'document_number',
             },
-          ]} filter={filterCustomer} setFilter={setFilterCustomer} input={inputCustomer} setInput={setInputCustomer} label={'Dueño'} setHelperSearch={setHelperSearchCustomer} setHelper={setHelperCustomer} css={'w-full col-span-full order-1 pe-10'} listStyle={'w-full max-h-72'}>
+          ]} filter={filterCustomer} setFilter={setFilterCustomer} input={inputCustomer} setInput={setInputCustomer} label={'Dueño'} setHelperSearch={setHelperSearchCustomer} setHelper={setHelperCustomer} css={'w-full col-span-full order-1 pe-10'} listStyle={'w-full max-h-72 z-20'}>
             {
               loadingCustomer
                 ?
@@ -214,7 +214,7 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
                     {
                       dataCustomer.data?.map((el, index) => (
                         <li
-                          key={index} className='cursor-pointer hover:bg-slate-600 rounded p-2'
+                          key={index} className={`cursor-pointer hover:bg-slate-600 rounded p-2 ${state.customer_id === el.id && 'bg-slate-600'}`}
                           onClick={() => {
                             dispatch({
                               type: REDUCER_ACTION_TYPE.customer_id,
@@ -224,7 +224,7 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
                             setInputCustomer(el.name)
                           }
                           }
-                        >{`${el.name} - ${el.identity_document ? `${el.identity_document.abbreviation}: ${el.document_number}` : '--'}`}</li>))
+                        >{`${el.name} - ${el.identity_document ? `${el.identity_document.abbreviation}: ${el.document_number}` : ''}`}</li>))
                     }
                   </ul>
             }
@@ -239,7 +239,12 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
         </div>
 
         <div className='relative w-full col-span-full grid grid-cols-1 sm:grid-cols-2 gap-6 order-1'>
-          <ReactSelect setMustSearch={setMustSearchBreed} input={inputBreed} setInput={setInputBreed} label={'Raza'} setHelperSearch={setHelperSearchBreed} setHelper={setHelperBreed} listStyle={'w-full max-h-72'}>
+          <ReactSelect setMustSearch={setMustSearchBreed}filters={[
+          {
+            tag: 'Nombre de la raza',
+            value: 'name',
+          },
+        ]} filter='name' input={inputBreed} setInput={setInputBreed} label={'Raza'} setHelperSearch={setHelperSearchBreed} setHelper={setHelperBreed} listStyle={'w-full max-h-72'}>
             {
               loadingBreed
                 ?
@@ -255,7 +260,7 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
                     {
                       dataBreed.data?.map((el, index) => (
                         <li
-                          key={index} className='cursor-pointer hover:bg-slate-600 rounded p-2'
+                          key={index} className={`cursor-pointer hover:bg-slate-600 rounded p-2 ${state.breed_id === el.id && 'bg-slate-600'}`}
                           onClick={() => {
                             dispatch({
                               type: REDUCER_ACTION_TYPE.breed_id,
@@ -270,7 +275,7 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
                   </ul>
             }
           </ReactSelect>
-          <button type='button' className='order-1 absolute bottom-1 right-12 top-1 bg-gray-100 rounded-full px-2 py-1 z-10 hover:bg-gray-300'
+          <button type='button' className='order-1 absolute bottom-1 right-12 bg-gray-100 rounded-full px-2 py-1 z-10 hover:bg-gray-300'
               onClick={() => setOpenBreed(true)}>
               <Icon icon={faShieldCat} size='22px' />
           </button>

@@ -68,7 +68,7 @@ export default function Pet({ petI, setPet, setOption, setOpenModal, setHelper, 
           <p className='text-gray-900 font-semibold'>Raza: {petI.breed?.name}</p>
           <p className='text-gray-900 font-semibold'>Sexo: {petI.sex}</p>
           <p className='text-gray-900 font-semibold'>C/E: {petI.ce}</p>
-          <p className='mt-2 text-gray-700'>Dueño: {petI.customer?.name} - {petI.customer?.identity_document?.abbreviation}: {petI.customer?.document_number}</p>
+          <p className='mt-2 text-gray-700'>Dueño: {petI.customer?.name} <br /> {petI.customer?.identity_document?.abbreviation}: {petI.customer?.document_number}</p>
           <p className='text-gray-700'>Fecha: {getLocaleString(petI.created_at)}</p>
           {
             petI.observations?.length > 50

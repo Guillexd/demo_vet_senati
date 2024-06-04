@@ -71,7 +71,6 @@ function formatTime(value, unit) {
 }
 
 export const dateCalculator = (date) => {
-
     const ISOdate = new Date(date);
     const currentDate = new Date();
     const ISOdateTest = new Date(date);
@@ -81,7 +80,9 @@ export const dateCalculator = (date) => {
     currentDateTest.setHours(0, 0, 0, 0);
 
     let miliSecondsDifference = currentDateTest - ISOdateTest;
-    const diasPasados = Math.floor(miliSecondsDifference / (1000 * 60 * 60 * 24));
+    const diasPasados = Math.floor(
+        miliSecondsDifference / (1000 * 60 * 60 * 24)
+    );
 
     if (!(diasPasados >= 2)) {
         miliSecondsDifference = currentDate - ISOdate;
@@ -111,13 +112,20 @@ export const getLocaleDate = (date) => {
 };
 
 export const getLocaleString = (date) => {
-    const newDate = new Date(date).toLocaleString().toString();
+    const newDate = new Date(date).toLocaleDateString("es-PE", {
+        day: "numeric",
+        month: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        hour12: true,
+    });
     return newDate;
 };
 
 export const getStringDate = (date) => {
-    const newDate = new Date(date);
-    const fechaString = newDate.toLocaleDateString("es-PE", {
+    const fechaString = new Date(date).toLocaleDateString("es-PE", {
         day: "numeric",
         month: "long",
         year: "numeric",
@@ -126,14 +134,13 @@ export const getStringDate = (date) => {
 };
 
 export const getStringTime = (date) => {
-    const newDate = new Date(date);
-    const fechaString = newDate.toLocaleDateString("es-PE", {
+    const fechaString = new Date(date).toLocaleDateString("es-PE", {
         day: "numeric",
         month: "long",
         year: "numeric",
         hour: "2-digit",
         minute: "2-digit",
-        second: "2-digit"
+        second: "2-digit",
     });
     return fechaString;
 };
@@ -142,38 +149,13 @@ export const formatId = (code, value) => {
     return code + value.toString().padStart(7, "0");
 };
 
-export const setLocalTime = () => {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = ("0" + (date.getMonth() + 1)).slice(-2);
-    const day = ("0" + date.getDate()).slice(-2);
-    const hours = ("0" + date.getHours()).slice(-2);
-    const minutes = ("0" + date.getMinutes()).slice(-2);
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
-};
-
-export const getDateNow= () => {
-    const date = new Date();
-
-    const month = ("0" + (date.getMonth() + 1)).slice(-2);
-    const day = ("0" + date.getDate()).slice(-2);
-    const year = date.getFullYear();
-
-    return `${year}/${month}/${day}`;
-};
-
-export const getTwoWeekLater = () => {
-    const date = new Date();
-    date.setDate(date.getDate() + 14); // Agregar 2 semanas (14 días)
-
-    const month = ("0" + (date.getMonth() + 1)).slice(-2);
-    const day = ("0" + date.getDate()).slice(-2);
-    const year = date.getFullYear();
-
-    return `${year}/${month}/${day}`;
-};
-
-export const showNotification = (title, footer, confirmText = '¡Lo revisaré!', icon = "warning", timer = 10000) => {
+export const showNotification = (
+    title,
+    footer,
+    confirmText = "¡Lo revisaré!",
+    icon = "warning",
+    timer = 10000
+) => {
     Swal.fire({
         position: "bottom-start",
         icon,
@@ -187,7 +169,8 @@ export const showNotification = (title, footer, confirmText = '¡Lo revisaré!',
         confirmButtonText: confirmText,
         buttonsStyling: false,
         customClass: {
-            confirmButton: 'bg-indigo-500 text-white font-bold mx-auto py-1 w-full rounded-lg',
-        }
+            confirmButton:
+                "bg-indigo-500 text-white font-bold mx-auto py-1 w-full rounded-lg",
+        },
     });
 };

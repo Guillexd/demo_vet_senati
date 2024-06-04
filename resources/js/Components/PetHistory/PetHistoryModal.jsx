@@ -11,7 +11,6 @@ import ReactSelect from '../ReactSelect';
 import CheckBox from '../CheckBox';
 import Selector from '../Selector';
 import SectionData from '../SectionData'
-import ImageModal from '../ImageModal';
 import { flushSync } from 'react-dom';
 
 const values = {
@@ -359,7 +358,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                           {
                             dataPet.data?.map((el, index) => (
                               <li
-                                key={index} className='cursor-pointer hover:bg-slate-600 p-2 border-b rounded-lg'
+                                key={index} className={`cursor-pointer hover:bg-slate-600 p-2 border-b rounded-lg ${state.pet_id=== el.id && 'bg-slate-600'}`}
                                 onClick={() => {
                                   dispatch({
                                     type: REDUCER_ACTION_TYPE.pet_id,
@@ -375,7 +374,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                                   <div className='flex flex-col items-start'>
                                     <p> <strong>Nombre:</strong> {`${el.name}`}</p>
                                     <p> <strong>Dueño:</strong> {el.customer?.name}</p>
-                                    <p>{el.customer?.identity_document?.abbreviation}: {el?.customer?.document_number}</p>
+                                    <p>{el.customer?.identity_document?.abbreviation ?? '- '}: {el?.customer?.document_number ?? ' -'}</p>
                                   </div>
                                 </article>
                               </li>))

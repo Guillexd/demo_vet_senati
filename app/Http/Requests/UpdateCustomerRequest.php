@@ -26,7 +26,7 @@ class UpdateCustomerRequest extends FormRequest
             'name' => ['nullable', 'string', 'max:100'],
             'identity_document_id' => ['nullable', 'numeric'],
             'document_number' => [
-                'nullable',
+                empty($this->input('identity_document_id')) ? 'nullable' : 'required',
                 $this->input('identity_document_id') == 1 || $this->input('identity_document_id') == 2 ? 'integer' : 'string',
                 $this->input('identity_document_id') == 1 ? 'digits:8' : ($this->input('identity_document_id') == 2 ? 'digits:11' : 'max:15'),
                 Rule::unique('customers', 'document_number')->ignore($this->id),

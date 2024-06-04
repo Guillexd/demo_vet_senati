@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreProductRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,7 @@ class StoreProductRequest extends FormRequest
             'purchase_price' => ['required', 'min:0', 'numeric', 'max:999999'],
             'stock' => ['required', 'integer', 'min:0', 'max:999999'],
             'utility' => ['required', 'numeric', 'min:0', 'max:999999'],
-            'serie' => ['nullable', 'string', 'max:20', 'unique:'.Product::class],
+            'serie' => ['nullable', 'string', 'max:20', Rule::unique('products', 'serie')->ignore($this->id)],
             'product_image' => ['nullable', 'image', 'max:1024'],
             'description' => ['nullable', 'string'],
             'due_date' => ['nullable', 'date'],

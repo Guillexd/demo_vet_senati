@@ -1,4 +1,4 @@
-import { dateCalculator, fetchHelper, getLocaleDate, getStringTime, showSWToDelete } from '../../utils/utils';
+import { dateCalculator, fetchHelper, getLocaleString, getStringTime, showSWToDelete } from '../../utils/utils';
 import { toast } from 'react-toastify';
 import Spinner from '../presentational/Spinner';
 import ToastifyErrorList from '../ToastifyErrorList';
@@ -102,7 +102,7 @@ export default function PetHistory({ petHistoryI, setPetHistory, setOption, setO
             </div>
           }
 
-          <p className='text-gray-700 mt-1'>Fecha: {getLocaleDate(petHistoryI.created_at)}</p>
+          <p className='text-gray-700 mt-1'>Fecha: {getLocaleString(petHistoryI.created_at)}</p>
         </div>
         <section>
           <div className='mt-3 '>

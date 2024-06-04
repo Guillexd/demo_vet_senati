@@ -1,4 +1,4 @@
-import { dateCalculator, fetchHelper, getLocaleDate, showSWToDelete } from '../../utils/utils';
+import { dateCalculator, fetchHelper, getLocaleString, showSWToDelete } from '../../utils/utils';
 import { toast } from 'react-toastify';
 import Spinner from '../presentational/Spinner';
 import ToastifyErrorList from '../ToastifyErrorList';
@@ -71,7 +71,7 @@ export default function Customer({ customerI, setCustomer, setOption, setOpenMod
             <p className='text-gray-700'>2º teléfono: ---</p>
         }
         <p className='text-gray-700'>Dirección: {customerI.direction || '---'}</p>
-        <p className='text-gray-700'>Fecha: { getLocaleDate(customerI.created_at) }</p>
+        <p className='text-gray-700'>Fecha: { getLocaleString(customerI.created_at) }</p>
       </div>
       <div className='my-3 flex gap-2 pb-4'>
         <button className='bg-vetsky rounded-md py-1 px-4 font-semibold hover:bg-gray-400'

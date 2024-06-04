@@ -29,6 +29,7 @@ class StorePetRequest extends FormRequest
             'pet_image' => ['nullable', 'image', 'max:1024'],
             'observations' => ['nullable', 'string'],
             'ce' => ['required', 'string'],
+            'sex' => ['required', 'string'],
         ];
     }
 
@@ -42,6 +43,7 @@ class StorePetRequest extends FormRequest
             'pet_image' => 'foto de la mascota',
             'observations' => 'observaciones',
             'ce' => 'C/E',
+            'sex' => 'sexo',
         ];
     }
 }
