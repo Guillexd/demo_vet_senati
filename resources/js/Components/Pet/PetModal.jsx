@@ -61,7 +61,7 @@ function reducer(state, action) {
   }
 }
 
-export default function PetModal({ pet, option, open, setOpen, setMustLoad, setHelper }) {
+export default function PetModal({ pet, option, open, setOpen, setMustLoad, setHelper, actions = true, mustBeToast = true }) {
 
   const options = {
     method: option === 'Crear' ? 'POST' : 'POST',
@@ -101,8 +101,10 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
           return toast.update(loadingToastId, { render: <><ToastifyErrorList data={data.errors} /></>, type: toast.TYPE.ERROR, autoClose: 3000, hideProgressBar: false, })
         }
         toast.update(loadingToastId, { render: options.sucessMessage, type: toast.TYPE.SUCCESS, autoClose: 1500, hideProgressBar: false, })
-        setMustLoad(false)
-        setHelper((prev) => prev + 1)
+        if (actions) {
+          setMustLoad(false)
+          setHelper((prev) => prev + 1)
+        }
         setOpen(false)
       })
       .catch((err) => {
@@ -161,7 +163,7 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
                 payload: e.target.value
               })
             }}
-            required autoFocus />
+            required />
           <label
             className='pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] transition-all duration-200 ease-out peer-focus:-translate-y-[1.8rem] peer-focus:scale-[0.9] peer-data-[te-input-state-active]:-translate-y-[2rem] peer-data-[te-input-state-active]:scale-[0.9] motion-reduce:transition-none text-gray-600  peer-focus:text-primary peer-valid:-translate-y-[1.8rem] peer-valid:scale-[0.9] peer-valid:text-primary'
           >
@@ -235,7 +237,7 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
           </button>
         </div>
         <div className='absolute'>
-          <AddCustomer customer={{ ...initialStateCustomer }} option={'Crear'} open={openCustomer} setOpen={setOpenCustomer} actions={false} mustBeToast={false} focus={false} />
+          <AddCustomer customer={{ ...initialStateCustomer }} option={'Crear'} open={openCustomer} setOpen={setOpenCustomer} actions={false} mustBeToast={false} />
         </div>
 
         <div className='relative w-full col-span-full grid grid-cols-1 sm:grid-cols-2 gap-6 order-1'>
@@ -281,7 +283,7 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
           </button>
         </div>
         <div className='absolute'>
-          <AddBreed breed={{ ...initialStateBreed }} option={'Crear'} open={openBreed} setOpen={setOpenBreed} actions={false} mustBeToast={false} focus={false} />
+          <AddBreed breed={{ ...initialStateBreed }} option={'Crear'} open={openBreed} setOpen={setOpenBreed} actions={false} mustBeToast={false} />
         </div>
 
         <Selector
@@ -360,7 +362,11 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
           </label>
         </div>
       </Modal>
-      <Modal.ToastifyModal />
+      {
+        mustBeToast
+        &&
+        <Modal.ToastifyModal />
+      }
     </>
   )
 }

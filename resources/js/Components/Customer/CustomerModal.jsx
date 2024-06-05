@@ -45,7 +45,7 @@ function reducer(state, action) {
   }
 }
 
-export default function CustomerModal({ customer, option, open, setOpen, setMustLoad, setHelper, actions = true, mustBeToast = true, focus = true }) {
+export default function CustomerModal({ customer, option, open, setOpen, setMustLoad, setHelper, actions = true, mustBeToast = true }) {
 
   const options = {
     method: option === 'Crear' ? 'POST' : 'PUT',
@@ -197,8 +197,7 @@ export default function CustomerModal({ customer, option, open, setOpen, setMust
                 type: REDUCER_ACTION_TYPE.name,
                 payload: e.target.value
               })
-            }}
-            autoFocus={focus} />
+            }} />
           <label
             className='pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] transition-all duration-200 ease-out peer-focus:-translate-y-[1.8rem] peer-focus:scale-[0.9] peer-data-[te-input-state-active]:-translate-y-[2rem] peer-data-[te-input-state-active]:scale-[0.9] motion-reduce:transition-none text-gray-600 peer-focus:text-primary peer-valid:-translate-y-[1.8rem] peer-valid:scale-[0.9] peer-valid:text-primary'
           >

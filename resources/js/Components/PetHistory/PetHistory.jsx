@@ -18,6 +18,7 @@ export default function PetHistory({ petHistoryI, setPetHistory, setOption, setO
         .then((data) => {
           setMustLoad(false)
           if (data.errors) {
+            setIsDeleted(false)
             return toast.update(loadingToastId, { render: <><ToastifyErrorList data={data.errors} /></>, type: toast.TYPE.ERROR, autoClose: 3000, hideProgressBar: false, })
           }
           if (data.message) {

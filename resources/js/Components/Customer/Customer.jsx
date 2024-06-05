@@ -27,6 +27,7 @@ export default function Customer({ customerI, setCustomer, setOption, setOpenMod
           setHelper((prev) => prev + 1)
         })
         .catch((err) => {
+          setIsDeleted(false)
           toast.update(loadingToastId, { render: 'Hay problemas de conexión', type: toast.TYPE.WARNING, autoClose: 2500, hideProgressBar: false, })
         })
     }, 'Se eliminarán los datos asociados a este cliente como sus mascotas y el historial de las mismas.')

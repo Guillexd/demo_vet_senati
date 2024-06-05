@@ -85,8 +85,8 @@
                         <button @click="dropdownOpen = ! dropdownOpen"
                             class="relative block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none">
                             <img class="object-cover w-full h-full"
-                                src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=296&amp;q=80"
-                                alt="Your avatar">
+                                src="/image/profile.avif"
+                                alt="tú avatar">
                         </button>
 
                         <div x-show="dropdownOpen" @click="dropdownOpen = false"

@@ -183,7 +183,7 @@ class DatabaseSeeder extends Seeder
             DB::table('cash_registerables')->insert((array) $record);
         }
 
-        $sale->correlativo = 3;
+        $sale->correlativo = 4;
         $sale->save();
     }
 }

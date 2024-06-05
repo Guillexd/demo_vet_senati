@@ -24,6 +24,7 @@ export default function Breed({ breedI, setBreed, setOption, setOpenModal, setHe
           setHelper((prev) => prev + 1)
         })
         .catch((err) => {
+          setIsDeleted(false)
           toast.update(loadingToastId, { render: 'Hay problemas de conexión', type: toast.TYPE.WARNING, autoClose: 2500, hideProgressBar: false, })
         })
     })

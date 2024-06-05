@@ -4,14 +4,17 @@ import { toast } from 'react-toastify';
 import { fetchHelper } from '../../utils/utils';
 import ToastifyErrorList from '../ToastifyErrorList';
 import Spinner from '../presentational/Spinner';
-import { faBook } from '@fortawesome/free-solid-svg-icons'
+import { faBook, faDog } from '@fortawesome/free-solid-svg-icons'
 import useDebounce from '../useDebounce';
 import useFetchData from '../../utils/useFetchData';
 import ReactSelect from '../ReactSelect';
 import CheckBox from '../CheckBox';
 import Selector from '../Selector';
 import SectionData from '../SectionData'
+import { initialStatePet } from '../Pet/inititalStatePet';
+import AddPet from '../Pet/PetModal';
 import { flushSync } from 'react-dom';
+import Icon from '../../utils/Icon';
 
 const values = {
   consul: 'consulta',
@@ -242,6 +245,8 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
     loadingMessage: !(option === 'Actualizar') ? 'Agregando historial' : 'Actualizando historial',
   }
 
+  const [openPet, setOpenPet] = useState(false)
+
   const [optionSearch, setOptionSearch] = useState(values.consul)
   const [state, dispatch] = useReducer(reducer, petHistory)
   const [isLoading, setIsLoading] = useState(false)
@@ -358,7 +363,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                           {
                             dataPet.data?.map((el, index) => (
                               <li
-                                key={index} className={`cursor-pointer hover:bg-slate-600 p-2 border-b rounded-lg ${state.pet_id=== el.id && 'bg-slate-600'}`}
+                                key={index} className={`cursor-pointer hover:bg-slate-600 p-2 border-b rounded-lg ${state.pet_id === el.id && 'bg-slate-600'}`}
                                 onClick={() => {
                                   dispatch({
                                     type: REDUCER_ACTION_TYPE.pet_id,
@@ -374,7 +379,13 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                                   <div className='flex flex-col items-start'>
                                     <p> <strong>Nombre:</strong> {`${el.name}`}</p>
                                     <p> <strong>Dueño:</strong> {el.customer?.name}</p>
-                                    <p>{el.customer?.identity_document?.abbreviation ?? '- '}: {el?.customer?.document_number ?? ' -'}</p>
+                                    {
+                                      el.customer?.identity_document
+                                        ?
+                                        <p>{el.customer.identity_document.abbreviation}: {el.customer.document_number}</p>
+                                        :
+                                        ''
+                                    }
                                   </div>
                                 </article>
                               </li>))
@@ -382,6 +393,13 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                         </ul>
                   }
                 </ReactSelect>
+                <button type='button' className='order-1 absolute bottom-3 right-12 bg-gray-100 rounded-full px-2 py-1 z-10 hover:bg-gray-300'
+                  onClick={() => setOpenPet(true)}>
+                  <Icon icon={faDog} />
+                </button>
+              </div>
+              <div className='absolute'>
+                <AddPet pet={{ ...initialStatePet }} option={'Crear'} open={openPet} setOpen={setOpenPet} actions={false} mustBeToast={false} />
               </div>
 
               <div className='relative border border-gray-600 rounded w-full col-span-1 order-1'>

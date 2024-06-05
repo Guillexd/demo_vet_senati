@@ -21,6 +21,7 @@ export default function User({ userI, setUser, setOption, setOpenModal, setHelpe
           setHelper((prev) => prev + 1)
         })
         .catch((err) => {
+          setIsDeleted(false)
           toast.update(loadingToastId, { render: 'Hay problemas de conexión', type: toast.TYPE.WARNING, autoClose: 2500, hideProgressBar: false, })
         })
     })
@@ -53,30 +54,3 @@ export default function User({ userI, setUser, setOption, setOpenModal, setHelpe
     </div>
   )
 }
-
-
-{/* <div className='lg:flex-shrink-0 lg:h-full'>
-        <img className='lg:h-full w-full object-cover lg:w-48 blur-sm' src='https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/fd35c-no-user-image-icon-27.png?fit=500%2C500&ssl=1' alt='Imagen de ejemplo' />
-      </div>
-      <div className='px-8 pt-5 flex flex-col justify-between'>
-        <div>
-          <div className='uppercase tracking-wide text-sm text-indigo-500 font-semibold'>Nombre: {userI.name}</div>
-          <p className='text-gray-500'>Rol: {userI.rol.name}</p>
-          <p className='mt-2 text-gray-400'>Correo: {userI.email}</p>
-          <p className='text-gray-400'>DNI: {userI.dni}</p>
-          <p className='text-gray-400'>Teléfono: {userI.phone}</p>
-          <p className='text-gray-400'>Dirección: {userI.direction}</p>
-        </div>
-        <div className='mb-3 self-end flex gap-2'>
-          <button className='bg-vetsky rounded-md py-1 px-4 font-semibold hover:bg-gray-400'
-            onClick={() => {
-              setOption('Actualizar')
-              setOpenModal(true)
-              setUser(userI)
-            }}
-          >Editar</button>
-          <button className='bg-vetbrown rounded-md py-1 px-4 text-white font-semibold hover:bg-gray-500'
-            onClick={handleDelete}
-          >Eliminar</button>
-        </div>
-      </div> */}

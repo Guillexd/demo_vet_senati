@@ -95,7 +95,7 @@ class CashRegisterController extends Controller
                 DB::raw('(SELECT document_number FROM customers WHERE id = MAX(customer_id)) AS doc_customer'),
                 DB::raw('(SELECT abbreviation FROM identity_documents JOIN customers ON identity_documents.id = customers.identity_document_id WHERE customers.id = MAX(customer_id)) AS abbreviation')
             )
-            ->join('customers', 'cash_registerables.customer_id', '=', 'customers.id')
+            ->leftJoin('customers', 'cash_registerables.customer_id', '=', 'customers.id')
             ->orderByDesc('max_created_at')
             ->groupBy(['voucher_id', 'customer_id'])
             ->whereNotNull('voucher_id');

@@ -25,6 +25,7 @@ export default function Service({ serviceI, setService, setOption, setOpenModal,
           setHelper((prev) => prev + 1)
         })
         .catch((err) => {
+          setIsDeleted(false)
           toast.update(loadingToastId, { render: 'Hay problemas de conexión', type: toast.TYPE.WARNING, autoClose: 2500, hideProgressBar: false, })
         })
     })

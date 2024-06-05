@@ -24,7 +24,7 @@ function reducer(state, action) {
   }
 }
 
-export default function ExpenseModal({ expense, option, open, setOpen, setMustLoad, setHelper }) {
+export default function ExpenseModal({ expense, option, open, setOpen, setMustLoad, setHelper, actions = true, mustBeToast = true }) {
 
   const options = {
     method: option === 'Crear' ? 'POST' : 'PUT',
@@ -48,8 +48,10 @@ export default function ExpenseModal({ expense, option, open, setOpen, setMustLo
           return toast.update(loadingToastId, { render: <><ToastifyErrorList data={data.errors} /></>, type: toast.TYPE.ERROR, autoClose: 3000, hideProgressBar: false, })
         }
         toast.update(loadingToastId, { render: options.sucessMessage, type: toast.TYPE.SUCCESS, autoClose: 1500, hideProgressBar: false, })
-        setMustLoad(false)
-        setHelper((prev) => prev + 1)
+        if (actions) {
+          setMustLoad(false)
+          setHelper((prev) => prev + 1)
+        }
         setOpen(false)
       })
       .catch((err) => {
@@ -92,7 +94,11 @@ export default function ExpenseModal({ expense, option, open, setOpen, setMustLo
           </label>
         </div>
       </Modal>
-      <Modal.ToastifyModal />
+      {
+        mustBeToast
+        &&
+        <Modal.ToastifyModal />
+      }
     </>
   )
 }

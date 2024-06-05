@@ -11,13 +11,11 @@ import Icon from '../../utils/Icon';
 import Footer from '../Footer';
 import Expense from './Expense';
 import ExpenseModal from './ExpenseModal';
+import { initialStateExpense as initialStateExpenseExport} from './initialStateExpense'
 
 function ExpenseContainer() {
 
-  const initialStateExpense = {
-    id: '',
-    reason: '',
-  }
+  const initialStateExpense = {...initialStateExpenseExport}
 
   const filters = [
     {

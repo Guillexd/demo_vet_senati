@@ -29,6 +29,7 @@ export default function Product({ productI, setProduct, setOption, setOpenModal,
           setHelper((prev) => prev + 1)
         })
         .catch((err) => {
+          setIsDeleted(false)
           toast.update(loadingToastId, { render: 'Hay problemas de conexión', type: toast.TYPE.WARNING, autoClose: 2500, hideProgressBar: false, })
         })
     })

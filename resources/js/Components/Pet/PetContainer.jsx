@@ -12,20 +12,11 @@ import Footer from '../Footer';
 import Pet from './Pet';
 import PetModal from './PetModal';
 import ImageModal from '../ImageModal';
+import { initialStatePet as initialStatePetExport } from './inititalStatePet';
 
 function PetContainer() {
 
-  const initialStatePet = {
-    id: '',
-    name: '',
-    age: '',
-    customer_id: '',
-    breed_id: '',
-    sex: 'Macho',
-    ce: 'Entero',
-    pet_image: null,
-    observations: 'No hay observaciones.',
-  }
+  const initialStatePet = {...initialStatePetExport}
 
   const filters = [
     {

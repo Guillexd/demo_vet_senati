@@ -1,4 +1,4 @@
-import { faArrowDown, faArrowUp, faCashRegister, faExclamation, faFileExcel, faFilePdf, faMagnifyingGlass, faMoneyBill, faTrash, faUserPlus, faX } from '@fortawesome/free-solid-svg-icons'
+import { faAnglesUp, faArrowDown, faArrowUp, faCashRegister, faExclamation, faFileExcel, faFilePdf, faMagnifyingGlass, faMoneyBill, faTrash, faUserPlus, faX } from '@fortawesome/free-solid-svg-icons'
 import Icon from '../../utils/Icon'
 import useFetchData from '../../utils/useFetchData'
 import { useEffect, useState } from 'react'
@@ -13,6 +13,8 @@ import { dateCalculator, fetchData, fetchHelper, getLocaleString, getPageQuery, 
 import ToastifyErrorList from '../ToastifyErrorList'
 import { initialStateCustomer } from '../Customer/initialStateCustomer'
 import AddCustomer from '../Customer/CustomerModal'
+import { initialStateExpense } from '../Expense/initialStateExpense'
+import AddExpense from '../Expense/ExpenseModal'
 import { flushSync } from 'react-dom'
 
 const values = {
@@ -112,7 +114,7 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
         cashRegister.id !== null
           ?
           <>
-            <button className='bg-gray-400 right-0 absolute p-3 rounded-xl m-2 opacity-80 hover:opacity-45 z-40 animate-bounce' onClick={handleClose}>
+            <button className='bg-gray-400 sticky top-3 float-right p-3 rounded-xl m-2 opacity-80 hover:opacity-45 z-40 animate-bounce' onClick={handleClose}>
               <Icon css={'text-green-900'} icon={faX} size='22px' />
             </button>
             <br /> <br />
@@ -421,31 +423,31 @@ function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSe
                       <td className='px-2 py-4 whitespace-no-wrap border-b border-gray-200 h-24'>
                         <div className='text-gray-900 w-20 mx-auto'>
                           <img
-                          src={el.product_image_url}
-                          alt={el.name}
-                          className={`rounded-sm h-16 mx-auto cursor-pointer ${hide > 0 ? 'opacity-0' : ''}`}
-                          onClick={() => {
-                            if (document.startViewTransition) {
-                              document.startViewTransition(() => {
+                            src={el.product_image_url}
+                            alt={el.name}
+                            className={`rounded-sm h-16 mx-auto cursor-pointer ${hide > 0 ? 'opacity-0' : ''}`}
+                            onClick={() => {
+                              if (document.startViewTransition) {
+                                document.startViewTransition(() => {
+                                  flushSync(() => {
+                                    setTransitionName(`${el.name}-${el.id}`)
+                                    setImage({
+                                      url: el.product_image_url,
+                                      label: el.name,
+                                    })
+                                  })
+                                });
+                              } else {
                                 flushSync(() => {
                                   setTransitionName(`${el.name}-${el.id}`)
-                                setImage({
-                                  url: el.product_image_url,
-                                  label: el.name,
+                                  setImage({
+                                    url: el.product_image_url,
+                                    label: el.name,
+                                  })
                                 })
-                                })
-                              });
-                            } else {
-                              flushSync(() => {
-                                setTransitionName(`${el.name}-${el.id}`)
-                                setImage({
-                                  url: el.product_image_url,
-                                  label: el.name,
-                                })
-                              })
-                            }
-                          }}
-                          style={{ viewTransitionName: !transitionName && `${el.name}-${el.id}` }}
+                              }
+                            }}
+                            style={{ viewTransitionName: !transitionName && `${el.name}-${el.id}` }}
                           />
                         </div>
                       </td>
@@ -471,7 +473,7 @@ function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSe
 
                   <td
                     className='px-2 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200 relative text-center'>
-                    <div className='text-sm leading-5 text-gray-900 w-40 overflow-hidden mx-auto'>{el.customer?.name}</div>
+                    <div className='text-sm leading-5 text-gray-900 w-40 overflow-hidden mx-auto'>{el.customer?.name ?? '--'}</div>
                     <div className='text-sm leading-5 text-gray-700 w-40 overflow-hidden mx-auto'>{el.customer?.identity_document?.abbreviation && `${el.customer?.identity_document?.abbreviation}:`} {el.customer?.document_number}</div>
                   </td>
 
@@ -664,7 +666,7 @@ function BodyAllVouchersTable({ cashId, page, limit, searchByFilter, helper, set
 
                   <td
                     className='px-2 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200 relative text-center'>
-                    <div className='text-sm leading-5 text-gray-900 w-40 overflow-hidden mx-auto'>{el.customer}</div>
+                    <div className='text-sm leading-5 text-gray-900 w-40 overflow-hidden mx-auto'>{el.customer ?? '--'}</div>
                     <div className='text-sm leading-5 text-gray-700 w-40 overflow-hidden mx-auto'>{el.abbreviation && `${el.abbreviation}:`} {el.doc_customer}</div>
                   </td>
 
@@ -778,7 +780,14 @@ function BodyVoucherTable({ id, searchByFilter, mustLoad, helper, handleDelete }
             }
             <tr className='hover:bg-sky-200'>
               <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200' colSpan={100}>
-                <div className='text-lg font-bold leading-5 text-gray-900 text-center'>Cliente: {data.customer?.name} - {data.customer?.identity_document?.abbreviation || '-'}: {data.customer?.document_number || '--'}</div>
+                <div className='text-lg font-bold leading-5 text-gray-900 text-center'>
+                  Cliente: {data.customer?.name ?? '-'}
+                  {
+                    data.customer?.identity_document
+                    &&
+                    ` - ${data.customer.identity_document.abbreviation}: ${data.customer.document_number}`
+                  }
+                </div>
               </td>
             </tr>
             <tr className='hover:bg-sky-200'>
@@ -1240,7 +1249,7 @@ function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustome
                           setCustomerId(el.id)
                         }
                         }
-                      >{`${el.name} - ${el.identity_document?.abbreviation ?? '- '}: ${el.document_number ?? ' -'}`}</li>))
+                      >{`${el.name} - ${el.identity_document ? `${el.identity_document.abbreviation}: ${el.document_number}` : ''}`}</li>))
                   }
                 </ul>
           }
@@ -1534,13 +1543,22 @@ function ModalTableBody({ data, setData, transitionName, setTransitionName, setI
                 <td className='whitespace-no-wrap border-b border-gray-200 h-20'>
                   <div className='text-gray-900 w-20'>
                     <img
-                    src={el.img}
-                    alt={el.name}
-                    className='rounded-sm h-16 mx-auto cursor-pointer'
-                    onClick={() => {
-                      setHide(true)
-                      if (document.startViewTransition) {
-                        document.startViewTransition(() => {
+                      src={el.img}
+                      alt={el.name}
+                      className='rounded-sm h-16 mx-auto cursor-pointer'
+                      onClick={() => {
+                        setHide(true)
+                        if (document.startViewTransition) {
+                          document.startViewTransition(() => {
+                            flushSync(() => {
+                              setTransitionName(`${el.name}-${el.id}`)
+                              setImage({
+                                url: el.img,
+                                label: el.name,
+                              })
+                            })
+                          });
+                        } else {
                           flushSync(() => {
                             setTransitionName(`${el.name}-${el.id}`)
                             setImage({
@@ -1548,18 +1566,9 @@ function ModalTableBody({ data, setData, transitionName, setTransitionName, setI
                               label: el.name,
                             })
                           })
-                        });
-                      } else {
-                        flushSync(() => {
-                          setTransitionName(`${el.name}-${el.id}`)
-                          setImage({
-                            url: el.img,
-                            label: el.name,
-                          })
-                        })
-                      }
-                    }}
-                    style={{ viewTransitionName: !transitionName && `${el.name}-${el.id}` }}
+                        }
+                      }}
+                      style={{ viewTransitionName: !transitionName && `${el.name}-${el.id}` }}
                     />
                   </div>
                 </td>
@@ -1605,6 +1614,7 @@ function ModalTableBody({ data, setData, transitionName, setTransitionName, setI
 }
 
 function ExpenseModal({ setMustSearchExpense, inputExpense, setInputExpense, loadingExpense, dataExpense, selectExpense, setSelectExpense, setExpenses, initialStateExpense, expenses, setHelperSearchExpense, setHelperExpense }) {
+  const [openExpense, setOpenExpense] = useState(false)
   return (
     <>
       <div className='relative w-full col-span-full grid grid-cols-1 gap-6'>
@@ -1647,6 +1657,13 @@ function ExpenseModal({ setMustSearchExpense, inputExpense, setInputExpense, loa
                 </ul>
           }
         </ReactSelect>
+        <button type='button' className='order-1 absolute bottom-1 right-12 bg-gray-100 rounded-full px-2 py-1 z-10 hover:bg-gray-300'
+          onClick={() => setOpenExpense(true)}>
+          <Icon icon={faAnglesUp} />
+        </button>
+      </div>
+      <div className='absolute'>
+        <AddExpense expense={{ ...initialStateExpense }} option={'Crear'} open={openExpense} setOpen={setOpenExpense} actions={false} mustBeToast={false} />
       </div>
 
       {
@@ -1680,6 +1697,14 @@ function ExpenseModal({ setMustSearchExpense, inputExpense, setInputExpense, loa
                 if (!selectExpense.expense_id) {
                   return [...prev]
                 }
+                const expenseFounded = expenses.findIndex(el => el.expense_id === selectExpense.expense_id)
+
+                if (expenseFounded !== -1) {
+                  const updatesExpenses = [...expenses]
+                  updatesExpenses[expenseFounded].subtotal = parseFloat(selectExpense.subtotal)
+                  return updatesExpenses
+                }
+
                 return [...prev, selectExpense]
               })
               setInputExpense('')
