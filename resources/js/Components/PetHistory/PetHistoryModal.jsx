@@ -393,7 +393,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                         </ul>
                   }
                 </ReactSelect>
-                <button type='button' className='order-1 absolute bottom-3 right-12 bg-gray-100 rounded-full px-2 py-1 z-10 hover:bg-gray-300'
+                <button type='button' className='order-1 absolute bottom-1 min-[1167px]:bottom-3 right-12 bg-gray-100 rounded-full px-2 py-1 z-10 hover:bg-gray-300'
                   onClick={() => setOpenPet(true)}>
                   <Icon icon={faDog} />
                 </button>
