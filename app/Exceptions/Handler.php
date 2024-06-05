@@ -6,6 +6,8 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
+use Illuminate\Support\Facades\Lang;
 
 class Handler extends ExceptionHandler
 {
@@ -26,5 +28,18 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
 
+    }
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof ThrottleRequestsException) {
+            if($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Demasiados intentos, vuelva a intentarlo en ' . $exception->getHeaders()['Retry-After'] . ' segundos.',
+                    'exception' => get_class($exception)
+                ], 429);
+            }
+        }
+
+        return parent::render($request, $exception);
     }
 }

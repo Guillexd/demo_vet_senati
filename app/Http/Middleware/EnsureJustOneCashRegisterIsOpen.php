@@ -18,7 +18,7 @@ class EnsureJustOneCashRegisterIsOpen
     {
         $cash_register = CashRegister::where('state', true)->first();
 
-        if(isset($cash_register)) {
+        if(isset($cash_register) && $cash_register->id !== $request->id) {
             $errors = [
                 'request_error' => ["¡Ya existe una caja registradora abierta! (caja $cash_register->id)"],
             ];

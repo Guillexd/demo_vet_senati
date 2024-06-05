@@ -3,57 +3,57 @@
     "file": "assets/Spinner-f424a175.css",
     "src": "Spinner.css"
   },
-  "_BreedModal-d41dcc21.js": {
-    "file": "assets/BreedModal-d41dcc21.js",
+  "_BreedModal-d6d17d99.js": {
+    "file": "assets/BreedModal-d6d17d99.js",
     "imports": [
-      "_Footer-5a793555.js",
-      "_Spinner-fb413991.js"
+      "_Footer-a8182496.js",
+      "_Spinner-632d6834.js"
     ]
   },
-  "_Filters-5c1cd9b5.js": {
-    "file": "assets/Filters-5c1cd9b5.js",
+  "_Filters-4cca8f66.js": {
+    "file": "assets/Filters-4cca8f66.js",
     "imports": [
-      "_Footer-5a793555.js"
+      "_Footer-a8182496.js"
     ]
   },
-  "_Footer-5a793555.js": {
-    "file": "assets/Footer-5a793555.js"
+  "_Footer-a8182496.js": {
+    "file": "assets/Footer-a8182496.js"
   },
-  "_ImageModal-6e5161c6.js": {
-    "file": "assets/ImageModal-6e5161c6.js",
+  "_ImageModal-632de468.js": {
+    "file": "assets/ImageModal-632de468.js",
     "imports": [
-      "_Footer-5a793555.js"
+      "_Footer-a8182496.js"
     ]
   },
-  "_ReactSelect-a5a841a5.js": {
-    "file": "assets/ReactSelect-a5a841a5.js",
+  "_ReactSelect-5502b375.js": {
+    "file": "assets/ReactSelect-5502b375.js",
     "imports": [
-      "_Footer-5a793555.js"
+      "_Footer-a8182496.js"
     ]
   },
-  "_Selector-eee34858.js": {
-    "file": "assets/Selector-eee34858.js",
+  "_Selector-4f8ac2ba.js": {
+    "file": "assets/Selector-4f8ac2ba.js",
     "imports": [
-      "_Footer-5a793555.js"
+      "_Footer-a8182496.js"
     ]
   },
-  "_Spinner-fb413991.js": {
+  "_Spinner-632d6834.js": {
     "css": [
       "assets/Spinner-f424a175.css"
     ],
-    "file": "assets/Spinner-fb413991.js",
+    "file": "assets/Spinner-632d6834.js",
     "imports": [
-      "_Footer-5a793555.js"
+      "_Footer-a8182496.js"
     ]
   },
   "_index-7c0738bf.js": {
     "file": "assets/index-7c0738bf.js"
   },
-  "_initialStateCustomer-a7eed3e2.js": {
-    "file": "assets/initialStateCustomer-a7eed3e2.js",
+  "_initialStateCustomer-49125ee2.js": {
+    "file": "assets/initialStateCustomer-49125ee2.js",
     "imports": [
-      "_Footer-5a793555.js",
-      "_Spinner-fb413991.js"
+      "_Footer-a8182496.js",
+      "_Spinner-632d6834.js"
     ]
   },
   "resources/css/app.css": {
@@ -62,69 +62,69 @@
     "src": "resources/css/app.css"
   },
   "resources/js/Components/Breed/BreedContainer.jsx": {
-    "file": "assets/BreedContainer-e9632046.js",
+    "file": "assets/BreedContainer-c6cc2e52.js",
     "imports": [
-      "_Footer-5a793555.js",
-      "_Filters-5c1cd9b5.js",
-      "_Spinner-fb413991.js",
-      "_BreedModal-d41dcc21.js"
+      "_Footer-a8182496.js",
+      "_Filters-4cca8f66.js",
+      "_Spinner-632d6834.js",
+      "_BreedModal-d6d17d99.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Components/Breed/BreedContainer.jsx"
   },
   "resources/js/Components/CashRegister/CashRegisterContainer.jsx": {
-    "file": "assets/CashRegisterContainer-b2e99072.js",
+    "file": "assets/CashRegisterContainer-3adff8d0.js",
     "imports": [
-      "_Footer-5a793555.js",
-      "_Spinner-fb413991.js",
-      "_ReactSelect-a5a841a5.js",
-      "_initialStateCustomer-a7eed3e2.js",
-      "_ImageModal-6e5161c6.js"
+      "_Footer-a8182496.js",
+      "_Spinner-632d6834.js",
+      "_ReactSelect-5502b375.js",
+      "_initialStateCustomer-49125ee2.js",
+      "_ImageModal-632de468.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Components/CashRegister/CashRegisterContainer.jsx"
   },
   "resources/js/Components/Customer/CustomerContainer.jsx": {
-    "file": "assets/CustomerContainer-9aa6bbc9.js",
+    "file": "assets/CustomerContainer-7590fd9e.js",
     "imports": [
-      "_Footer-5a793555.js",
-      "_Filters-5c1cd9b5.js",
-      "_Spinner-fb413991.js",
+      "_Footer-a8182496.js",
+      "_Filters-4cca8f66.js",
+      "_Spinner-632d6834.js",
       "_index-7c0738bf.js",
-      "_initialStateCustomer-a7eed3e2.js"
+      "_initialStateCustomer-49125ee2.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Components/Customer/CustomerContainer.jsx"
   },
   "resources/js/Components/Expense/ExpenseContainer.jsx": {
-    "file": "assets/ExpenseContainer-6d7461a8.js",
+    "file": "assets/ExpenseContainer-4ba41024.js",
     "imports": [
-      "_Footer-5a793555.js",
-      "_Filters-5c1cd9b5.js",
-      "_Spinner-fb413991.js"
+      "_Footer-a8182496.js",
+      "_Filters-4cca8f66.js",
+      "_Spinner-632d6834.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Components/Expense/ExpenseContainer.jsx"
   },
   "resources/js/Components/Graphics/Graphics.jsx": {
-    "file": "assets/Graphics-4cc98626.js",
+    "file": "assets/Graphics-cd7976c9.js",
     "imports": [
-      "_Footer-5a793555.js"
+      "_Footer-a8182496.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Components/Graphics/Graphics.jsx"
   },
   "resources/js/Components/Pet/PetContainer.jsx": {
-    "file": "assets/PetContainer-73b16bef.js",
+    "file": "assets/PetContainer-031ef0bb.js",
     "imports": [
-      "_Footer-5a793555.js",
-      "_Filters-5c1cd9b5.js",
-      "_Spinner-fb413991.js",
-      "_ReactSelect-a5a841a5.js",
-      "_Selector-eee34858.js",
-      "_initialStateCustomer-a7eed3e2.js",
-      "_BreedModal-d41dcc21.js",
-      "_ImageModal-6e5161c6.js"
+      "_Footer-a8182496.js",
+      "_Filters-4cca8f66.js",
+      "_Spinner-632d6834.js",
+      "_ReactSelect-5502b375.js",
+      "_Selector-4f8ac2ba.js",
+      "_initialStateCustomer-49125ee2.js",
+      "_BreedModal-d6d17d99.js",
+      "_ImageModal-632de468.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Components/Pet/PetContainer.jsx"
@@ -137,46 +137,46 @@
     "css": [
       "assets/PetHistoryContainer-33d8cc87.css"
     ],
-    "file": "assets/PetHistoryContainer-6d2cec28.js",
+    "file": "assets/PetHistoryContainer-3aa12c82.js",
     "imports": [
-      "_Footer-5a793555.js",
-      "_Filters-5c1cd9b5.js",
-      "_Spinner-fb413991.js",
+      "_Footer-a8182496.js",
+      "_Filters-4cca8f66.js",
+      "_Spinner-632d6834.js",
       "_index-7c0738bf.js",
-      "_ReactSelect-a5a841a5.js",
-      "_Selector-eee34858.js",
-      "_ImageModal-6e5161c6.js"
+      "_ReactSelect-5502b375.js",
+      "_Selector-4f8ac2ba.js",
+      "_ImageModal-632de468.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Components/PetHistory/PetHistoryContainer.jsx"
   },
   "resources/js/Components/Product/ProductContainer.jsx": {
-    "file": "assets/ProductContainer-4fd96c94.js",
+    "file": "assets/ProductContainer-8c0b8636.js",
     "imports": [
-      "_Footer-5a793555.js",
-      "_Filters-5c1cd9b5.js",
-      "_Spinner-fb413991.js",
-      "_ImageModal-6e5161c6.js"
+      "_Footer-a8182496.js",
+      "_Filters-4cca8f66.js",
+      "_Spinner-632d6834.js",
+      "_ImageModal-632de468.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Components/Product/ProductContainer.jsx"
   },
   "resources/js/Components/Services/ServiceContainer.jsx": {
-    "file": "assets/ServiceContainer-458c8f1a.js",
+    "file": "assets/ServiceContainer-4f0233ec.js",
     "imports": [
-      "_Footer-5a793555.js",
-      "_Filters-5c1cd9b5.js",
-      "_Spinner-fb413991.js"
+      "_Footer-a8182496.js",
+      "_Filters-4cca8f66.js",
+      "_Spinner-632d6834.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Components/Services/ServiceContainer.jsx"
   },
   "resources/js/Components/User/UserContainer.jsx": {
-    "file": "assets/UserContainer-8c54388a.js",
+    "file": "assets/UserContainer-ef552059.js",
     "imports": [
-      "_Footer-5a793555.js",
-      "_Filters-5c1cd9b5.js",
-      "_Spinner-fb413991.js"
+      "_Footer-a8182496.js",
+      "_Filters-4cca8f66.js",
+      "_Spinner-632d6834.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Components/User/UserContainer.jsx"
@@ -201,7 +201,7 @@
       "resources/js/Components/CashRegister/CashRegisterContainer.jsx",
       "resources/js/Components/Graphics/Graphics.jsx"
     ],
-    "file": "assets/app-9a749d8d.js",
+    "file": "assets/app-ba4ec947.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }

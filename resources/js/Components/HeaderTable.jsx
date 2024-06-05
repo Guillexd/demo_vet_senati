@@ -20,7 +20,7 @@ export default function HeaderTable({ icon, message, name, setOpen, setOption, s
 
 export function DefaultHeader({ icon, message }) {
   return (
-    <div className='w-full flex flex-wrap justify-center md:justify-between md:px-7'>
+    <div className='w-full flex flex-wrap justify-center md:justify-between mb-4 md:px-7'>
       <p className='font-bold text-4xl text-center'>
         <Icon icon={icon} css={'mr-3'} size='37px' />
         {message}

@@ -8,7 +8,7 @@ import Icon from '../../utils/Icon';
 import Footer from '../Footer';
 import CashRegister from './CashRegister';
 import CashRegisterModal from './CashRegisterModal';
-import HeaderTable from '../HeaderTable';
+import HeaderTable, { DefaultHeader } from '../HeaderTable';
 import SectionCashRegister from './SectionCashRegister';
 import { getLocaleString } from '../../utils/utils';
 import ImageModal from '../ImageModal';
@@ -44,9 +44,23 @@ function CashRegisterContainer() {
   const [transitionName, setTransitionName] = useState('')
   const [hide, setHide] = useState(false)
 
+  const [rol, setRol] = useState(2)
+
+  useEffect(() => {
+    const cashRegisterDiv = document.getElementById('cash_register');
+    const roleValue = cashRegisterDiv.getAttribute('role');
+    setRol(roleValue)
+  }, [])
+
   return (
     <>
-      <HeaderTable icon={faCashRegister} message={'Gestión de cajas'} name={'nueva caja'} setOpen={setOpen} setOption={setOption} setData={setCashRegister} initialState={initialStateCashRegister} />
+      {
+        rol == 1
+          ?
+          <HeaderTable icon={faCashRegister} message={'Gestión de cajas'} name={'nueva caja'} setOpen={setOpen} setOption={setOption} setData={setCashRegister} initialState={initialStateCashRegister} />
+          :
+          <DefaultHeader icon={faCashRegister} message={'Gestión de cajas'} />
+      }
       <SectionData>
         <SectionData.SearchDate setHelper={setHelper} startDate={startDate} setStartDate={setStartDate} finishDate={finishDate} setFinishDate={setFinishDate} setPage={setPage} handleReset={() => {
           setStartDate('')
@@ -56,7 +70,7 @@ function CashRegisterContainer() {
           setHelper((prev) => prev + 1)
         }} />
 
-        <ExcelButton />
+        <ExcelButton rol={rol} />
 
         <SectionData.FilterBar
           hide={!startDate && !finishDate}
@@ -133,15 +147,8 @@ function CashRegisterContainer() {
   )
 }
 
-function ExcelButton() {
+function ExcelButton({ rol }) {
   const [date, setDate] = useState('')
-  const [rol, setRol] = useState(2)
-
-  useEffect(() => {
-    const cashRegisterDiv = document.getElementById('cash_register');
-    const roleValue = cashRegisterDiv.getAttribute('role');
-    setRol(roleValue)
-  }, [])
   return (
     <>
       {

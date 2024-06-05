@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import HeaderTable from '../HeaderTable';
+import HeaderTable, { DefaultHeader } from '../HeaderTable';
 import { faBone, faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import Filters from '../Filters';
@@ -99,10 +99,23 @@ function ProductContainer() {
     }, 1000)
   }, [])
 
+  const [rol, setRol] = useState(2)
+
+  useEffect(() => {
+    const cashRegisterDiv = document.getElementById('product');
+    const roleValue = cashRegisterDiv.getAttribute('role');
+    setRol(roleValue)
+  }, [])
+
   return (
     <>
-      <HeaderTable icon={faBone} message={'Gestión de productos'} name={'producto'} setOpen={setOpen} setOption={setOption} setData={setProduct} initialState={initialStateProduct} />
-
+      {
+        rol == 1
+          ?
+          <HeaderTable icon={faBone} message={'Gestión de productos'} name={'producto'} setOpen={setOpen} setOption={setOption} setData={setProduct} initialState={initialStateProduct} />
+          :
+          <DefaultHeader icon={faBone} message={'Gestión de productos'} />
+      }
       <Filters>
         {
           filters.map((filterI, index) => (
