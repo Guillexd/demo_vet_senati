@@ -151,6 +151,10 @@ class CashRegisterController extends Controller
                         throw new \Exception("El stock de $productData->name es insuficiente ($stock).");
                     }
 
+                    if (!$productData->isActive) {
+                        throw new \Exception("El producto $productData->name está inactivo, actívelo si desea realizar un movimiento.");
+                    }
+
                     $productData->save();
 
                     $subTotal = $productData->price * $product['quantity'];
@@ -174,6 +178,10 @@ class CashRegisterController extends Controller
                     $serviceData = Service::findOrFail($service['service_id']);
 
                     $subTotal = $serviceData->price * $service['quantity'];
+
+                    if (!$serviceData->isActive) {
+                        throw new \Exception("El servicio $serviceData->name está inactivo, actívelo si desea realizar un movimiento.");
+                    }
 
                     $cah_register->services()->attach($serviceData->id, [
                         'customer_id' => $request->customer_id,

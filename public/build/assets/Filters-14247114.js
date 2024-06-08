@@ -1,0 +1,1 @@
+import{j as e}from"./Footer-c5ea0129.js";function s({children:t}){return e.jsx("section",{className:"w-full sm:w-3/4 xl:w-3/5 mx-auto py-1 mb-3 flex justify-between font-semibold overflow-y-auto",children:t})}export{s as F};

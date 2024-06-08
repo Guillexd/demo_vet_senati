@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->decimal('price', 8, 2);
+            $table->boolean('isActive')->default(1);
             $table->timestamps();
         });
     }

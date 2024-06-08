@@ -9,6 +9,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmailVerificationPromptController;
 use App\Http\Controllers\EmailVerificationNotificationController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\GenericController;
 use App\Http\Controllers\GraphicController;
 use App\Http\Controllers\IdentityDocumentController;
 use App\Http\Controllers\InquiryController;
@@ -54,110 +55,114 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', fn () => view('App.home'));
 
     Route::view('/usuarios', 'App.User.index')->middleware(['can:admin']);
-    Route::middleware(['can:admin'])->prefix('users')->group(function () {
-        Route::get('/list', [UserController::class, 'list']);
-        Route::post('/store', [UserController::class, 'store']);
-        Route::put('/update', [UserController::class, 'update']);
-        Route::delete('/destroy', [UserController::class, 'destroy']);
+    Route::middleware(['can:admin'])->prefix('users')->controller(UserController::class)->group(function () {
+        Route::get('/list', 'list');
+        Route::post('/store', 'store');
+        Route::put('/update', 'update');
+        Route::delete('/destroy', 'destroy');
     });
 
     Route::view('/clientes', 'App.Customer.index');
-    Route::prefix('customers')->group(function () {
-        Route::get('/list', [CustomerController::class, 'list']);
-        Route::post('/store', [CustomerController::class, 'store']);
-        Route::put('/update', [CustomerController::class, 'update']);
-        Route::delete('/destroy', [CustomerController::class, 'destroy'])->middleware(['can:admin']);
+    Route::prefix('customers')->controller(CustomerController::class)->group(function () {
+        Route::get('/list', 'list');
+        Route::post('/store', 'store');
+        Route::put('/update', 'update');
+        Route::delete('/destroy', 'destroy')->middleware(['can:admin']);
     });
 
     Route::view('/mascotas', 'App.Pet.index');
-    Route::prefix('pets')->group(function () {
-        Route::get('/list', [PetController::class, 'list']);
-        Route::post('/store', [PetController::class, 'store']);
-        Route::post('/update', [PetController::class, 'update']);
-        Route::delete('/destroy', [PetController::class, 'destroy'])->middleware(['can:admin']);
+    Route::prefix('pets')->controller(PetController::class)->group(function () {
+        Route::get('/list', 'list');
+        Route::post('/store', 'store');
+        Route::post('/update', 'update');
+        Route::delete('/destroy', 'destroy')->middleware(['can:admin']);
     });
 
     Route::view('/servicios', 'App.Service.index');
-    Route::prefix('services')->group(function () {
-        Route::get('/list', [ServiceController::class, 'list']);
-        Route::post('/store', [ServiceController::class, 'store']);
-        Route::put('/update', [ServiceController::class, 'update']);
-        Route::delete('/destroy', [ServiceController::class, 'destroy'])->middleware(['can:admin']);
+    Route::prefix('services')->controller(ServiceController::class)->group(function () {
+        Route::get('/list', 'list');
+        Route::post('/store', 'store')->middleware(['can:admin']);
+        Route::put('/update', 'update')->middleware(['can:admin']);
+        Route::delete('/destroy', 'destroy')->middleware(['can:admin']);
     });
 
     Route::view('/razas', 'App.Breed.index');
-    Route::prefix('breeds')->group(function () {
-        Route::get('/list', [BreedController::class, 'list']);
-        Route::post('/store', [BreedController::class, 'store']);
-        Route::put('/update', [BreedController::class, 'update']);
-        Route::delete('/destroy', [BreedController::class, 'destroy'])->middleware(['can:admin']);
+    Route::prefix('breeds')->controller(BreedController::class)->group(function () {
+        Route::get('/list', 'list');
+        Route::post('/store', 'store');
+        Route::put('/update', 'update');
+        Route::delete('/destroy', 'destroy')->middleware(['can:admin']);
     });
 
     Route::view('/historial-de-mascotas', 'App.PetHistory.index');
-    Route::prefix('pet_histories')->group(function () {
-        Route::get('/list', [PetHistoryController::class, 'list']);
-        Route::post('/store', [PetHistoryController::class, 'store']);
-        Route::post('/update', [PetHistoryController::class, 'update']);
-        Route::delete('/destroy', [PetHistoryController::class, 'destroy'])->middleware(['can:admin']);
-        Route::get('/get_next_date', [PetHistoryController::class, 'getNextDate']);
-        Route::get('/get_plan_pdf', [PetHistoryController::class, 'getPlanPdf']);
+    Route::prefix('pet_histories')->controller(PetHistoryController::class)->group(function () {
+        Route::get('/list', 'list');
+        Route::post('/store', 'store');
+        Route::post('/update', 'update');
+        Route::delete('/destroy', 'destroy')->middleware(['can:admin']);
+        Route::get('/get_next_date', 'getNextDate');
+        Route::get('/get_plan_pdf', 'getPlanPdf');
     });
 
     Route::view('/inventario', 'App.Product.index');
-    Route::prefix('products')->group(function () {
-        Route::get('/list', [ProductController::class, 'list']);
-        Route::post('/store', [ProductController::class, 'store'])->middleware(['can:admin']);
-        Route::post('/update', [ProductController::class, 'update'])->middleware(['can:admin']);
-        Route::delete('/destroy', [ProductController::class, 'destroy'])->middleware(['can:admin']);
-        Route::get('/by_due_date', [ProductController::class, 'getProductsByDueDate']);
+    Route::prefix('products')->controller(ProductController::class)->group(function () {
+        Route::get('/list', 'list');
+        Route::post('/store', 'store')->middleware(['can:admin']);
+        Route::post('/update', 'update')->middleware(['can:admin']);
+        Route::delete('/destroy', 'destroy')->middleware(['can:admin']);
+        Route::get('/by_due_date', 'getProductsByDueDate');
     });
 
     Route::view('/razones-de-egreso', 'App.Expense.index');
-    Route::prefix('expenses')->group(function () {
-        Route::get('/list', [ExpenseController::class, 'list']);
-        Route::post('/store', [ExpenseController::class, 'store']);
-        Route::put('/update', [ExpenseController::class, 'update']);
-        Route::delete('/destroy', [ExpenseController::class, 'destroy'])->middleware(['can:admin']);
+    Route::prefix('expenses')->controller(ExpenseController::class)->group(function () {
+        Route::get('/list', 'list');
+        Route::post('/store', 'store');
+        Route::put('/update', 'update');
+        Route::delete('/destroy', 'destroy')->middleware(['can:admin']);
     });
 
     Route::view('/cajas', 'App.CashRegister.index');
-    Route::prefix('cash_registers')->group(function () {
-        Route::get('/list', [CashRegisterController::class, 'list']);
-        Route::get('/get_products/{cash_register}', [CashRegisterController::class, 'getProducts']);
-        Route::get('/get_services/{cash_register}', [CashRegisterController::class, 'getServices']);
-        Route::get('/get_expenses/{cash_register}', [CashRegisterController::class, 'getExpenses']);
-        Route::get('/get_all_vouchers', [CashRegisterController::class, 'getAllVouchers']);
-        Route::get('/get_voucher/{cash_register}', [CashRegisterController::class, 'getVoucher']);
-        Route::post('/store', [CashRegisterController::class, 'storeInitialCashRegister'])->middleware(['can:admin', EnsureJustOneCashRegisterIsOpen::class]);
-        Route::post('/store_movements', [CashRegisterController::class, 'storeMovements'])
+    Route::prefix('cash_registers')->controller(CashRegisterController::class)->group(function () {
+        Route::get('/list', 'list');
+        Route::get('/get_products/{cash_register}', 'getProducts');
+        Route::get('/get_services/{cash_register}', 'getServices');
+        Route::get('/get_expenses/{cash_register}', 'getExpenses');
+        Route::get('/get_all_vouchers', 'getAllVouchers');
+        Route::get('/get_voucher/{cash_register}', 'getVoucher');
+        Route::post('/store', 'storeInitialCashRegister')->middleware(['can:admin', EnsureJustOneCashRegisterIsOpen::class]);
+        Route::post('/store_movements', 'storeMovements')
             ->middleware(EnsureCashRegisterIsOpen::class);
-        Route::put('/update', [CashRegisterController::class, 'update'])
+        Route::put('/update', 'update')
             ->middleware(['can:admin', EnsureJustOneCashRegisterIsOpen::class]);
-        Route::put('/update_state', [CashRegisterController::class, 'updateState']);
-        Route::delete('/destroy', [CashRegisterController::class, 'destroy'])
+        Route::put('/update_state', 'updateState');
+        Route::delete('/destroy', 'destroy')
             ->middleware(['can:admin', EnsureCashRegisterIsOpen::class]);
-        Route::delete('/destroy_movement', [CashRegisterController::class, 'destroyMovement'])
+        Route::delete('/destroy_movement', 'destroyMovement')
             ->middleware(['can:admin', EnsureCashRegisterIsOpen::class]);
-        Route::delete('/destroy_voucher', [CashRegisterController::class, 'destroyVoucher'])
+        Route::delete('/destroy_voucher', 'destroyVoucher')
             ->middleware(['can:admin', EnsureCashRegisterIsOpen::class]);
-        Route::get('/get_voucher_id', [CashRegisterController::class, 'getVoucherId']);
-        Route::get('/get_voucher_pdf/{cash_register}', [CashRegisterController::class, 'pdfVoucher']);
-        Route::get('/get_excel_by_cash_register', [CashRegisterController::class, 'excelProducts'])->middleware(['can:admin']);
-        Route::get('/get_excel_by_month', [CashRegisterController::class, 'excelByMonth'])->middleware(['can:admin']);
+        Route::get('/get_voucher_id', 'getVoucherId');
+        Route::get('/get_voucher_pdf/{cash_register}', 'pdfVoucher');
+        Route::get('/get_excel_by_cash_register', 'excelProducts')->middleware(['can:admin']);
+        Route::get('/get_excel_by_month', 'excelByMonth')->middleware(['can:admin']);
     });
 
     Route::view('/graficos', 'App.Graphics.index')->middleware(['can:admin']);
-    Route::prefix('graphics')->middleware(['can:admin'])->group(function(){
-        Route::get('/list',[GraphicController::class, 'list']);
-        Route::get('/get_excel_products_by_month',[GraphicController::class, 'excelProductsByMonth']);
+    Route::middleware(['can:admin'])->prefix('graphics')->controller(GraphicController::class)->group(function(){
+        Route::get('/list','list');
+        Route::get('/get_excel_products_by_month','excelProductsByMonth');
     });
 
     Route::prefix('identity-documents')->group(function () {
         Route::get('/list', [IdentityDocumentController::class, 'list']);
     });
 
-    Route::prefix('inquiry')->group(function () {
-        Route::get('/ruc', [InquiryController::class, 'getRUC']);
-        Route::get('/dni', [InquiryController::class, 'getDNI']);
+    Route::middleware(['can:admin'])->prefix('generic')->controller(GenericController::class)->group(function () {
+        Route::post('/change-status', 'changeStatus');
+    });
+
+    Route::prefix('inquiry')->controller(InquiryController::class)->group(function () {
+        Route::get('/ruc', 'getRUC');
+        Route::get('/dni', 'getDNI');
     });
 });

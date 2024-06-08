@@ -102,8 +102,8 @@ function ProductContainer() {
   const [rol, setRol] = useState(2)
 
   useEffect(() => {
-    const cashRegisterDiv = document.getElementById('product');
-    const roleValue = cashRegisterDiv.getAttribute('role');
+    const productDiv = document.getElementById('product');
+    const roleValue = productDiv.getAttribute('role');
     setRol(roleValue)
   }, [])
 
@@ -228,7 +228,7 @@ function ProductContainer() {
                   <>
                     {data?.data?.map((productI, index) => (
                       <SectionData.CardContainer.Card mustAnimate={mustAnimate} setMustAnimate={setMustAnimate} key={`${productI.id}-${index}`}>
-                        <Product productI={productI} setProduct={setProduct} setOption={setOption} setOpenModal={setOpen} setHelper={setHelper} setMustLoad={setMustLoad} setMustAnimate={setMustAnimate} setImage={setImage} transitionName={transitionName} setTransitionName={setTransitionName} />
+                        <Product productI={productI} setProduct={setProduct} setOption={setOption} setOpenModal={setOpen} setHelper={setHelper} setMustLoad={setMustLoad} setMustAnimate={setMustAnimate} setImage={setImage} transitionName={transitionName} setTransitionName={setTransitionName} rol={rol} />
                       </SectionData.CardContainer.Card>
                     ))}
                   </>

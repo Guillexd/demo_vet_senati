@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import HeaderTable from '../HeaderTable';
+import HeaderTable, { DefaultHeader } from '../HeaderTable';
 import { faExclamation, faShieldDog } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import Filters from '../Filters';
@@ -54,10 +54,23 @@ function ServiceContainer() {
     }
   }, [debounceValue])
 
+  const [rol, setRol] = useState(2)
+
+  useEffect(() => {
+    const serviceDiv = document.getElementById('service');
+    const roleValue = serviceDiv.getAttribute('role');
+    setRol(roleValue)
+  }, [])
+
   return (
     <>
-      <HeaderTable icon={faShieldDog} message={'Gestión de servicios'} name={'servicio'} setOpen={setOpen} setOption={setOption} setData={setService} initialState={initialStateService} />
-
+      {
+        rol == 1
+          ?
+          <HeaderTable icon={faShieldDog} message={'Gestión de servicios'} name={'servicio'} setOpen={setOpen} setOption={setOption} setData={setService} initialState={initialStateService} />
+          :
+          <DefaultHeader icon={faShieldDog} message={'Gestión de servicios'} />
+      }
       <Filters>
         {
           filters.map((filterI, index) => (
@@ -75,9 +88,9 @@ function ServiceContainer() {
 
       <SectionData>
         <SectionData.Search inputFilter={inputFilter} setInputFilter={setInputFilter}
-         filter={filter}
-         filters={filters}
-         renderMoreFilters={false} />
+          filter={filter}
+          filters={filters}
+          renderMoreFilters={false} />
         <SectionData.FilterBar
           hide={!debounceValue}
           data={
@@ -108,7 +121,7 @@ function ServiceContainer() {
                   <>
                     {data?.data?.map((serviceI, index) => (
                       <SectionData.CardContainer.Card mustAnimate={mustAnimate} setMustAnimate={setMustAnimate} width={'w-full'} key={`${serviceI.id}-${index}`}>
-                        <Service serviceI={serviceI} setService={setService} setOption={setOption} setOpenModal={setOpen} setHelper={setHelper} setMustLoad={setMustLoad} setMustAnimate={setMustAnimate} />
+                        <Service serviceI={serviceI} setService={setService} setOption={setOption} setOpenModal={setOpen} setHelper={setHelper} setMustLoad={setMustLoad} setMustAnimate={setMustAnimate} rol={rol} />
                       </SectionData.CardContainer.Card>
                     ))}
                   </>

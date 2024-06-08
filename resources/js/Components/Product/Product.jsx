@@ -4,8 +4,9 @@ import Spinner from '../presentational/Spinner';
 import ToastifyErrorList from '../ToastifyErrorList';
 import { useState } from 'react';
 import { flushSync } from 'react-dom';
+import ButtonStatus from '../ButtonStatus';
 
-export default function Product({ productI, setProduct, setOption, setOpenModal, setHelper, setMustLoad, setMustAnimate, setImage, transitionName, setTransitionName, setIsDeleted }) {
+export default function Product({ productI, setProduct, setOption, setOpenModal, setHelper, setMustLoad, setMustAnimate, setImage, transitionName, setTransitionName, rol, setIsDeleted }) {
 
   const [open, setOpen] = useState(false)
 
@@ -37,10 +38,20 @@ export default function Product({ productI, setProduct, setOption, setOpenModal,
 
   return (
     <>
-      <img className='w-full h-60 object-cover' src={productI.product_image_url} alt={productI.name}
-        onClick={() => {
-          if (document.startViewTransition) {
-            document.startViewTransition(() => {
+      <figure className='relative'>
+        <img className='w-full h-60 object-cover cursor-pointer' src={productI.product_image_url} alt={productI.name}
+          onClick={() => {
+            if (document.startViewTransition) {
+              document.startViewTransition(() => {
+                flushSync(() => {
+                  setTransitionName(`${productI.name}-${productI.id}`)
+                  setImage({
+                    url: productI.product_image_url,
+                    label: productI.name,
+                  })
+                })
+              });
+            } else {
               flushSync(() => {
                 setTransitionName(`${productI.name}-${productI.id}`)
                 setImage({
@@ -48,21 +59,25 @@ export default function Product({ productI, setProduct, setOption, setOpenModal,
                   label: productI.name,
                 })
               })
-            });
-          } else {
-            flushSync(() => {
-              setTransitionName(`${productI.name}-${productI.id}`)
-              setImage({
-                url: productI.product_image_url,
-                label: productI.name,
-              })
-            })
-          }
-        }}
-        style={{ viewTransitionName: !transitionName && `${productI.name}-${productI.id}` }}
-      />
-      <div className='px-8 pt-5 flex flex-col justify-between flex-1'>
-        <div>
+            }
+          }}
+          style={{ viewTransitionName: !transitionName && `${productI.name}-${productI.id}` }}
+        />
+        {
+          (rol == 1 & !productI.isActive)
+            ?
+            <section className='absolute top-0 bg-gray-300 h-full w-full opacity-50'></section>
+            :
+            null
+        }
+      </figure>
+      <div className={`px-8 pt-5 flex flex-col justify-between flex-1 ${(!productI.isActive) && 'bg-gray-300'}`}>
+        {
+          rol == 1
+          &&
+          <ButtonStatus isActive={productI.isActive} id={productI.id} name={productI.name} model={'products'} setHelper={setHelper} setMustLoad={setMustLoad} css={'top-0 right-0'} />
+        }
+        <div className={`mb-3 ${rol != 1 && 'pb-4'}`}>
           <div className='uppercase tracking-wide text-sm text-indigo-500 font-semibold'>Nombre: {productI.name}</div>
           <p className='text-gray-900 font-semibold'>Precio: S/. {productI.price}</p>
           <p className='text-gray-900 font-semibold'>Stock: {productI.stock} u.</p>
@@ -106,18 +121,23 @@ export default function Product({ productI, setProduct, setOption, setOpenModal,
               <p className='text-gray-700 font-semibold'> <strong>Descripción:</strong> {productI.description || '---'}</p>
           }
         </div>
-        <div className='my-3 flex gap-2 pb-4'>
-          <button className='bg-vetsky rounded-md py-1 px-4 font-semibold hover:bg-gray-400'
-            onClick={() => {
-              setOption('Actualizar')
-              setOpenModal(true)
-              setProduct(productI)
-            }}
-          >Editar</button>
-          <button className='bg-vetbrown rounded-md py-1 px-4 text-white font-semibold hover:bg-gray-500'
-            onClick={handleDelete}
-          >Eliminar</button>
-        </div>
+
+        {
+          rol == 1
+          &&
+          <div className='mb-3 flex gap-2 pb-4'>
+            <button className='bg-vetsky rounded-md py-1 px-4 font-semibold hover:bg-gray-400'
+              onClick={() => {
+                setOption('Actualizar')
+                setOpenModal(true)
+                setProduct(productI)
+              }}
+            >Editar</button>
+            <button className='bg-vetbrown rounded-md py-1 px-4 text-white font-semibold hover:bg-gray-500'
+              onClick={handleDelete}
+            >Eliminar</button>
+          </div>
+        }
         <p className='text-gray-600 font-medium text-sm absolute bottom-1 right-6'>Agregado {dateCalculator(productI.created_at)}</p>
       </div></>
   )

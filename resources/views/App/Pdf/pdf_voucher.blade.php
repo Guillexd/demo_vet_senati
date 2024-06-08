@@ -74,7 +74,7 @@
         }
 
         .table_column {
-            padding: 15px;
+            padding: 10px;
         }
 
         .customer {
@@ -170,6 +170,11 @@
                     <tr>
                         <td class="table_column">
                             <h2 style="text-transform: uppercase; padding: 0 20px;">{{ $voucher_name }}</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table_column">
+                            <p style="font-size: 1.5rem;"> <strong>RUC:</strong> 20600428544</p>
                         </td>
                     </tr>
                     <tr>

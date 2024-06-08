@@ -5,7 +5,7 @@ import ToastifyErrorList from '../ToastifyErrorList';
 import Icon from '../../utils/Icon';
 import { faHandPointUp, faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
 
-export default function CashRegister({ cash_registerI, setCashRegister, setOption, setOpenModal, setHelper, setMustLoad, setMustAnimate, setIsDeleted, handleClick }) {
+export default function CashRegister({ cash_registerI, setCashRegister, setOption, setOpenModal, setHelper, setMustLoad, setMustAnimate, rol, handleClick, setIsDeleted }) {
 
   const handleDelete = () => {
     showSWToDelete('¿Quieres eliminar esta caja?', () => {
@@ -34,7 +34,7 @@ export default function CashRegister({ cash_registerI, setCashRegister, setOptio
   }
 
   return (
-    <div className='px-8 pt-5 flex flex-col justify-between flex-1' onClick={handleClick} >
+    <div className='px-8 pt-5 flex flex-col justify-between flex-1 cursor-pointer' onClick={handleClick} >
       <div className='absolute top-1 left-2 rounded-full bg-indigo-500 w-8 h-8 flex justify-center items-center font-bold font-mono text-xl text-white'>
         {cash_registerI.id}
       </div>
@@ -50,7 +50,7 @@ export default function CashRegister({ cash_registerI, setCashRegister, setOptio
           Total: S/. {cash_registerI.total}
         </div>
       }
-      <div className={`${cash_registerI.state === 0 ? 'bg-red-400 text-amber-200 ' : 'bg-green-400 text-black '} uppercase tracking-wide text-sm font-semibold rounded-lg w-fullpx-4 py-1 flex justify-center`}>
+      <div className={`${cash_registerI.state === 0 ? 'bg-red-400 text-amber-200 ' : 'bg-green-400 text-black '} uppercase tracking-wide text-sm font-semibold rounded-lg w-fullpx-4 py-1 flex justify-center mb-3`}>
         {
           cash_registerI.state !== 0
             ?
@@ -65,33 +65,37 @@ export default function CashRegister({ cash_registerI, setCashRegister, setOptio
             </>
         }
       </div>
-      <div className='my-3 flex gap-2 mx-auto' onClick={(e) => e.stopPropagation()}>
-        {
-          cash_registerI.state === 0
-            ?
-            <button type='button' className='bg-green-300 rounded-md py-1 px-4 font-semibold hover:bg-green-400'
-              onClick={() => {
-                setOption('Actualizar')
-                setOpenModal(false)
-                setCashRegister(cash_registerI)
-                setTimeout(() => {
-                  document.getElementById('btn_to_submit').click()
-                }, 200)
-              }}
-            >Abrir caja</button>
-            :
-            <button className='bg-vetsky rounded-md py-1 px-4 font-semibold hover:bg-gray-400'
-              onClick={() => {
-                setOption('Actualizar')
-                setOpenModal(true)
-                setCashRegister(cash_registerI)
-              }}
-            >Editar</button>
-        }
-        <button className='bg-vetbrown rounded-md py-1 px-4 text-white font-semibold hover:bg-gray-500'
-          onClick={handleDelete}
-        >Eliminar</button>
-      </div>
+      {
+        rol == 1
+        &&
+        <div className='mb-3 flex gap-2 mx-auto' onClick={(e) => e.stopPropagation()}>
+          {
+            cash_registerI.state === 0
+              ?
+              <button type='button' className='bg-green-300 rounded-md py-1 px-4 font-semibold hover:bg-green-400'
+                onClick={() => {
+                  setOption('Actualizar')
+                  setOpenModal(false)
+                  setCashRegister(cash_registerI)
+                  setTimeout(() => {
+                    document.getElementById('btn_to_submit').click()
+                  }, 200)
+                }}
+              >Abrir caja</button>
+              :
+              <button className='bg-vetsky rounded-md py-1 px-4 font-semibold hover:bg-gray-400'
+                onClick={() => {
+                  setOption('Actualizar')
+                  setOpenModal(true)
+                  setCashRegister(cash_registerI)
+                }}
+              >Editar</button>
+          }
+          <button className='bg-vetbrown rounded-md py-1 px-4 text-white font-semibold hover:bg-gray-500'
+            onClick={handleDelete}
+          >Eliminar</button>
+        </div>
+      }
     </div>
   )
 }

@@ -37,7 +37,7 @@ export default function PetHistory({ petHistoryI, setPetHistory, setOption, setO
 
   return (
     <>
-      <img className={`w-full h-60 object-cover ${hide > 0 ? 'opacity-0' : ''}`} src={petHistoryI?.pet?.pet_image_url} alt={petHistoryI?.pet?.name}
+      <img className={`w-full h-60 object-cover cursor-pointer ${hide > 0 ? 'opacity-0' : ''}`} src={petHistoryI?.pet?.pet_image_url} alt={petHistoryI?.pet?.name}
         onClick={() => {
           if (document.startViewTransition) {
             document.startViewTransition(() => {

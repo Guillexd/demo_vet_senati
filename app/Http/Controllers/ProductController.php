@@ -34,6 +34,9 @@ class ProductController extends Controller
             if (isset($request->inputFilter)) {
                 $query->where($request->filter, 'LIKE', "%$request->inputFilter%");
             }
+            if(auth()->user()->rol_id !== 1) {
+                $query->where('isActive', true);
+            }
         })->paginate($request->limit ?? 20);
         return response()->json($product);
     }

@@ -127,7 +127,7 @@ function Card({ children, mustAnimate, width }) {
   });
 
   return (
-    <section ref={userRef} className={`relative overflow-hidden bg-white rounded-xl shadow-xl hover:scale-[103%] cursor-pointer ${width || 'w-[300px]'} ease-in duration-150 ${isDeleted ? 'opacity-0 translate-y-44' : mustAnimate ? '-translate-y-44 opacity-0' : 'translate-y-0 opacity-100'}`}>
+    <section ref={userRef} className={`relative overflow-hidden bg-white rounded-xl shadow-xl hover:scale-[102%] ${width || 'w-[300px]'} ease-in duration-150 ${isDeleted ? 'opacity-0 translate-y-44' : mustAnimate ? '-translate-y-44 opacity-0' : 'translate-y-0 opacity-100'}`}>
       <div className='flex flex-col h-full'>
         {childWithProps}
       </div>

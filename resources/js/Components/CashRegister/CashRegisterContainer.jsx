@@ -115,7 +115,7 @@ function CashRegisterContainer() {
                   <>
                     {data?.data?.map((cash_registerI, index) => (
                       <SectionData.CardContainer.Card mustAnimate={mustAnimate} setMustAnimate={setMustAnimate} key={`${cash_registerI.id}-${index}`}>
-                        <CashRegister cash_registerI={cash_registerI} setCashRegister={setCashRegister} setOption={setOption} setOpenModal={setOpen} setHelper={setHelper} setMustLoad={setMustLoad} setMustAnimate={setMustAnimate} handleClick={() => {
+                        <CashRegister cash_registerI={cash_registerI} setCashRegister={setCashRegister} setOption={setOption} setOpenModal={setOpen} setHelper={setHelper} setMustLoad={setMustLoad} setMustAnimate={setMustAnimate} rol={rol} handleClick={() => {
                           setCashRegisterId({
                             id: cash_registerI.id,
                             name: getLocaleString(cash_registerI.created_at),

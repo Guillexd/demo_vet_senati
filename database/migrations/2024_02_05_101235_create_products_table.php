@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('product_public_id')->nullable();
             $table->dateTimeTz('due_date')->nullable();
             $table->text('description')->nullable();
+            $table->boolean('isActive')->default(1);
             $table->timestamps();
         });
     }

@@ -759,7 +759,7 @@ function BodyVoucherTable({ id, searchByFilter, mustLoad, helper, handleDelete }
 
                   <td
                     className='px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200 relative'>
-                    <div className='text-sm leading-5 text-gray-900 min-w-24'>{el.pivot?.description}</div>
+                    <div className='text-sm leading-5 text-gray-900 min-w-24'>{el.pivot?.description ?? '-'}</div>
                   </td>
 
                   <td
@@ -1267,6 +1267,13 @@ function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustome
 }
 
 function ProductModal({ setMustSearchProduct, filterProduct, setFilterProduct, inputProduct, setInputProduct, loadingProduct, dataProduct, selectProduct, setSelectProduct, setProducts, initialStateProduct, products, setHelperSearchProduct, setHelperProduct, transitionName, setTransitionName, setImage, setHide }) {
+  const [rol, setRol] = useState(2)
+
+  useEffect(() => {
+    const cashRegisterDiv = document.getElementById('cash_register');
+    const roleValue = cashRegisterDiv.getAttribute('role');
+    setRol(roleValue)
+  }, [])
   return (
     <>
       <div className='w-full col-span-1 grid grid-cols-1 self-start gap-6 sm:gap-x-6'>
@@ -1320,6 +1327,11 @@ function ProductModal({ setMustSearchProduct, filterProduct, setFilterProduct, i
                             {
                               el.serie && (
                                 <p> <strong>Serie:</strong> {`${el.serie}`}</p>
+                              )
+                            }
+                            {
+                              rol == 1 && (
+                                <p> <strong>Estado:</strong> {`${el.isActive ? 'Activo' : 'Inactivo'}`}</p>
                               )
                             }
                           </div>
@@ -1388,6 +1400,13 @@ function ProductModal({ setMustSearchProduct, filterProduct, setFilterProduct, i
 }
 
 function ServiceModal({ setMustSearchService, inputService, setInputService, loadingService, dataService, selectService, setSelectService, setServices, initialStateService, services, setHelperSearchService, setHelperService }) {
+  const [rol, setRol] = useState(2)
+
+  useEffect(() => {
+    const cashRegisterDiv = document.getElementById('cash_register');
+    const roleValue = cashRegisterDiv.getAttribute('role');
+    setRol(roleValue)
+  }, [])
   return (
     <>
       <div className='w-full col-span-1 grid grid-cols-1 self-start gap-6 sm:gap-x-6'>
@@ -1426,7 +1445,17 @@ function ServiceModal({ setMustSearchService, inputService, setInputService, loa
                           });
                         }
                         }
-                      >{`${el.name} ->  S/. ${el.price}`}</li>))
+                      >
+                        {
+                          `${el.name} ->  S/. ${el.price}`
+                        }
+                        {
+                          rol == 1 && (
+                            <p> <strong>Estado:</strong> {`${el.isActive ? 'Activo' : 'Inactivo'}`}</p>
+                          )
+                        }
+                      </li>
+                    ))
                   }
                 </ul>
           }
