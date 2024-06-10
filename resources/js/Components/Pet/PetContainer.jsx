@@ -73,12 +73,12 @@ function PetContainer() {
       <HeaderTable icon={faDog} message={'Gestión de mascotas'} name={'mascota'} setOpen={setOpen} setOption={setOption} setData={setPet} initialState={initialStatePet} />
 
       <Filters>
-        <div className='w-full flex justify-between flex-wrap sm:flex-nowrap gap-y-1'>
+        <div className='w-full flex justify-between flex-wrap lg:flex-nowrap gap-y-1'>
           {
             filters.map((filterI, index) => (
               <button
                 key={index}
-                className={`${filter === filterI.value ? 'bg-vetgreen-200 text-white' : 'bg-vetgreen-100 hover:bg-vetgreen-200 hover:text-white'} cursor-pointer py-2 md:mx-2 mx-1 rounded-xl sm:rounded-full flex-grow`}
+                className={`${filter === filterI.value ? 'bg-vetgreen-200 text-white' : 'bg-vetgreen-100 hover:bg-vetgreen-200 hover:text-white'} cursor-pointer py-2 md:mx-2 mx-1 rounded-xl lg:rounded-full flex-grow`}
                 onClick={() => {
                   setFilter(filterI.value)
                   setInputFilter('')
