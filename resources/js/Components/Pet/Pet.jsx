@@ -82,7 +82,7 @@ export default function Pet({ petI, setPet, setOption, setOpenModal, setHelper, 
                   Observaciones
                 </button>
                 <article className={`${open ? '-translate-y-0' : 'translate-y-full'} z-10 ease-in duration-150 absolute flex top-0 left-0 w-full h-full bg-vetgreen-100 text-black font-medium rounded-lg`}>
-                  <button className='fixed bg-red-900 text-white font-semibold px-3 py-1 rounded-lg top-1 right-0 me-5 mt-1 animate-bounce'
+                  <button className='fixed bg-red-900 text-white font-semibold px-3 py-1 rounded-lg top-2 right-0 me-5 mt-1 animate-bounce'
                     onClick={() => setOpen(false)}
                   >
                     Cerrar

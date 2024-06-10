@@ -17,7 +17,13 @@ class PetController extends Controller
     }
     public function list(Request $request)
     {
-        $pet = Pet::with('customer.identity_document', 'breed')->orderBy('id', 'desc')->where(function (Builder $query) use ($request) {
+        $pet = Pet::with(['customer' => function ($queryBuilder) {
+            $queryBuilder->select('id', 'name', 'identity_document_id', 'document_number');
+        }, 'customer.identity_document' => function ($queryBuilder) {
+            $queryBuilder->select('id', 'abbreviation');
+        }, 'breed' => function ($queryBuilder) {
+            $queryBuilder->select('id', 'name');
+        }])->orderBy('id', 'desc')->where(function (Builder $query) use ($request) {
             if ($request->filter === 'customer_id') {
                 $query->whereHas('customer', function (Builder $subQuery) use ($request) {
                     $subQuery->where('name', 'LIKE', "%{$request->inputFilter}%");

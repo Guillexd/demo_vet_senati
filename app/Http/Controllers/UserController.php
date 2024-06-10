@@ -14,7 +14,9 @@ class UserController extends Controller
 {
     public function list(Request $request)
     {
-        $user = User::with('rol')->orderBy('id', 'desc')->where(function (Builder $query) use ($request) {
+        $user = User::with(['rol' => function ($queryBuilder) {
+            $queryBuilder->select('id', 'name');
+        }])->orderBy('id', 'desc')->where(function (Builder $query) use ($request) {
             if (isset($request->rol)) {
                 $query->where('rol_id', $request->rol);
             }
@@ -59,7 +61,7 @@ class UserController extends Controller
 
     public function destroy(Request $request)
     {
-        if($request->id === auth()->user()->id) {
+        if ($request->id === auth()->user()->id) {
             $errors = [
                 'user_error' => ['No es posible eliminar tu cuenta directamente a través del sistema, tienes que realizarlo desde otra cuenta administrativa.'],
             ];

@@ -49,7 +49,9 @@ class CashRegisterController extends Controller
 
         $products->getCollection()
             ->each(function ($product) {
-                $customer = Customer::with('identity_document')->find($product->pivot->customer_id);
+                $customer = Customer::with(['identity_document' => function ($queryBuilder) {
+                    $queryBuilder->select('id', 'abbreviation');
+                }])->find($product->pivot->customer_id);
                 $product->customer = $customer;
             });
 
@@ -66,7 +68,9 @@ class CashRegisterController extends Controller
 
         $services->getCollection()
             ->each(function ($service) {
-                $customer = Customer::with('identity_document')->find($service->pivot->customer_id);
+                $customer = Customer::with(['identity_document' => function ($queryBuilder) {
+                    $queryBuilder->select('id', 'abbreviation');
+                }])->find($service->pivot->customer_id);
                 $service->customer = $customer;
             });
 
@@ -114,7 +118,9 @@ class CashRegisterController extends Controller
         $v1 = $cashRegister->products()->wherePivot('voucher_id', $request->inputFilter)->get();
         $v2 = $cashRegister->services()->wherePivot('voucher_id', $request->inputFilter)->get();
         $id = $v1->first()?->pivot?->customer_id ?? $v2->first()?->pivot?->customer_id;
-        $customer = Customer::with('identity_document')->find($id);
+        $customer = Customer::with(['identity_document' => function ($queryBuilder) {
+            $queryBuilder->select('id', 'abbreviation');
+        }])->find($id);
         $voucher = $v1->concat($v2);
         return response()->json([
             'customer' => $customer,
@@ -162,7 +168,7 @@ class CashRegisterController extends Controller
                     $cah_register->products()->attach($productData->id, [
                         'customer_id' => $request->customer_id,
                         'user_id' => $seller,
-                        'transactions_type' => $request->type_of_movement,
+                        'transactions_type' => 1,
                         'quantity' => $product['quantity'],
                         'voucher_id' => $uuid,
                         'subtotal' => str_replace(',', '', number_format($subTotal, 2)),
@@ -186,7 +192,7 @@ class CashRegisterController extends Controller
                     $cah_register->services()->attach($serviceData->id, [
                         'customer_id' => $request->customer_id,
                         'user_id' => $seller,
-                        'transactions_type' => $request->type_of_movement,
+                        'transactions_type' => 1,
                         'quantity' => $service['quantity'],
                         'voucher_id' => $uuid,
                         'subtotal' => str_replace(',', '', number_format($subTotal, 2)),
@@ -200,7 +206,7 @@ class CashRegisterController extends Controller
 
                 foreach ($request->input('expenses') as $expense) {
                     $cah_register->expenses()->attach($expense['expense_id'], [
-                        'transactions_type' => $request->type_of_movement,
+                        'transactions_type' => 2,
                         'subtotal' => str_replace(',', '', number_format($expense['subtotal'], 2)),
                         'created_at' => now(), 'updated_at' => now()
                     ]);
@@ -237,15 +243,17 @@ class CashRegisterController extends Controller
 
     public function updateState(Request $request)
     {
-        $cash_register = CashRegister::with(['products', 'services', 'expenses'])->whereId($request->id)->first();
-        $totalProducts = $cash_register->products->sum('pivot.subtotal');
-        $totalServices = $cash_register->services->sum('pivot.subtotal');
-        $totalExpenses = $cash_register->expenses->sum('pivot.subtotal');
-        $total = $cash_register->initial_amount + $totalProducts + $totalServices - $totalExpenses;
-        $cash_register->total = $total;
+        $cash_registerables = DB::table('cash_registerables')
+            ->selectRaw('SUM(CASE WHEN transactions_type = 1 THEN subtotal ELSE 0 END) AS total_type_1,
+            SUM(CASE WHEN transactions_type = 2 THEN subtotal ELSE 0 END) AS total_type_2')
+            ->where('cash_register_id', $request->id)
+            ->first();
+
+        $cash_register = CashRegister::findOrFail($request->id);
+        $cash_register->total = $cash_registerables->total_type_1 - $cash_registerables->total_type_2;
         $cash_register->state = 0;
         $cash_register->save();
-        return response()->json($total);
+        return response()->json($cash_register->total);
     }
 
     public function destroy(Request $request)
@@ -288,7 +296,7 @@ class CashRegisterController extends Controller
     public function getVoucherId()
     {
         $sale = Sales::firstOrFail();
-        $voucher= $sale->code . '-' . Str::padLeft($sale->correlativo, 7, '0');
+        $voucher = $sale->code . '-' . Str::padLeft($sale->correlativo, 7, '0');
         return response()->json($voucher);
     }
 
@@ -300,7 +308,9 @@ class CashRegisterController extends Controller
         $timestamp = strtotime($data?->pivot?->created_at);
         $date = date('d/m/Y H:i:s', $timestamp);
 
-        $customer = Customer::with('identity_document')->find($id);
+        $customer = Customer::with(['identity_document' => function ($queryBuilder) {
+            $queryBuilder->select('id', 'abbreviation');
+        }])->find($id);
         $products = $cashRegister->products()->wherePivot('voucher_id', $request->uuid)->get();
         $products
             ->each(function ($product) {

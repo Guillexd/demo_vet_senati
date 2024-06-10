@@ -12,7 +12,9 @@ class CustomerController extends Controller
 {
     public function list(Request $request)
     {
-        $customer = Customer::with('identity_document')->orderBy('id', 'desc')->where(function (Builder $query) use ($request) {
+        $customer = Customer::with(['identity_document' => function ($queryBuilder) {
+            $queryBuilder->select('id', 'description', 'abbreviation');
+        }])->orderBy('id', 'desc')->where(function (Builder $query) use ($request) {
             if (isset($request->startDate)) {
                 $query->whereDate('created_at', '>=', $request->startDate);
             }

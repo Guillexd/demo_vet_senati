@@ -36,7 +36,11 @@ class PetHistoryController extends Controller
     }
     public function list(Request $request)
     {
-        $pet_history = PetHistory::with('pet.customer.identity_document', 'pet.breed')->orderBy('id', 'desc')->where(function (Builder $query) use ($request) {
+        $pet_history = PetHistory::with(['pet.customer', 'pet.customer.identity_document' => function ($queryBuilder) {
+            $queryBuilder->select('id', 'abbreviation');
+        }, 'pet.breed' => function ($queryBuilder) {
+            $queryBuilder->select('id', 'name');
+        }])->orderBy('id', 'desc')->where(function (Builder $query) use ($request) {
             if ($request->filter === 'pet_id') {
                 $query->whereHas('pet', function (Builder $subQuery) use ($request) {
                     $subQuery->where('name', 'LIKE', "%{$request->inputFilter}%");

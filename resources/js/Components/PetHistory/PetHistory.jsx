@@ -6,8 +6,11 @@ import Icon from '../../utils/Icon';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { faFilePdf } from '@fortawesome/free-regular-svg-icons';
 import { flushSync } from 'react-dom';
+import { useState } from 'react';
 
 export default function PetHistory({ petHistoryI, setPetHistory, setOption, setOpenModal, setHelper, setMustLoad, setMustAnimate, setImage, transitionName, setTransitionName, hide, setIsDeleted }) {
+
+  const [open, setOpen] = useState(false)
 
   const handleDelete = () => {
     showSWToDelete('¿Quieres eliminar este historial?', () => {
@@ -68,7 +71,7 @@ export default function PetHistory({ petHistoryI, setPetHistory, setOption, setO
           <p className='text-gray-900 font-semibold'>Raza: {petHistoryI.pet?.breed?.name}</p>
           <p className='text-gray-900 font-semibold'>Sexo: {petHistoryI.pet?.sex}</p>
           <p className='text-gray-900 font-semibold'>C/E: {petHistoryI.pet?.ce}</p>
-          <p className='text-gray-700 text-nowrap'>
+          <p className='text-gray-700 text-wrap min-[353px]:text-nowrap'>
             Desparasitación: {petHistoryI.last_deworming ? (
               <>
                 <br />
@@ -82,7 +85,7 @@ export default function PetHistory({ petHistoryI, setPetHistory, setOption, setO
             petHistoryI.pet?.customer?.first_phone
             &&
             <div className='mt-2'>
-              <p className='text-gray-700'>1º teléfono:
+              <p className='text-gray-700 text-nowrap'>1º teléfono:
                 <a href={`https://api.whatsapp.com/send/?phone=${petHistoryI.pet?.customer?.first_phone}&text=Hola,%20¿cómo%20estás%20${petHistoryI.pet?.customer?.name}?&type=phone_number&app_absent=0`} target='_blank' className='font-bold bg-emerald-300 p-1 rounded-md hover:bg-green-400'>
                   <Icon icon={faWhatsapp} css='mr-1' size='22px' />
                   {petHistoryI.pet?.customer?.first_phone}
@@ -94,7 +97,7 @@ export default function PetHistory({ petHistoryI, setPetHistory, setOption, setO
             petHistoryI.pet?.customer?.second_phone
             &&
             <div className='mt-2'>
-              <p className='text-gray-700'>2º teléfono:
+              <p className='text-gray-700 text-nowrap'>2º teléfono:
                 <a href={`https://api.whatsapp.com/send/?phone=${petHistoryI.pet?.customer?.second_phone}&text=Hola,%20¿cómo%20estás%20${petHistoryI.pet?.customer?.name}?&type=phone_number&app_absent=0`} target='_blank' className='font-bold bg-emerald-300 p-1 rounded-md hover:bg-green-400'>
                   <Icon icon={faWhatsapp} css='mr-1' size='22px' />
                   {petHistoryI.pet?.customer?.second_phone}
@@ -104,6 +107,27 @@ export default function PetHistory({ petHistoryI, setPetHistory, setOption, setO
           }
 
           <p className='text-gray-700 mt-1'>Fecha: {getLocaleString(petHistoryI.created_at)}</p>
+          {
+            petHistoryI.pet?.observations?.length > 50
+              ?
+              <div>
+                <button className='bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-3 py-1 rounded-lg'
+                  onClick={() => setOpen(true)}
+                >
+                  Observaciones de la mascota
+                </button>
+                <article className={`${open ? '-translate-y-0' : 'translate-y-full'} z-10 ease-in duration-150 absolute flex top-0 left-0 w-full h-full bg-vetgreen-100 text-black font-medium rounded-lg`}>
+                  <button className='fixed bg-red-900 text-white font-semibold px-3 py-1 rounded-lg top-2 right-0 me-5 mt-1 animate-bounce'
+                    onClick={() => setOpen(false)}
+                  >
+                    Cerrar
+                  </button>
+                  <p className='overflow-auto p-3 pt-10'>{petHistoryI.pet?.observations}</p>
+                </article>
+              </div>
+              :
+              <p className='text-gray-700 font-semibold'> <strong>Observaciones de la mascota:</strong> {petHistoryI.pet?.observations || '---'}</p>
+          }
         </div>
         <section>
           <div className='mt-3 '>

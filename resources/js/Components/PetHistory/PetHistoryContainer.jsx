@@ -156,6 +156,7 @@ function PetHistoryContainer() {
                 onClick={() => {
                   setFilter(filterI.value)
                   setInputFilter('')
+                  document.getElementById('input_search')?.focus()
                 }}
               >{filterI.name}</button>
             ))

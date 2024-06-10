@@ -13,7 +13,7 @@ import { dateCalculator, fetchData, fetchHelper, getLocaleString, getPageQuery, 
 import ToastifyErrorList from '../ToastifyErrorList'
 import { initialStateCustomer } from '../Customer/initialStateCustomer'
 import AddCustomer from '../Customer/CustomerModal'
-import { initialStateExpense } from '../Expense/initialStateExpense'
+import { initialStateExpense as initialStateExpenses } from '../Expense/initialStateExpense'
 import AddExpense from '../Expense/ExpenseModal'
 import { flushSync } from 'react-dom'
 
@@ -109,7 +109,7 @@ function SectionCashRegister({ cashRegister, handleClose, setHelper: setHelperCo
   };
 
   return (
-    <section className={`${cashRegister.id !== null ? 'translate-y-0' : 'translate-y-[200%]'} transition-all duration-500 ease-in fixed bg-slate-50 z-30 bottom-0 left-0 px-3 md:px-5 ${open ? 'overflow-hidden' : 'overflow-y-auto'} rounded-t-2xl w-screen h-[99vh] mt-2 pb-10`}>
+    <section id='section_cash_register' className={`${cashRegister.id !== null ? 'translate-y-0' : 'translate-y-[200%]'} transition-all duration-500 ease-in fixed bg-slate-50 z-30 bottom-0 left-0 px-3 md:px-5 ${open ? 'overflow-hidden' : 'overflow-y-auto'} rounded-t-2xl w-screen h-[99vh] mt-2 pb-10`}>
       {
         cashRegister.id !== null
           ?
@@ -216,7 +216,14 @@ function Header({ message, messageButton, disabled, handleClick }) {
         <Icon icon={faCashRegister} css={'mr-3'} size='37px' />
         {message}
       </p>
-      <button className={`bg-sky-700 hover:bg-sky-900 text-white font-bold py-2 px-4 rounded mr-4 mb-4 mt-4 sm:mt-0 shadow-xl ${disabled && 'opacity-0'}`} disabled={disabled} onClick={handleClick}>
+      <button className={`bg-sky-700 hover:bg-sky-900 text-white font-bold py-2 px-4 rounded mr-4 mb-4 mt-4 sm:mt-0 shadow-xl ${disabled && 'opacity-0'}`} disabled={disabled} onClick={() => {
+        handleClick()
+        const cash = document.getElementById('section_cash_register')
+        cash.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        })
+      }}>
         {messageButton}
       </button>
     </header>
@@ -459,11 +466,17 @@ function TableBody({ loading, mustLoad, message, data, handleDelete, setOptionSe
                   </td>
 
                   <td className='px-2 py-4 whitespace-no-wrap border-b border-gray-200 text-center'>
-                    <div className='text-sm leading-5 text-gray-900 min-w-16'>S/. {el.price}</div>
+                    <div className='text-sm leading-5 text-gray-900 min-w-20'>S/. {el.price}</div>
                   </td>
 
                   <td className='px-2 py-4 whitespace-no-wrap border-b border-gray-200 text-center'>
-                    <div className='text-sm leading-5 text-gray-900'>{el.pivot?.quantity}</div>
+                    <div className='text-sm leading-5 text-gray-900'>
+                      {
+                        Number.isInteger(parseFloat(el.pivot?.quantity))
+                          ? parseFloat(el.pivot?.quantity).toFixed(0)
+                          : el.pivot?.quantity
+                      }
+                    </div>
                   </td>
 
                   <td
@@ -563,7 +576,7 @@ function BodyExpenseTable({ id, setData, page, limit, helper, searchByFilter, mu
                     </div>
                   </td>
                   <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center w-40'>
-                    <div className='text-sm leading-5 text-gray-900 min-w-16'>S/. {el.pivot?.subtotal}</div>
+                    <div className='text-sm leading-5 text-gray-900 min-w-20'>S/. {el.pivot?.subtotal}</div>
                   </td>
                   <td
                     className='px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200 relative min-w-[400px]'>
@@ -745,11 +758,17 @@ function BodyVoucherTable({ id, searchByFilter, mustLoad, helper, handleDelete }
                   </td>
 
                   <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center'>
-                    <div className='text-sm leading-5 text-gray-900 min-w-16'>S/. {el.price}</div>
+                    <div className='text-sm leading-5 text-gray-900 min-w-20'>S/. {el.price}</div>
                   </td>
 
                   <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center '>
-                    <div className='text-sm leading-5 text-gray-900'>{el.pivot?.quantity}</div>
+                    <div className='text-sm leading-5 text-gray-900'>
+                      {
+                        Number.isInteger(parseFloat(el.pivot?.quantity))
+                          ? parseFloat(el.pivot?.quantity).toFixed(0)
+                          : el.pivot?.quantity
+                      }
+                    </div>
                   </td>
 
                   <td
@@ -1692,7 +1711,7 @@ function ExpenseModal({ setMustSearchExpense, inputExpense, setInputExpense, loa
         </button>
       </div>
       <div className='absolute'>
-        <AddExpense expense={{ ...initialStateExpense }} option={'Crear'} open={openExpense} setOpen={setOpenExpense} actions={false} mustBeToast={false} />
+        <AddExpense expense={{ ...initialStateExpenses }} option={'Crear'} open={openExpense} setOpen={setOpenExpense} actions={false} mustBeToast={false} />
       </div>
 
       {
