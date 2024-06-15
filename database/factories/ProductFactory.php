@@ -16,7 +16,7 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $price = fake()->randomFloat(2, 10, 150);
+        $price = fake()->randomFloat(2, 5, 50);
         $purchasePrice = $price - fake()->randomFloat(2, 2, 30);
         $utility = $price - $purchasePrice;
 

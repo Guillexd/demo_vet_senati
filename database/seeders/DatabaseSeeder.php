@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
 
         foreach ($services as $record) {
             $service = Service::find($record->cash_registerable_id);
-            $record->quantity = rand(1, 15);
+            $record->quantity = rand(1, 8);
             $record->subtotal = $service->price * $record->quantity;
             $record->cash_register_id = 48;
             $record->cash_registerable_type = 'App\\Models\\Service';
@@ -84,7 +84,7 @@ class DatabaseSeeder extends Seeder
 
         foreach ($services as $record) {
             $service = Service::find($record->cash_registerable_id);
-            $record->quantity = rand(1, 15);
+            $record->quantity = rand(1, 5);
             $record->subtotal = $service->price * $record->quantity;
             $record->cash_register_id = 49;
             $record->cash_registerable_type = 'App\\Models\\Service';

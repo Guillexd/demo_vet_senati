@@ -16,8 +16,8 @@ class CashRegisterFactory extends Factory
      */
     public function definition(): array
     {
-        $initial = fake()->randomFloat(2, 20, 300);
-        $total = $initial * fake()->randomFloat(2, 1, 3);
+        $initial = fake()->randomFloat(2, 50, 300);
+        $total = $initial * fake()->randomFloat(2, 2, 3);
 
         return [
             'initial_amount' => $initial,
