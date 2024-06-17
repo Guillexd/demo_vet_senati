@@ -25,7 +25,7 @@ function reducer(state, action) {
   }
 }
 
-export default function BreedModal({ breed, option, open, setOpen, setMustLoad, setHelper, actions = true, mustBeToast = true }) {
+export default function BreedModal({ breed, option, open, setOpen, setMustLoad, setHelper, actions = true, mustBeToast = true, onChangeComponent }) {
 
   const options = {
     method: option === 'Crear' ? 'POST' : 'PUT',
@@ -54,6 +54,9 @@ export default function BreedModal({ breed, option, open, setOpen, setMustLoad, 
           setHelper((prev) => prev + 1)
         }
         setOpen(false)
+        if (typeof onChangeComponent === 'function') {
+          onChangeComponent(data);
+        }
       })
       .catch((err) => {
         console.log(err);

@@ -21,8 +21,8 @@ class ExpenseController extends Controller
 
     public function store(StoreExpenseRequest $request)
     {
-        Expense::create($request->validated());
-        return response()->json($request->only('name'));
+        $expense = Expense::create($request->validated());
+        return response()->json($expense);
     }
 
     public function update(StoreExpenseRequest $request)

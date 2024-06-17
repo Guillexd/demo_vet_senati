@@ -371,8 +371,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                                   })
                                   setMustSearchPet(false)
                                   setInputPet(el.name)
-                                }
-                                }
+                                }}
                               >
                                 <article className='flex flex-col sm:flex-row justify-center sm:justify-start items-center'>
                                   <img src={el.pet_image_url || '/image/mascota.webp'} alt={el.name} width='150px' className='rounded-lg object-contain mb-6 sm:mb-0 sm:me-10' />
@@ -399,7 +398,13 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                 </button>
               </div>
               <div className='absolute'>
-                <AddPet pet={{ ...initialStatePet }} option={'Crear'} open={openPet} setOpen={setOpenPet} actions={false} mustBeToast={false} />
+                <AddPet pet={{ ...initialStatePet }} option={'Crear'} open={openPet} setOpen={setOpenPet} actions={false} mustBeToast={false} onChangeComponent={(data) => {
+                  dispatch({
+                    type: REDUCER_ACTION_TYPE.pet_id,
+                    payload: data.id
+                  })
+                  setInputPet(data.name)
+                }} />
               </div>
 
               <div className='relative border border-gray-600 rounded w-full col-span-1 order-1'>

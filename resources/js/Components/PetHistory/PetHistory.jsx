@@ -80,7 +80,15 @@ export default function PetHistory({ petHistoryI, setPetHistory, setOption, setO
             ) : '--'}
           </p>
 
-          <p className='mt-2 text-gray-700'>Dueño: {petHistoryI.pet?.customer?.name} <br />  {petHistoryI.pet?.customer?.identity_document?.abbreviation}: {petHistoryI.pet?.customer?.document_number}</p>
+          <p className='mt-2 text-gray-700'>Dueño: {petHistoryI.pet?.customer?.name}
+            {
+              petHistoryI.pet?.customer?.identity_document?.abbreviation
+              &&
+              <>
+                <br /> {petHistoryI.pet?.customer?.identity_document?.abbreviation}: {petHistoryI.pet?.customer?.document_number}
+              </>
+            }
+          </p>
           {
             petHistoryI.pet?.customer?.first_phone
             &&

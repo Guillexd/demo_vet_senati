@@ -12,7 +12,7 @@ export default function ModalCashRegister({ children, option, open, setOpen, han
           <div className={`relative rounded-lg shadow bg-white z-40`}
           >
             <div className='flex items-start p-4 border-b rounded-t border-gray-600'>
-              <Icon icon={icon} css='text-gray-700  text-3xl mx-3' />
+              <Icon icon={icon} css='text-gray-700  mx-3' size='30px' />
               <h3 className='text-2xl font-semibold text-gray-700 '>
                 {text}
               </h3>

@@ -679,8 +679,8 @@ function BodyAllVouchersTable({ cashId, page, limit, searchByFilter, helper, set
 
                   <td
                     className='px-2 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200 relative text-center'>
-                    <div className='text-sm leading-5 text-gray-900 w-40 overflow-hidden mx-auto'>{el.customer ?? '--'}</div>
-                    <div className='text-sm leading-5 text-gray-700 w-40 overflow-hidden mx-auto'>{el.abbreviation && `${el.abbreviation}:`} {el.doc_customer}</div>
+                    <div className='text-sm leading-5 text-gray-900 min-w-28 overflow-hidden mx-auto'>{el.customer ?? '--'}</div>
+                    <div className='text-sm leading-5 text-gray-700 min-w-28 overflow-hidden mx-auto'>{el.abbreviation && `${el.abbreviation}:`} {el.doc_customer}</div>
                   </td>
 
                   <td
@@ -1266,8 +1266,7 @@ function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustome
                           setMustSearchCustomer(false)
                           setInputCustomer(`${el.name} - ${el.identity_document?.abbreviation ?? ''}: ${el.document_number ?? ''}`)
                           setCustomerId(el.id)
-                        }
-                        }
+                        }}
                       >{`${el.name} - ${el.identity_document ? `${el.identity_document.abbreviation}: ${el.document_number}` : ''}`}</li>))
                   }
                 </ul>
@@ -1279,7 +1278,10 @@ function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustome
         </button>
       </div >
       <div className='absolute'>
-        <AddCustomer customer={{ ...initialStateCustomer }} option={'Crear'} open={open} setOpen={setOpen} actions={false} mustBeToast={false} focus={false} />
+        <AddCustomer customer={{ ...initialStateCustomer }} option={'Crear'} open={open} setOpen={setOpen} actions={false} mustBeToast={false} focus={false} onChangeComponent={(data) => {
+          setInputCustomer(`${data.name} -  ${data.document_number ?? ''}`)
+          setCustomerId(data.id)
+        }} />
       </div>
     </>
   )
@@ -1334,8 +1336,7 @@ function ProductModal({ setMustSearchProduct, filterProduct, setFilterProduct, i
                               price: el.price
                             };
                           });
-                        }
-                        }
+                        }}
                       >
                         <article className='flex flex-col sm:flex-row justify-center sm:justify-start items-center'>
                           <img src={el.product_image_url || '/image/juguete.webp'} alt={el.name} width='150px' className='rounded-lg object-contain mb-6 sm:mb-0 sm:me-10' />
@@ -1462,8 +1463,7 @@ function ServiceModal({ setMustSearchService, inputService, setInputService, loa
                               price: el.price
                             };
                           });
-                        }
-                        }
+                        }}
                       >
                         {
                           `${el.name} ->  S/. ${el.price}`
@@ -1698,8 +1698,7 @@ function ExpenseModal({ setMustSearchExpense, inputExpense, setInputExpense, loa
                               reason: el.reason
                             };
                           });
-                        }
-                        }
+                        }}
                       >{`${el.reason}`}</li>))
                   }
                 </ul>
@@ -1711,7 +1710,16 @@ function ExpenseModal({ setMustSearchExpense, inputExpense, setInputExpense, loa
         </button>
       </div>
       <div className='absolute'>
-        <AddExpense expense={{ ...initialStateExpenses }} option={'Crear'} open={openExpense} setOpen={setOpenExpense} actions={false} mustBeToast={false} />
+        <AddExpense expense={{ ...initialStateExpenses }} option={'Crear'} open={openExpense} setOpen={setOpenExpense} actions={false} mustBeToast={false} onChangeComponent={(data) => {
+          setInputExpense(data.reason)
+          setSelectExpense(prev => {
+            return {
+              ...prev,
+              expense_id: data.id,
+              reason: data.reason
+            };
+          });
+        }} />
       </div>
 
       {

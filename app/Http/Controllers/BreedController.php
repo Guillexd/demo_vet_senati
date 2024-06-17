@@ -30,8 +30,8 @@ class BreedController extends Controller
 
     public function store(StoreBreedRequest $request)
     {
-        Breed::create($request->validated());
-        return response()->json($request->only('name'));
+        $breed = Breed::create($request->validated());
+        return response()->json($breed);
     }
 
     public function update(StoreBreedRequest $request)

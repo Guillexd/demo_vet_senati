@@ -61,7 +61,7 @@ function reducer(state, action) {
   }
 }
 
-export default function PetModal({ pet, option, open, setOpen, setMustLoad, setHelper, actions = true, mustBeToast = true }) {
+export default function PetModal({ pet, option, open, setOpen, setMustLoad, setHelper, actions = true, mustBeToast = true, onChangeComponent }) {
 
   const options = {
     method: option === 'Crear' ? 'POST' : 'POST',
@@ -106,6 +106,9 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
           setHelper((prev) => prev + 1)
         }
         setOpen(false)
+        if (typeof onChangeComponent === 'function') {
+          onChangeComponent(data);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -224,29 +227,34 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
                             })
                             setMustSearchCustomer(false)
                             setInputCustomer(el.name)
-                          }
-                          }
+                          }}
                         >{`${el.name} - ${el.identity_document ? `${el.identity_document.abbreviation}: ${el.document_number}` : ''}`}</li>))
                     }
                   </ul>
             }
           </ReactSelect>
           <button type='button' className='order-1 absolute bottom-1 right-12 bg-gray-100 rounded-full px-2 py-1 z-10 hover:bg-gray-300'
-              onClick={() => setOpenCustomer(true)}>
-              <Icon icon={faUserPlus} />
+            onClick={() => setOpenCustomer(true)}>
+            <Icon icon={faUserPlus} />
           </button>
         </div>
         <div className='absolute'>
-          <AddCustomer customer={{ ...initialStateCustomer }} option={'Crear'} open={openCustomer} setOpen={setOpenCustomer} actions={false} mustBeToast={false} />
+          <AddCustomer customer={{ ...initialStateCustomer }} option={'Crear'} open={openCustomer} setOpen={setOpenCustomer} actions={false} mustBeToast={false} onChangeComponent={(data) => {
+            dispatch({
+              type: REDUCER_ACTION_TYPE.customer_id,
+              payload: data.id
+            })
+            setInputCustomer(data.name)
+          }} />
         </div>
 
         <div className='relative w-full col-span-full grid grid-cols-1 sm:grid-cols-2 gap-6 order-1'>
-          <ReactSelect setMustSearch={setMustSearchBreed}filters={[
-          {
-            tag: 'Nombre de la raza',
-            value: 'name',
-          },
-        ]} filter='name' input={inputBreed} setInput={setInputBreed} label={'Raza'} setHelperSearch={setHelperSearchBreed} setHelper={setHelperBreed} listStyle={'w-full max-h-72'}>
+          <ReactSelect setMustSearch={setMustSearchBreed} filters={[
+            {
+              tag: 'Nombre de la raza',
+              value: 'name',
+            },
+          ]} filter='name' input={inputBreed} setInput={setInputBreed} label={'Raza'} setHelperSearch={setHelperSearchBreed} setHelper={setHelperBreed} listStyle={'w-full max-h-72'}>
             {
               loadingBreed
                 ?
@@ -278,12 +286,18 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
             }
           </ReactSelect>
           <button type='button' className='order-1 absolute bottom-1 right-12 bg-gray-100 rounded-full px-2 py-1 z-10 hover:bg-gray-300'
-              onClick={() => setOpenBreed(true)}>
-              <Icon icon={faShieldCat} size='22px' />
+            onClick={() => setOpenBreed(true)}>
+            <Icon icon={faShieldCat} size='22px' />
           </button>
         </div>
         <div className='absolute'>
-          <AddBreed breed={{ ...initialStateBreed }} option={'Crear'} open={openBreed} setOpen={setOpenBreed} actions={false} mustBeToast={false} />
+          <AddBreed breed={{ ...initialStateBreed }} option={'Crear'} open={openBreed} setOpen={setOpenBreed} actions={false} mustBeToast={false} onChangeComponent={(data) => {
+            dispatch({
+              type: REDUCER_ACTION_TYPE.breed_id,
+              payload: data.id
+            })
+            setInputBreed(data.name)
+          }} />
         </div>
 
         <Selector
