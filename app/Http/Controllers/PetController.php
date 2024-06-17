@@ -63,7 +63,7 @@ class PetController extends Controller
     {
         if ($request->hasFile('pet_image')) {
             $img_info = $this->uploadImageService->saveImage($request->file('pet_image')->getRealPath());
-            Pet::create([
+            $pet = Pet::create([
                 'name' => $request->name,
                 'age' => $request->age,
                 'customer_id' => $request->customer_id,
@@ -75,9 +75,9 @@ class PetController extends Controller
                 'observations' => $request->observations,
             ]);
         } else {
-            Pet::create($request->validated());
+            $pet = Pet::create($request->validated());
         }
-        return response()->json($request->only('name'));
+        return response()->json($pet);
     }
 
     public function update(StorePetRequest $request)
