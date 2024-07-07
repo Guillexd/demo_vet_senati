@@ -124,7 +124,7 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
   }, [debounceValueCustomer])
 
   useEffect(() => {
-    if (!loadingBreed && mustSearchBreed) {
+    if (mustSearchBreed) {
       setHelperBreed((prev) => prev + 1)
     }
   }, [debounceValueBreed])
