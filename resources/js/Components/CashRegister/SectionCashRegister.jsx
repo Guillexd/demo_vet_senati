@@ -251,7 +251,7 @@ function Selector({ names, optionSearch, setOptionSearch, anotherAction = false,
 
 function Search({ render, setSearchByFilter, setMustLoad, setPage, placeholder, hide, data }) {
   const [inputFilter, setInputFilter] = useState('');
-  const { debounceValue } = useDebounce(inputFilter, 500)
+  const { debounceValue } = useDebounce(inputFilter)
 
   useEffect(() => {
     setMustLoad(true)
@@ -1003,7 +1003,7 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper, tr
   const [helperCustomer, setHelperCustomer] = useState(1)
   const [mustSearchCustomer, setMustSearchCustomer] = useState(false)
   const [helperSearchCustomer, setHelperSearchCustomer] = useState(false)
-  const { debounceValue: debounceValueCustomer } = useDebounce(inputCustomer, 400)
+  const { debounceValue: debounceValueCustomer } = useDebounce(inputCustomer)
   const { data: dataCustomer, loading: loadingCustomer } = useFetchData(`/customers/list?filter=${filterCustomer}&inputFilter=${debounceValueCustomer}`, [helperCustomer], helperSearchCustomer)
 
   const [selectProduct, setSelectProduct] = useState(initialStateProduct)
@@ -1013,7 +1013,7 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper, tr
   const [helperProduct, setHelperProduct] = useState(1)
   const [mustSearchProduct, setMustSearchProduct] = useState(false)
   const [helperSearchProduct, setHelperSearchProduct] = useState(false)
-  const { debounceValue: debounceValueProduct } = useDebounce(inputProduct, 400)
+  const { debounceValue: debounceValueProduct } = useDebounce(inputProduct)
   const { data: dataProduct, loading: loadingProduct } = useFetchData(`/products/list?filter=${filterProduct}&inputFilter=${debounceValueProduct}`, [helperProduct], helperSearchProduct)
 
   const [selectService, setSelectService] = useState(initialStateService)
@@ -1022,7 +1022,7 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper, tr
   const [helperService, setHelperService] = useState(1)
   const [mustSearchService, setMustSearchService] = useState(false)
   const [helperSearchService, setHelperSearchService] = useState(false)
-  const { debounceValue: debounceValueService } = useDebounce(inputService, 400)
+  const { debounceValue: debounceValueService } = useDebounce(inputService)
   const { data: dataService, loading: loadingService } = useFetchData(`/services/list?filter=name&inputFilter=${debounceValueService}`, [helperService], helperSearchService)
 
   const [selectExpense, setSelectExpense] = useState(initialStateExpense)
@@ -1031,29 +1031,29 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper, tr
   const [helperExpense, setHelperExpense] = useState(1)
   const [mustSearchExpense, setMustSearchExpense] = useState(false)
   const [helperSearchExpense, setHelperSearchExpense] = useState(false)
-  const { debounceValue: debounceValueExpense } = useDebounce(inputExpense, 400)
+  const { debounceValue: debounceValueExpense } = useDebounce(inputExpense)
   const { data: dataExpense, loading: loadingExpense } = useFetchData(`/expenses/list?filter=reason&inputFilter=${debounceValueExpense}`, [helperExpense], helperSearchExpense)
 
   useEffect(() => {
-    if (!loadingProduct && mustSearchProduct) {
+    if (mustSearchProduct) {
       setHelperProduct((prev) => prev + 1)
     }
   }, [debounceValueProduct])
 
   useEffect(() => {
-    if (!loadingService && mustSearchService) {
+    if (mustSearchService) {
       setHelperService((prev) => prev + 1)
     }
   }, [debounceValueService])
 
   useEffect(() => {
-    if (!loadingExpense && mustSearchExpense) {
+    if (mustSearchExpense) {
       setHelperExpense((prev) => prev + 1)
     }
   }, [debounceValueExpense])
 
   useEffect(() => {
-    if (!loadingCustomer && mustSearchCustomer) {
+    if (mustSearchCustomer) {
       setHelperCustomer((prev) => prev + 1)
     }
   }, [debounceValueCustomer])
@@ -1191,15 +1191,15 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper, tr
 
             <hr className='col-span-full border' />
 
-            <SectionCashRegisterModal.CustomerModal setMustSearchCustomer={setMustSearchCustomer} filterCustomer={filterCustomer} setFilterCustomer={setFilterCustomer} inputCustomer={inputCustomer} setInputCustomer={setInputCustomer} loadingCustomer={loadingCustomer} dataCustomer={dataCustomer} setCustomerId={setCustomerId} setHelperSearchCustomer={setHelperSearchCustomer} setHelperCustomer={setHelperCustomer} />
+            <SectionCashRegisterModal.CustomerModal setMustSearchCustomer={setMustSearchCustomer} filterCustomer={filterCustomer} setFilterCustomer={setFilterCustomer} inputCustomer={inputCustomer} setInputCustomer={setInputCustomer} loadingCustomer={loadingCustomer} dataCustomer={dataCustomer} setCustomerId={setCustomerId} setHelperSearchCustomer={setHelperSearchCustomer} />
 
             <hr className='col-span-full border' />
 
-            <SectionCashRegisterModal.ProductModal setMustSearchProduct={setMustSearchProduct} filterProduct={filterProduct} setFilterProduct={setFilterProduct} inputProduct={inputProduct} setInputProduct={setInputProduct} loadingProduct={loadingProduct} dataProduct={dataProduct} selectProduct={selectProduct} setSelectProduct={setSelectProduct} setProducts={setProducts} initialStateProduct={initialStateProduct} products={products} setHelperSearchProduct={setHelperSearchProduct} setHelperProduct={setHelperProduct} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} setHide={setHide} />
+            <SectionCashRegisterModal.ProductModal setMustSearchProduct={setMustSearchProduct} filterProduct={filterProduct} setFilterProduct={setFilterProduct} inputProduct={inputProduct} setInputProduct={setInputProduct} loadingProduct={loadingProduct} dataProduct={dataProduct} selectProduct={selectProduct} setSelectProduct={setSelectProduct} setProducts={setProducts} initialStateProduct={initialStateProduct} products={products} setHelperSearchProduct={setHelperSearchProduct} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} setHide={setHide} />
 
             <hr className='col-span-full border sm:hidden' />
 
-            <SectionCashRegisterModal.ServiceModal setMustSearchService={setMustSearchService} inputService={inputService} setInputService={setInputService} loadingService={loadingService} dataService={dataService} selectService={selectService} setSelectService={setSelectService} setServices={setServices} initialStateService={initialStateService} services={services} setHelperSearchService={setHelperSearchService} setHelperService={setHelperService} />
+            <SectionCashRegisterModal.ServiceModal setMustSearchService={setMustSearchService} inputService={inputService} setInputService={setInputService} loadingService={loadingService} dataService={dataService} selectService={selectService} setSelectService={setSelectService} setServices={setServices} initialStateService={initialStateService} services={services} setHelperSearchService={setHelperSearchService} />
 
             <hr className='col-span-full border' />
           </>
@@ -1213,7 +1213,7 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper, tr
                 <code>LIMPIAR FORMULARIO</code>
               </button>
             </SectionCashRegisterModal.ButtonContainer>
-            <SectionCashRegisterModal.ExpenseModal setMustSearchExpense={setMustSearchExpense} inputExpense={inputExpense} setInputExpense={setInputExpense} loadingExpense={loadingExpense} dataExpense={dataExpense} selectExpense={selectExpense} setSelectExpense={setSelectExpense} setExpenses={setExpenses} initialStateExpense={initialStateExpense} expenses={expenses} setHelperSearchExpense={setHelperSearchExpense} setHelperExpense={setHelperExpense} />
+            <SectionCashRegisterModal.ExpenseModal setMustSearchExpense={setMustSearchExpense} inputExpense={inputExpense} setInputExpense={setInputExpense} loadingExpense={loadingExpense} dataExpense={dataExpense} selectExpense={selectExpense} setSelectExpense={setSelectExpense} setExpenses={setExpenses} initialStateExpense={initialStateExpense} expenses={expenses} setHelperSearchExpense={setHelperSearchExpense} />
           </>
       }
 
@@ -1229,7 +1229,7 @@ function ButtonContainer({ children, css = '' }) {
   )
 }
 
-function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustomer, inputCustomer, setInputCustomer, loadingCustomer, dataCustomer, setCustomerId, setHelperSearchCustomer, setHelperCustomer }) {
+function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustomer, inputCustomer, setInputCustomer, loadingCustomer, dataCustomer, setCustomerId, setHelperSearchCustomer }) {
   const [open, setOpen] = useState(false)
   return (
     <>
@@ -1243,7 +1243,7 @@ function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustome
             tag: 'Número de documento',
             value: 'document_number',
           },
-        ]} filter={filterCustomer} setFilter={setFilterCustomer} input={inputCustomer} setInput={setInputCustomer} label={'Cliente'} setHelperSearch={setHelperSearchCustomer} setHelper={setHelperCustomer} css={'w-full col-span-full order-1 pe-10'} listStyle={'w-full max-h-72'} anotherAction={true} actions={() => {
+        ]} filter={filterCustomer} setFilter={setFilterCustomer} input={inputCustomer} setInput={setInputCustomer} label={'Cliente'} setHelperSearch={setHelperSearchCustomer} css={'w-full col-span-full order-1 pe-10'} listStyle={'w-full max-h-72'} anotherAction={true} actions={() => {
           setCustomerId('')
         }} >
           {
@@ -1287,7 +1287,7 @@ function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustome
   )
 }
 
-function ProductModal({ setMustSearchProduct, filterProduct, setFilterProduct, inputProduct, setInputProduct, loadingProduct, dataProduct, selectProduct, setSelectProduct, setProducts, initialStateProduct, products, setHelperSearchProduct, setHelperProduct, transitionName, setTransitionName, setImage, setHide }) {
+function ProductModal({ setMustSearchProduct, filterProduct, setFilterProduct, inputProduct, setInputProduct, loadingProduct, dataProduct, selectProduct, setSelectProduct, setProducts, initialStateProduct, products, setHelperSearchProduct, transitionName, setTransitionName, setImage, setHide }) {
   const [rol, setRol] = useState(2)
 
   useEffect(() => {
@@ -1307,7 +1307,7 @@ function ProductModal({ setMustSearchProduct, filterProduct, setFilterProduct, i
             tag: 'Serie',
             value: 'serie',
           },
-        ]} filter={filterProduct} setFilter={setFilterProduct} input={inputProduct} setInput={setInputProduct} label={'Producto'} setHelperSearch={setHelperSearchProduct} setHelper={setHelperProduct} css={'w-full max-h-10 order-1'} listStyle={'w-full sm:w-[200%] max-h-72'}>
+        ]} filter={filterProduct} setFilter={setFilterProduct} input={inputProduct} setInput={setInputProduct} label={'Producto'} setHelperSearch={setHelperSearchProduct} css={'w-full max-h-10 order-1'} listStyle={'w-full sm:w-[200%] max-h-72'}>
           {
             loadingProduct
               ?
@@ -1419,7 +1419,7 @@ function ProductModal({ setMustSearchProduct, filterProduct, setFilterProduct, i
   )
 }
 
-function ServiceModal({ setMustSearchService, inputService, setInputService, loadingService, dataService, selectService, setSelectService, setServices, initialStateService, services, setHelperSearchService, setHelperService }) {
+function ServiceModal({ setMustSearchService, inputService, setInputService, loadingService, dataService, selectService, setSelectService, setServices, initialStateService, services, setHelperSearchService }) {
   const [rol, setRol] = useState(2)
 
   useEffect(() => {
@@ -1435,7 +1435,7 @@ function ServiceModal({ setMustSearchService, inputService, setInputService, loa
             tag: 'Nombre del servicio',
             value: 'name',
           },
-        ]} filter='name' input={inputService} setInput={setInputService} label={'Servicio'} setHelperSearch={setHelperSearchService} setHelper={setHelperService} css={'w-full max-h-10 order-1'} listStyle={'w-full max-h-72'}>
+        ]} filter='name' input={inputService} setInput={setInputService} label={'Servicio'} setHelperSearch={setHelperSearchService} css={'w-full max-h-10 order-1'} listStyle={'w-full max-h-72'}>
           {
             loadingService
               ?
@@ -1661,7 +1661,7 @@ function ModalTableBody({ data, setData, transitionName, setTransitionName, setI
   )
 }
 
-function ExpenseModal({ setMustSearchExpense, inputExpense, setInputExpense, loadingExpense, dataExpense, selectExpense, setSelectExpense, setExpenses, initialStateExpense, expenses, setHelperSearchExpense, setHelperExpense }) {
+function ExpenseModal({ setMustSearchExpense, inputExpense, setInputExpense, loadingExpense, dataExpense, selectExpense, setSelectExpense, setExpenses, initialStateExpense, expenses, setHelperSearchExpense }) {
   const [openExpense, setOpenExpense] = useState(false)
   return (
     <>
@@ -1671,7 +1671,7 @@ function ExpenseModal({ setMustSearchExpense, inputExpense, setInputExpense, loa
             tag: 'Razón',
             value: 'reason',
           },
-        ]} filter='reason' input={inputExpense} setInput={setInputExpense} label={'Egresos'} setHelperSearch={setHelperSearchExpense} setHelper={setHelperExpense} >
+        ]} filter='reason' input={inputExpense} setInput={setInputExpense} label={'Egresos'} setHelperSearch={setHelperSearchExpense} >
           {
             loadingExpense
               ?

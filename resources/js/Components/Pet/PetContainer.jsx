@@ -44,7 +44,7 @@ function PetContainer() {
   const [sex, setSex] = useState('');
   const [startDate, setStartDate] = useState('');
   const [finishDate, setFinishDate] = useState('');
-  const { debounceValue } = useDebounce(inputFilter, 500)
+  const { debounceValue } = useDebounce(inputFilter)
   const [helper, setHelper] = useState(0)
   const url = `/pets/list?page=${page}&limit=${limit}&filter=${filter}&inputFilter=${debounceValue}&sex=${sex}&startDate=${startDate}&finishDate=${finishDate}`
   const { data, loading } = useFetchData(url, [page, limit, helper])

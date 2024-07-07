@@ -118,7 +118,7 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
   }
 
   useEffect(() => {
-    if (!loadingCustomer && mustSearchCustomer) {
+    if (mustSearchCustomer) {
       setHelperCustomer((prev) => prev + 1)
     }
   }, [debounceValueCustomer])
@@ -203,7 +203,7 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
               tag: 'Número de documento',
               value: 'document_number',
             },
-          ]} filter={filterCustomer} setFilter={setFilterCustomer} input={inputCustomer} setInput={setInputCustomer} label={'Dueño'} setHelperSearch={setHelperSearchCustomer} setHelper={setHelperCustomer} css={'w-full col-span-full order-1 pe-10'} listStyle={'w-full max-h-72 z-20'}>
+          ]} filter={filterCustomer} setFilter={setFilterCustomer} input={inputCustomer} setInput={setInputCustomer} label={'Dueño'} setHelperSearch={setHelperSearchCustomer} css={'w-full col-span-full order-1 pe-10'} listStyle={'w-full max-h-72 z-20'}>
             {
               loadingCustomer
                 ?
@@ -254,7 +254,7 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
               tag: 'Nombre de la raza',
               value: 'name',
             },
-          ]} filter='name' input={inputBreed} setInput={setInputBreed} label={'Raza'} setHelperSearch={setHelperSearchBreed} setHelper={setHelperBreed} listStyle={'w-full max-h-72'}>
+          ]} filter='name' input={inputBreed} setInput={setInputBreed} label={'Raza'} setHelperSearch={setHelperSearchBreed} listStyle={'w-full max-h-72'}>
             {
               loadingBreed
                 ?

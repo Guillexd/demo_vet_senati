@@ -51,7 +51,7 @@ function ProductContainer() {
   const [dueDate, setDueDate] = useState('');
   const [startDate, setStartDate] = useState('');
   const [finishDate, setFinishDate] = useState('');
-  const { debounceValue } = useDebounce(inputFilter, 500)
+  const { debounceValue } = useDebounce(inputFilter)
   const [helper, setHelper] = useState(0)
   const url = `/products/list?page=${page}&limit=${limit}&filter=${filter}&inputFilter=${debounceValue}&dueDate=${dueDate}&startDate=${startDate}&finishDate=${finishDate}`
   const { data, loading } = useFetchData(url, [page, limit, helper])

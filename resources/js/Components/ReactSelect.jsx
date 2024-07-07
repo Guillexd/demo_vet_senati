@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Icon from '../utils/Icon'
 import { faDeleteLeft } from '@fortawesome/free-solid-svg-icons'
 
-export default function ReactSelect({ children, setMustSearch, filters, filter, setFilter, input, setInput, label, setHelperSearch, setHelper, anotherAction = false, actions, css, listStyle }) {
+export default function ReactSelect({ children, setMustSearch, filters, filter, setFilter, input, setInput, label, setHelperSearch, anotherAction = false, actions, css, listStyle }) {
   const [isFocused, setIsFocused] = useState(false)
   return (
     <>
@@ -31,7 +31,6 @@ export default function ReactSelect({ children, setMustSearch, filters, filter, 
           onFocus={() => {
             setHelperSearch(true)
             setIsFocused(true)
-            setHelper(prev => prev + 1)
           }}
           onBlur={() => setTimeout(() => {
             setIsFocused(false)

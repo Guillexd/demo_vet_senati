@@ -93,7 +93,7 @@ function PetHistoryContainer() {
   const [finishDate, setFinishDate] = useState('');
   const [startNextDate, setStartNextDate] = useState('');
   const [finishNextDate, setFinishNextDate] = useState('');
-  const { debounceValue } = useDebounce(inputFilter, 500)
+  const { debounceValue } = useDebounce(inputFilter)
   const [helper, setHelper] = useState(0)
   const url = `/pet_histories/list?page=${page}&limit=${limit}&filter=${filter}&inputFilter=${debounceValue}&startDate=${startDate}&finishDate=${finishDate}&startNextDate=${startNextDate}&finishNextDate=${finishNextDate}`
   const { data, loading } = useFetchData(url, [page, limit, helper])

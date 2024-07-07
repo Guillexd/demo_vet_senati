@@ -35,7 +35,7 @@ function ServiceContainer() {
   const [limit, setLimit] = useState(12);
   const [filter, setFilter] = useState('name');
   const [inputFilter, setInputFilter] = useState('');
-  const { debounceValue } = useDebounce(inputFilter, 500)
+  const { debounceValue } = useDebounce(inputFilter)
   const [helper, setHelper] = useState(0)
   const url = `/services/list?page=${page}&limit=${limit}&filter=${filter}&inputFilter=${debounceValue}`
   const { data, loading } = useFetchData(url, [page, limit, helper])

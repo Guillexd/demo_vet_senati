@@ -30,7 +30,7 @@ function BreedContainer() {
   const [inputFilter, setInputFilter] = useState('');
   const [startDate, setStartDate] = useState('');
   const [finishDate, setFinishDate] = useState('');
-  const { debounceValue } = useDebounce(inputFilter, 500)
+  const { debounceValue } = useDebounce(inputFilter)
   const [helper, setHelper] = useState(0)
   const url = `/breeds/list?page=${page}&limit=${limit}&filter=${filter}&inputFilter=${debounceValue}&startDate=${startDate}&finishDate=${finishDate}`
   const { data, loading } = useFetchData(url, [page, limit, helper])

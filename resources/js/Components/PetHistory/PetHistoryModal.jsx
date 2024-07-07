@@ -255,7 +255,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
   const [helperPet, setHelperPet] = useState(1)
   const [mustSearchPet, setMustSearchPet] = useState(false)
   const [helperSearchPet, setHelperSearchPet] = useState(false)
-  const { debounceValue: debounceValuePet } = useDebounce(inputPet, 400)
+  const { debounceValue: debounceValuePet } = useDebounce(inputPet, 300)
   const { data: dataPet, loading: loadingPet } = useFetchData(`/pets/list?filter=${filterPet}&inputFilter=${debounceValuePet}`, [helperPet], helperSearchPet)
 
   const handleSubmit = (e) => {
@@ -272,7 +272,6 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
         toast.update(loadingToastId, { render: options.sucessMessage, type: toast.TYPE.SUCCESS, autoClose: 1500, hideProgressBar: false, })
         setMustLoad(false)
         setHelper((prev) => prev + 1)
-        // setOpen(false)
         setTimeout(() => {
           document.getElementById(`btn-history-${data.id}`)?.click()
         }, 1000)
@@ -285,7 +284,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
   }
 
   useEffect(() => {
-    if (!loadingPet && mustSearchPet) {
+    if (mustSearchPet) {
       setHelperPet((prev) => prev + 1)
     }
   }, [debounceValuePet])
@@ -347,7 +346,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                     tag: 'Número de documento',
                     value: 'document_number',
                   }
-                ]} filter={filterPet} setFilter={setFilterPet} input={inputPet} setInput={setInputPet} label={'Mascota'} setHelperSearch={setHelperSearchPet} setHelper={setHelperPet} listStyle={'w-full sm:w-[150%] xl:w-full max-h-96'}>
+                ]} filter={filterPet} setFilter={setFilterPet} input={inputPet} setInput={setInputPet} label={'Mascota'} setHelperSearch={setHelperSearchPet} listStyle={'w-full sm:w-[150%] xl:w-full max-h-96'}>
                   {
                     loadingPet
                       ?

@@ -52,7 +52,7 @@ function UserContainer() {
   const [rol, setRol] = useState('')
   const [startDate, setStartDate] = useState('');
   const [finishDate, setFinishDate] = useState('');
-  const { debounceValue } = useDebounce(inputFilter, 500)
+  const { debounceValue } = useDebounce(inputFilter)
   const [helper, setHelper] = useState(0)
   const url = `/users/list?page=${page}&limit=${limit}&filter=${filter}&inputFilter=${debounceValue}&rol=${rol}&startDate=${startDate}&finishDate=${finishDate}`
   const { data, loading } = useFetchData(url, [page, limit, helper])
