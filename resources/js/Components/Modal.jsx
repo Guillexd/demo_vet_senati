@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ToastContainer, Flip } from 'react-toastify'
 import Icon from '../utils/Icon'
 import { faX } from '@fortawesome/free-solid-svg-icons'
@@ -14,7 +13,7 @@ function Modal({ children, option, open, setOpen, isLoading, handleSubmit, icon,
           <section className={`relative rounded-lg shadow bg-white z-40`}
           >
             <div className='flex items-start p-4 border-b rounded-t border-gray-600'>
-              <FontAwesomeIcon icon={icon} className='text-gray-700 text-3xl mx-3' />
+              <Icon icon={icon} css={'text-gray-700 text-3xl mx-3'} size='30px' />
               <h3 className='text-2xl font-semibold text-gray-700'>
                 {text}
               </h3>

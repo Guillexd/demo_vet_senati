@@ -1035,30 +1035,6 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper, tr
   const { data: dataExpense, loading: loadingExpense } = useFetchData(`/expenses/list?filter=reason&inputFilter=${debounceValueExpense}`, [helperExpense], helperSearchExpense)
 
   useEffect(() => {
-    if (mustSearchProduct) {
-      setHelperProduct((prev) => prev + 1)
-    }
-  }, [debounceValueProduct])
-
-  useEffect(() => {
-    if (mustSearchService) {
-      setHelperService((prev) => prev + 1)
-    }
-  }, [debounceValueService])
-
-  useEffect(() => {
-    if (mustSearchExpense) {
-      setHelperExpense((prev) => prev + 1)
-    }
-  }, [debounceValueExpense])
-
-  useEffect(() => {
-    if (mustSearchCustomer) {
-      setHelperCustomer((prev) => prev + 1)
-    }
-  }, [debounceValueCustomer])
-
-  useEffect(() => {
     setTotal(Array.isArray(products) && Array.isArray(services) ? (
       ([...products, ...services].reduce((previousValue, currentValue) => {
         return previousValue + (parseFloat(currentValue.price) * parseFloat(currentValue.quantity));
@@ -1191,15 +1167,15 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper, tr
 
             <hr className='col-span-full border' />
 
-            <SectionCashRegisterModal.CustomerModal setMustSearchCustomer={setMustSearchCustomer} filterCustomer={filterCustomer} setFilterCustomer={setFilterCustomer} inputCustomer={inputCustomer} setInputCustomer={setInputCustomer} loadingCustomer={loadingCustomer} dataCustomer={dataCustomer} setCustomerId={setCustomerId} setHelperSearchCustomer={setHelperSearchCustomer} />
+            <SectionCashRegisterModal.CustomerModal mustSearchCustomer={mustSearchCustomer} setMustSearchCustomer={setMustSearchCustomer} filterCustomer={filterCustomer} setFilterCustomer={setFilterCustomer} inputCustomer={inputCustomer} setInputCustomer={setInputCustomer} loadingCustomer={loadingCustomer} dataCustomer={dataCustomer} setCustomerId={setCustomerId} setHelperCustomer={setHelperCustomer} debounceValueCustomer={debounceValueCustomer} setHelperSearchCustomer={setHelperSearchCustomer} />
 
             <hr className='col-span-full border' />
 
-            <SectionCashRegisterModal.ProductModal setMustSearchProduct={setMustSearchProduct} filterProduct={filterProduct} setFilterProduct={setFilterProduct} inputProduct={inputProduct} setInputProduct={setInputProduct} loadingProduct={loadingProduct} dataProduct={dataProduct} selectProduct={selectProduct} setSelectProduct={setSelectProduct} setProducts={setProducts} initialStateProduct={initialStateProduct} products={products} setHelperSearchProduct={setHelperSearchProduct} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} setHide={setHide} />
+            <SectionCashRegisterModal.ProductModal mustSearchProduct={mustSearchProduct} setMustSearchProduct={setMustSearchProduct} filterProduct={filterProduct} setFilterProduct={setFilterProduct} inputProduct={inputProduct} setInputProduct={setInputProduct} loadingProduct={loadingProduct} dataProduct={dataProduct} selectProduct={selectProduct} setSelectProduct={setSelectProduct} setProducts={setProducts} initialStateProduct={initialStateProduct} products={products} setHelperProduct={setHelperProduct} debounceValueProduct={debounceValueProduct} setHelperSearchProduct={setHelperSearchProduct} transitionName={transitionName} setTransitionName={setTransitionName} setImage={setImage} setHide={setHide} />
 
             <hr className='col-span-full border sm:hidden' />
 
-            <SectionCashRegisterModal.ServiceModal setMustSearchService={setMustSearchService} inputService={inputService} setInputService={setInputService} loadingService={loadingService} dataService={dataService} selectService={selectService} setSelectService={setSelectService} setServices={setServices} initialStateService={initialStateService} services={services} setHelperSearchService={setHelperSearchService} />
+            <SectionCashRegisterModal.ServiceModal mustSearchService={mustSearchService} setMustSearchService={setMustSearchService} inputService={inputService} setInputService={setInputService} loadingService={loadingService} dataService={dataService} selectService={selectService} setSelectService={setSelectService} setServices={setServices} initialStateService={initialStateService} services={services} setHelperService={setHelperService} debounceValueService={debounceValueService} setHelperSearchService={setHelperSearchService} />
 
             <hr className='col-span-full border' />
           </>
@@ -1213,7 +1189,7 @@ function SectionCashRegisterModal({ cashRegisterId, open, setOpen, setHelper, tr
                 <code>LIMPIAR FORMULARIO</code>
               </button>
             </SectionCashRegisterModal.ButtonContainer>
-            <SectionCashRegisterModal.ExpenseModal setMustSearchExpense={setMustSearchExpense} inputExpense={inputExpense} setInputExpense={setInputExpense} loadingExpense={loadingExpense} dataExpense={dataExpense} selectExpense={selectExpense} setSelectExpense={setSelectExpense} setExpenses={setExpenses} initialStateExpense={initialStateExpense} expenses={expenses} setHelperSearchExpense={setHelperSearchExpense} />
+            <SectionCashRegisterModal.ExpenseModal mustSearchExpense={mustSearchExpense} setMustSearchExpense={setMustSearchExpense} inputExpense={inputExpense} setInputExpense={setInputExpense} loadingExpense={loadingExpense} dataExpense={dataExpense} selectExpense={selectExpense} setSelectExpense={setSelectExpense} setExpenses={setExpenses} initialStateExpense={initialStateExpense} expenses={expenses} setHelperExpense={setHelperExpense} debounceValueExpense={debounceValueExpense} setHelperSearchExpense={setHelperSearchExpense} />
           </>
       }
 
@@ -1229,12 +1205,12 @@ function ButtonContainer({ children, css = '' }) {
   )
 }
 
-function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustomer, inputCustomer, setInputCustomer, loadingCustomer, dataCustomer, setCustomerId, setHelperSearchCustomer }) {
+function CustomerModal({ mustSearchCustomer, setMustSearchCustomer, filterCustomer, setFilterCustomer, inputCustomer, setInputCustomer, loadingCustomer, dataCustomer, setCustomerId, setHelperCustomer, debounceValueCustomer, setHelperSearchCustomer }) {
   const [open, setOpen] = useState(false)
   return (
     <>
       <div className='relative w-full col-span-full grid grid-cols-1 sm:grid-cols-2 gap-6'>
-        <ReactSelect setMustSearch={setMustSearchCustomer} filters={[
+        <ReactSelect mustSearch={mustSearchCustomer} setMustSearch={setMustSearchCustomer} filters={[
           {
             tag: 'Nombre del cliente',
             value: 'name',
@@ -1243,7 +1219,7 @@ function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustome
             tag: 'Número de documento',
             value: 'document_number',
           },
-        ]} filter={filterCustomer} setFilter={setFilterCustomer} input={inputCustomer} setInput={setInputCustomer} label={'Cliente'} setHelperSearch={setHelperSearchCustomer} css={'w-full col-span-full order-1 pe-10'} listStyle={'w-full max-h-72'} anotherAction={true} actions={() => {
+        ]} filter={filterCustomer} setFilter={setFilterCustomer} input={inputCustomer} setInput={setInputCustomer} label={'Cliente'} setHelper={setHelperCustomer} debounceValue={debounceValueCustomer} setHelperSearch={setHelperSearchCustomer} css={'w-full col-span-full order-1 pe-10'} listStyle={'w-full max-h-72'} anotherAction={true} actions={() => {
           setCustomerId('')
         }} >
           {
@@ -1287,7 +1263,7 @@ function CustomerModal({ setMustSearchCustomer, filterCustomer, setFilterCustome
   )
 }
 
-function ProductModal({ setMustSearchProduct, filterProduct, setFilterProduct, inputProduct, setInputProduct, loadingProduct, dataProduct, selectProduct, setSelectProduct, setProducts, initialStateProduct, products, setHelperSearchProduct, transitionName, setTransitionName, setImage, setHide }) {
+function ProductModal({ mustSearchProduct, setMustSearchProduct, filterProduct, setFilterProduct, inputProduct, setInputProduct, loadingProduct, dataProduct, selectProduct, setSelectProduct, setProducts, initialStateProduct, products, setHelperProduct, debounceValueProduct, setHelperSearchProduct, transitionName, setTransitionName, setImage, setHide }) {
   const [rol, setRol] = useState(2)
 
   useEffect(() => {
@@ -1298,7 +1274,7 @@ function ProductModal({ setMustSearchProduct, filterProduct, setFilterProduct, i
   return (
     <>
       <div className='w-full col-span-1 grid grid-cols-1 self-start gap-6 sm:gap-x-6'>
-        <ReactSelect setMustSearch={setMustSearchProduct} filters={[
+        <ReactSelect mustSearch={mustSearchProduct} setMustSearch={setMustSearchProduct} filters={[
           {
             tag: 'Nombre del producto',
             value: 'name',
@@ -1307,7 +1283,7 @@ function ProductModal({ setMustSearchProduct, filterProduct, setFilterProduct, i
             tag: 'Serie',
             value: 'serie',
           },
-        ]} filter={filterProduct} setFilter={setFilterProduct} input={inputProduct} setInput={setInputProduct} label={'Producto'} setHelperSearch={setHelperSearchProduct} css={'w-full max-h-10 order-1'} listStyle={'w-full sm:w-[200%] max-h-72'}>
+        ]} filter={filterProduct} setFilter={setFilterProduct} input={inputProduct} setInput={setInputProduct} label={'Producto'} setHelper={setHelperProduct} debounceValue={debounceValueProduct} setHelperSearch={setHelperSearchProduct} css={'w-full max-h-10 order-1'} listStyle={'w-full sm:w-[200%] max-h-72'}>
           {
             loadingProduct
               ?
@@ -1419,7 +1395,7 @@ function ProductModal({ setMustSearchProduct, filterProduct, setFilterProduct, i
   )
 }
 
-function ServiceModal({ setMustSearchService, inputService, setInputService, loadingService, dataService, selectService, setSelectService, setServices, initialStateService, services, setHelperSearchService }) {
+function ServiceModal({ mustSearchService, setMustSearchService, inputService, setInputService, loadingService, dataService, selectService, setSelectService, setServices, initialStateService, services, setHelperService, debounceValueService, setHelperSearchService }) {
   const [rol, setRol] = useState(2)
 
   useEffect(() => {
@@ -1430,12 +1406,12 @@ function ServiceModal({ setMustSearchService, inputService, setInputService, loa
   return (
     <>
       <div className='w-full col-span-1 grid grid-cols-1 self-start gap-6 sm:gap-x-6'>
-        <ReactSelect setMustSearch={setMustSearchService} filters={[
+        <ReactSelect mustSearch={mustSearchService} setMustSearch={setMustSearchService} filters={[
           {
             tag: 'Nombre del servicio',
             value: 'name',
           },
-        ]} filter='name' input={inputService} setInput={setInputService} label={'Servicio'} setHelperSearch={setHelperSearchService} css={'w-full max-h-10 order-1'} listStyle={'w-full max-h-72'}>
+        ]} filter='name' input={inputService} setInput={setInputService} label={'Servicio'} setHelper={setHelperService} debounceValue={debounceValueService} setHelperSearch={setHelperSearchService} css={'w-full max-h-10 order-1'} listStyle={'w-full max-h-72'}>
           {
             loadingService
               ?
@@ -1661,17 +1637,17 @@ function ModalTableBody({ data, setData, transitionName, setTransitionName, setI
   )
 }
 
-function ExpenseModal({ setMustSearchExpense, inputExpense, setInputExpense, loadingExpense, dataExpense, selectExpense, setSelectExpense, setExpenses, initialStateExpense, expenses, setHelperSearchExpense }) {
+function ExpenseModal({ mustSearchExpense, setMustSearchExpense, inputExpense, setInputExpense, loadingExpense, dataExpense, selectExpense, setSelectExpense, setExpenses, initialStateExpense, expenses, setHelperExpense, debounceValueExpense, setHelperSearchExpense }) {
   const [openExpense, setOpenExpense] = useState(false)
   return (
     <>
       <div className='relative w-full col-span-full grid grid-cols-1 gap-6'>
-        <ReactSelect setMustSearch={setMustSearchExpense} filters={[
+        <ReactSelect mustSearch={mustSearchExpense} setMustSearch={setMustSearchExpense} filters={[
           {
             tag: 'Razón',
             value: 'reason',
           },
-        ]} filter='reason' input={inputExpense} setInput={setInputExpense} label={'Egresos'} setHelperSearch={setHelperSearchExpense} >
+        ]} filter='reason' input={inputExpense} setInput={setInputExpense} label={'Egresos'} setHelper={setHelperExpense} debounceValue={debounceValueExpense} setHelperSearch={setHelperSearchExpense} >
           {
             loadingExpense
               ?

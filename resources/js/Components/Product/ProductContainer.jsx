@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import HeaderTable, { DefaultHeader } from '../HeaderTable';
+import { DefaultHeader, HeaderTableExcel } from '../HeaderTable';
 import { faBone, faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import Filters from '../Filters';
@@ -13,6 +13,7 @@ import Product from './Product';
 import ProductModal from './ProductModal';
 import ImageModal from '../ImageModal';
 import { fetchData, showNotification } from '../../utils/utils';
+import ImportExcelModal from '../ImportExcelModal';
 
 function ProductContainer() {
 
@@ -65,6 +66,7 @@ function ProductContainer() {
     label: '',
   })
   const [transitionName, setTransitionName] = useState('')
+  const [openImport, setOpenImport] = useState(false)
 
   useEffect(() => {
     if (!loading) {
@@ -112,9 +114,9 @@ function ProductContainer() {
       {
         rol == 1
           ?
-          <HeaderTable icon={faBone} message={'Gestión de productos'} name={'producto'} setOpen={setOpen} setOption={setOption} setData={setProduct} initialState={initialStateProduct} />
+          <HeaderTableExcel icon={faBone} message={'Gestión de productos'} name={'producto'} setOpen={setOpen} setOption={setOption} setData={setProduct} initialState={initialStateProduct} setOpenImport={setOpenImport} />
           :
-          <DefaultHeader icon={faBone} message={'Gestión de productos'} />
+          <DefaultHeader icon={faBone} message={'Gestión de productos'} setOpenImport={setOpenImport} />
       }
       <Filters>
         {
@@ -248,6 +250,7 @@ function ProductContainer() {
         />
       }
       <ProductModal product={product} option={option} open={open} setOpen={setOpen} setMustLoad={setMustLoad} setHelper={setHelper} />
+      <ImportExcelModal open={openImport} setOpen={setOpenImport} url={'/products/import'} format={'formato_productos.xlsx'} setPage={setPage} setHelper={setHelper} />
       <Footer />
     </>
   )

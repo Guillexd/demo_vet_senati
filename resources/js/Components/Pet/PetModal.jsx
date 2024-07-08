@@ -118,18 +118,6 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
   }
 
   useEffect(() => {
-    if (mustSearchCustomer) {
-      setHelperCustomer((prev) => prev + 1)
-    }
-  }, [debounceValueCustomer])
-
-  useEffect(() => {
-    if (mustSearchBreed) {
-      setHelperBreed((prev) => prev + 1)
-    }
-  }, [debounceValueBreed])
-
-  useEffect(() => {
     if (!!pet.customer?.name) {
       setInputCustomer(pet.customer?.name)
     } else {
@@ -194,7 +182,7 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
         </div>
 
         <div className='relative w-full col-span-full grid grid-cols-1 sm:grid-cols-2 gap-6'>
-          <ReactSelect setMustSearch={setMustSearchCustomer} filters={[
+          <ReactSelect mustSearch={mustSearchCustomer} setMustSearch={setMustSearchCustomer} filters={[
             {
               tag: 'Nombre del dueño',
               value: 'name',
@@ -203,7 +191,7 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
               tag: 'Número de documento',
               value: 'document_number',
             },
-          ]} filter={filterCustomer} setFilter={setFilterCustomer} input={inputCustomer} setInput={setInputCustomer} label={'Dueño'} setHelperSearch={setHelperSearchCustomer} css={'w-full col-span-full order-1 pe-10'} listStyle={'w-full max-h-72 z-20'}>
+          ]} filter={filterCustomer} setFilter={setFilterCustomer} input={inputCustomer} setInput={setInputCustomer} label={'Dueño'} setHelper={setHelperCustomer} debounceValue={debounceValueCustomer} setHelperSearch={setHelperSearchCustomer} css={'w-full col-span-full order-1 pe-10'} listStyle={'w-full max-h-72 z-20'}>
             {
               loadingCustomer
                 ?
@@ -249,12 +237,12 @@ export default function PetModal({ pet, option, open, setOpen, setMustLoad, setH
         </div>
 
         <div className='relative w-full col-span-full grid grid-cols-1 sm:grid-cols-2 gap-6 order-1'>
-          <ReactSelect setMustSearch={setMustSearchBreed} filters={[
+          <ReactSelect mustSearch={mustSearchBreed} setMustSearch={setMustSearchBreed} filters={[
             {
               tag: 'Nombre de la raza',
               value: 'name',
             },
-          ]} filter='name' input={inputBreed} setInput={setInputBreed} label={'Raza'} setHelperSearch={setHelperSearchBreed} listStyle={'w-full max-h-72'}>
+          ]} filter='name' input={inputBreed} setInput={setInputBreed} label={'Raza'} setHelper={setHelperBreed} debounceValue={debounceValueBreed} setHelperSearch={setHelperSearchBreed} listStyle={'w-full max-h-72'}>
             {
               loadingBreed
                 ?

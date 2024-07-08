@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/list', 'list');
         Route::post('/store', 'store')->middleware(['can:admin']);
         Route::put('/update', 'update')->middleware(['can:admin']);
+        Route::post('/import', 'import')->middleware(['can:admin']);
         Route::delete('/destroy', 'destroy')->middleware(['can:admin']);
     });
 
@@ -109,6 +110,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/list', 'list');
         Route::post('/store', 'store')->middleware(['can:admin']);
         Route::post('/update', 'update')->middleware(['can:admin']);
+        Route::post('/import', 'import')->middleware(['can:admin']);
         Route::delete('/destroy', 'destroy')->middleware(['can:admin']);
         Route::get('/by_due_date', 'getProductsByDueDate');
     });

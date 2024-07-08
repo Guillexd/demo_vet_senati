@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreServiceRequest;
+use App\Imports\ServicesImport;
 use App\Models\Service;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ServiceController extends Controller
 {
@@ -38,5 +40,13 @@ class ServiceController extends Controller
     {
         $service = Service::destroy($request->id);
         return response()->json($service);
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new ServicesImport, $request->file('excel'));
+        return response()->json([
+            'successfull' => true
+        ]);
     }
 }

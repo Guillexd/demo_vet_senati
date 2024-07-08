@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import HeaderTable, { DefaultHeader } from '../HeaderTable';
+import { DefaultHeader, HeaderTableExcel } from '../HeaderTable';
 import { faExclamation, faShieldDog } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import Filters from '../Filters';
@@ -11,6 +11,7 @@ import Icon from '../../utils/Icon';
 import Footer from '../Footer';
 import Service from './Service';
 import ServiceModal from './ServiceModal';
+import ImportExcelModal from '../ImportExcelModal';
 
 function ServiceContainer() {
 
@@ -44,6 +45,7 @@ function ServiceContainer() {
   const [service, setService] = useState(initialStateService)
   const [mustLoad, setMustLoad] = useState(true)
   const [mustAnimate, setMustAnimate] = useState(true)
+  const [openImport, setOpenImport] = useState(false)
 
   useEffect(() => {
     if (!loading) {
@@ -67,9 +69,9 @@ function ServiceContainer() {
       {
         rol == 1
           ?
-          <HeaderTable icon={faShieldDog} message={'Gestión de servicios'} name={'servicio'} setOpen={setOpen} setOption={setOption} setData={setService} initialState={initialStateService} />
+          <HeaderTableExcel icon={faShieldDog} message={'Gestión de servicios'} name={'servicio'} setOpen={setOpen} setOption={setOption} setData={setService} initialState={initialStateService} setOpenImport={setOpenImport} />
           :
-          <DefaultHeader icon={faShieldDog} message={'Gestión de servicios'} />
+          <DefaultHeader icon={faShieldDog} message={'Gestión de servicios'} setOpenImport={setOpenImport} />
       }
       <Filters>
         {
@@ -132,6 +134,7 @@ function ServiceContainer() {
         <SectionData.Pagination pageQuantity={data.current_page * data.per_page} quantity={data.total} setMustLoad={setMustLoad} setLimit={setLimit} setPage={setPage} nextPage={data.next_page_url} prevPage={data.prev_page_url} page={data.current_page} lastPage={data.last_page} setMustAnimate={setMustAnimate} />
       </SectionData>
       <ServiceModal service={service} option={option} open={open} setOpen={setOpen} setMustLoad={setMustLoad} setHelper={setHelper} />
+      <ImportExcelModal open={openImport} setOpen={setOpenImport} url={'/services/import'} format={'formato_servicios.xlsx'} setPage={setPage} setHelper={setHelper} />
       <Footer />
     </>
   )

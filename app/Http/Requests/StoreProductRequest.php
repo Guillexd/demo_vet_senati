@@ -27,7 +27,6 @@ class StoreProductRequest extends FormRequest
             'price' => ['required', 'numeric', 'min:0', 'max:999999'],
             'purchase_price' => ['required', 'min:0', 'numeric', 'max:999999'],
             'stock' => ['required', 'integer', 'min:0', 'max:999999'],
-            'utility' => ['required', 'numeric', 'min:0', 'max:999999'],
             'serie' => ['nullable', 'string', 'max:20', 'unique:'.Product::class],
             'product_image' => ['nullable', 'image', 'max:1024'],
             'description' => ['nullable', 'string'],
@@ -40,7 +39,6 @@ class StoreProductRequest extends FormRequest
             'name' => 'nombre',
             'price' => 'precio',
             'purchase_price' => 'precio de compra',
-            'utility' => 'utilidad',
             'product_image' => 'imagen del producto',
             'description' => 'descripción',
             'due_date' => 'fecha de vencimiento'

@@ -1,9 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Icon from '../utils/Icon'
 import { faDeleteLeft } from '@fortawesome/free-solid-svg-icons'
 
-export default function ReactSelect({ children, setMustSearch, filters, filter, setFilter, input, setInput, label, setHelperSearch, anotherAction = false, actions, css, listStyle }) {
+export default function ReactSelect({ children, mustSearch, setMustSearch, filters, filter, setFilter, input, setInput, label, setHelper, debounceValue, setHelperSearch, anotherAction = false, actions, css, listStyle }) {
   const [isFocused, setIsFocused] = useState(false)
+
+  useEffect(() => {
+    if (mustSearch) {
+      setHelper((prev) => prev + 1)
+    }
+  }, [debounceValue])
+
   return (
     <>
       {

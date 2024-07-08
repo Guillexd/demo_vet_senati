@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Imports\ProductsImport;
 use App\Models\Product;
 use App\Services\UploadImageService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -50,7 +52,7 @@ class ProductController extends Controller
                 'price' => $request->price,
                 'purchase_price' => $request->purchase_price,
                 'stock' => $request->stock,
-                'utility' => $request->utility,
+                'utility' => ((float) $request->price - (float) $request->purchase_price),
                 'serie' => $request->serie,
                 'product_image_url' => $img_info->image_url,
                 'product_public_id' => $img_info->public_id,
@@ -58,7 +60,9 @@ class ProductController extends Controller
                 'due_date' => $request->due_date,
             ]);
         } else {
-            Product::create($request->validated());
+            $validatedData = $request->validated();
+            $validatedData['utility'] = (float) $request->price - (float) $request->purchase_price;
+            Product::create($validatedData);
         }
         return response()->json($request->only('name'));
     }
@@ -102,5 +106,13 @@ class ProductController extends Controller
         $products = Product::orderBy('id', 'desc')->whereBetween('due_date', [$firstDay, $lastDay])->get();
         $count = $products->count();
         return response()->json(['products' => $products, 'count' => $count]);
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new ProductsImport, $request->file('excel'));
+        return response()->json([
+            'successfull' => true
+        ]);
     }
 }

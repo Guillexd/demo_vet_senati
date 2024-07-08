@@ -284,12 +284,6 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
   }
 
   useEffect(() => {
-    if (mustSearchPet) {
-      setHelperPet((prev) => prev + 1)
-    }
-  }, [debounceValuePet])
-
-  useEffect(() => {
     if (!!petHistory.pet?.name) {
       setInputPet(petHistory.pet?.name)
     } else {
@@ -333,7 +327,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
             ?
             <>
               <div className='relative w-full col-span-1 order-1 flex flex-col gap-6'>
-                <ReactSelect setMustSearch={setMustSearchPet} filters={[
+                <ReactSelect mustSearch={mustSearchPet} setMustSearch={setMustSearchPet} filters={[
                   {
                     tag: 'Nombre de la mascota',
                     value: 'name',
@@ -346,7 +340,7 @@ export default function PetHistoryModal({ petHistory, option, open, setOpen, set
                     tag: 'Número de documento',
                     value: 'document_number',
                   }
-                ]} filter={filterPet} setFilter={setFilterPet} input={inputPet} setInput={setInputPet} label={'Mascota'} setHelperSearch={setHelperSearchPet} listStyle={'w-full sm:w-[150%] xl:w-full max-h-96'}>
+                ]} filter={filterPet} setFilter={setFilterPet} input={inputPet} setInput={setInputPet} label={'Mascota'} setHelper={setHelperPet} debounceValue={debounceValuePet} setHelperSearch={setHelperSearchPet} listStyle={'w-full sm:w-[150%] xl:w-full max-h-96'}>
                   {
                     loadingPet
                       ?
