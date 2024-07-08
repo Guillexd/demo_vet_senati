@@ -2,6 +2,7 @@ import { faFileExcel, faX } from '@fortawesome/free-solid-svg-icons'
 import Icon from '../utils/Icon'
 import { useState } from 'react'
 import { fetchHelper } from '../utils/utils'
+import { toast } from 'react-toastify'
 
 export default function ImportExcelModal({ open, setOpen, url, format, setPage, setHelper }) {
 
@@ -9,17 +10,21 @@ export default function ImportExcelModal({ open, setOpen, url, format, setPage, 
   const [loading, setLoading] = useState(false)
 
   const handleSubmitExcel = () => {
-    setLoading(true)
-    fetchHelper('POST', url, {excel}, true)
-    .then(res => {
-      if(res.successfull) {
-        setPage(1)
-        setHelper((prev) => prev + 1)
-        setOpen(false)
-        setExcel(null)
-      }
-    })
-    .finally(() => setLoading(false))
+    if(excel) {
+      setLoading(true)
+      fetchHelper('POST', url, {excel}, true)
+      .then(res => {
+        if(res.successfull) {
+          setPage(1)
+          setHelper((prev) => prev + 1)
+          setOpen(false)
+          setExcel(null)
+        }
+      })
+      .finally(() => setLoading(false))
+    } else {
+      toast.info('Debes enviar un archivo excel', { autoClose: 1500 })
+    }
   }
 
   return (
@@ -71,7 +76,7 @@ export default function ImportExcelModal({ open, setOpen, url, format, setPage, 
               >
                 Importar
               </button>
-              <a href={`/formats/${format}`} className='focus:ring-4 focus:outline-none rounded-lg border text-sm font-medium px-5 py-2.5 focus:z-10 bg-sky-500 text-white border-sky-500 hover:bg-sky-600 focus:ring-sky-600 cursor-pointer'>
+              <a href={`/formats/${format}`} className='focus:ring-4 focus:outline-none rounded-lg border text-sm font-medium px-5 py-2.5 focus:z-10 bg-sky-500 text-white border-sky-500 hover:bg-sky-600 focus:ring-sky-600 cursor-pointer text-center'>
                 Descargar formato
               </a>
               <button type='button' className='focus:ring-4 focus:outline-none rounded-lg border text-sm font-medium px-5 py-2.5 focus:z-10 bg-gray-500 text-white border-gray-500 hover:bg-gray-600 focus:ring-gray-600'
