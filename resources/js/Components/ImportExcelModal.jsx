@@ -56,7 +56,7 @@ export default function ImportExcelModal({ open, setOpen, url, format, setPage, 
                   }}
                 />
                 <label htmlFor='excel_file' className='cursor-pointer block w-full py-2 text-center text-gray-600 bg-transparent rounded transition duration-200 ease-in-out hover:bg-gray-300'>
-                  --- Seleccionar foto (opcional) ---
+                  --- Seleccionar archivo ---
                 </label>
               </div>
 
