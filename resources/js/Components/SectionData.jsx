@@ -11,9 +11,9 @@ function Search({ children, inputFilter, setInputFilter, handleReset, filter, fi
         <input id='input_search' type='text' className='w-full bg-transparent focus:outline-none ml-2 py-2 ps-3 pe-12 font-semibold'
           value={inputFilter}
           placeholder={`Buscar por ${(filters.find(el => el.value === filter)?.name).toLowerCase()}`}
-          onChange={(e) => {
-            setInputFilter(e.target.value)
-          }} />
+          autoComplete='off'
+          autoCapitalize='off'
+          onChange={(e) => setInputFilter(e.target.value)} />
         <Icon css={'absolute inset-y-2.5 right-3'} icon={faMagnifyingGlass} size='20px' />
       </div>
       {

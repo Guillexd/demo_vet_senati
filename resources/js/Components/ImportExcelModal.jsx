@@ -3,6 +3,8 @@ import Icon from '../utils/Icon'
 import { useState } from 'react'
 import { fetchHelper } from '../utils/utils'
 import { toast } from 'react-toastify'
+import Spinner from './presentational/Spinner'
+import ToastifyErrorList from './ToastifyErrorList'
 
 export default function ImportExcelModal({ open, setOpen, url, format, setPage, setHelper }) {
 
@@ -12,14 +14,20 @@ export default function ImportExcelModal({ open, setOpen, url, format, setPage, 
   const handleSubmitExcel = () => {
     if(excel) {
       setLoading(true)
+      const loadingToastId = toast(<Spinner message={'Subiendo archivo'} />, { autoClose: 30000, hideProgressBar: true, });
       fetchHelper('POST', url, {excel}, true)
       .then(res => {
-        if(res.successfull) {
-          setPage(1)
-          setHelper((prev) => prev + 1)
-          setOpen(false)
-          setExcel(null)
+        if(!res.successfull) {
+          return toast.update(loadingToastId, { render: <><ToastifyErrorList data={{message: ['Archivo corrupto o incorrecto.']}} /></>, type: toast.TYPE.ERROR, autoClose: 3000, hideProgressBar: false, })
         }
+        setPage(1)
+        setHelper((prev) => prev + 1)
+        setOpen(false)
+        setExcel(null)
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.update(loadingToastId, { render: 'Hay problemas de conexión', type: toast.TYPE.WARNING, autoClose: 2500, hideProgressBar: false, })
       })
       .finally(() => setLoading(false))
     } else {
